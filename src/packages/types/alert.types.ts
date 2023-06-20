@@ -18,6 +18,7 @@ export const allAlertMessages = [
     'success.update-password',
     'success.add-openai-key',
     'success.modify-openai-key',
+    'success.user-story-saved',
 
     'error.login.default',
 

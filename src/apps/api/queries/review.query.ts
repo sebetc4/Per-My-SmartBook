@@ -1,11 +1,10 @@
-import { StoryReviewInstance } from '~/packages/types';
-import { StoryReview } from '../models';
-import { CustomError } from '~/packages/classes';
-import { GetStoryPreviewsQuery } from '~/packages/types/request/review.types';
-import { validQueryData } from '../functions';
 import { NextApiRequest } from 'next';
-import { getStoryPreviewsSchema } from '~/packages/schemas/review.schemas';
 import { ObjectId } from 'mongoose';
+import { StoryReviewInstance, GetStoryPreviewsQuery } from '~/packages/types';
+import { CustomError } from '~/packages/classes';
+import { getStoryPreviewsSchema } from '~/packages/schemas';
+import { StoryReview } from '../models';
+import { validQueryData } from '../functions';
 
 export const getAllStoryReviewRatingsFromDb = async (storyId: string) => {
     const reviews: StoryReviewInstance[] = await StoryReview.find({ story: storyId }, ['textRating', 'imageRating']);
@@ -21,11 +20,8 @@ export const getOneStoryReviewById = async (reviewId: string) => {
 };
 
 export const getStoryPreviewsFromDb = async (req: NextApiRequest) => {
-    const {storyId, reviewNumber, start } = await validQueryData<GetStoryPreviewsQuery>(
-        getStoryPreviewsSchema,
-        req
-    );
-    const storiesReviews: StoryReviewInstance[] = await StoryReview.find({story: storyId})
+    const { storyId, reviewNumber, start } = await validQueryData<GetStoryPreviewsQuery>(getStoryPreviewsSchema, req);
+    const storiesReviews: StoryReviewInstance[] = await StoryReview.find({ story: storyId })
         .sort({ previewRating: -1 })
         .limit(reviewNumber)
         .skip(start);
@@ -33,9 +29,13 @@ export const getStoryPreviewsFromDb = async (req: NextApiRequest) => {
 };
 
 export const getThreeBestStoryPreviewsFromDb = async (storyId: ObjectId) => {
-    const storiesReviews: StoryReviewInstance[] = await StoryReview.find({story: storyId})
+    const storiesReviews: StoryReviewInstance[] = await StoryReview.find({ story: storyId })
         .sort({ previewRating: -1 })
         .limit(3)
-        .skip(0);
+        .skip(0)
+        .populate({
+            path: 'author',
+            select: 'username',
+        });
     return storiesReviews;
 };

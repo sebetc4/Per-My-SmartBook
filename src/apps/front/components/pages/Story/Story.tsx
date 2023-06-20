@@ -1,6 +1,4 @@
 import { Container, useTheme } from '@mui/material';
-import { FinishedStoryData } from '../../../../../packages/types';
-import { LoadingContainer } from '../..';
 import { Book, Reviews } from './components';
 
 export const Story = () => {

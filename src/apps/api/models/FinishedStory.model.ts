@@ -173,7 +173,10 @@ schema.methods.hasVoted = function (this: FinishedStoryInstance, userId: string)
 };
 
 schema.methods.updateStoryRatings = async function (this: FinishedStoryInstance): Promise<void> {
+    console.log('updateStoryRatings')
     const allReviewRatings = await getAllStoryReviewRatingsFromDb(this.id);
+    console.log('allReviewRatings', allReviewRatings)
+    if (allReviewRatings.length !== 0) {
     const { imageRating, textRating } = allReviewRatings.reduce(
         (acc, { imageRating, textRating }) => ({
             imageRating: acc.imageRating + imageRating,
@@ -183,6 +186,10 @@ schema.methods.updateStoryRatings = async function (this: FinishedStoryInstance)
     );
     this.ratings.imageRating = roundNearestTenth(imageRating / allReviewRatings.length);
     this.ratings.textRating = roundNearestTenth(textRating / allReviewRatings.length);
+    } else {
+        this.ratings.imageRating = 0;
+        this.ratings.textRating = 0;
+    }
     await this.save();
 };
 

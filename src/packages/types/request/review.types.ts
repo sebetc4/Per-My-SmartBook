@@ -23,6 +23,7 @@ export type UpdateOneReviewBody = {
 };
 
 export type UpdateOneReviewRes = {
+    review: StoryReviewData
     storyRatings: StoryRatings;
 };
 

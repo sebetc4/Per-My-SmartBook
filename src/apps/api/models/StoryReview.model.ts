@@ -59,12 +59,12 @@ schema.methods.isAuthor = function (this: StoryReviewInstance, userId: string | 
         : userId.toString() === this.author!.toString();
 };
 
-schema.methods.getData = function (this: StoryReviewInstance): StoryReviewData {
+schema.methods.getData = function (): StoryReviewData {
     return {
         id: this.id,
         text: this.text,
         title: this.title,
-        author: this.author!.toString(),
+        author: this.author,
         textRating: this.textRating,
         imageRating: this.imageRating,
         createdAt: this.createdAt!.toString(),

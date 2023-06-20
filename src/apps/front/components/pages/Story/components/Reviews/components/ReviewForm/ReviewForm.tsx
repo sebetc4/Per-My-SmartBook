@@ -64,6 +64,7 @@ export const ReviewForm = () => {
     const handleDelete = async () => {
         await dispatch(deleteOneReview({ storyId: storyData!.id, reviewId: userReview!.id }));
         setTextReview('');
+        setTitleReview('');
         setTextRating(2);
         setImageRating(2);
     };

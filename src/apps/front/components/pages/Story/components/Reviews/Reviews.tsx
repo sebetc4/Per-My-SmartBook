@@ -8,7 +8,7 @@ export const Reviews = () => {
     const { t: storyT } = useTranslation('story');
 
     return (
-        <Box component='section'>
+        <Box component='section' id='reviews'>
             <Box sx={{ display: 'flex', flex: 1 }}>
                 <Box></Box>
                 <Box>

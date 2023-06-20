@@ -1,11 +1,17 @@
-import { StoryReviewInstance } from "~/packages/types";
-import { authUser, catchControllerError, onSuccess, validBody, validQueryData, validQueryId } from "../functions";
-import { StoryReview } from "../models";
-import { CustomError } from "~/packages/classes";
-import { getOneFinishedStoryById, getOneStoryReviewById, getStoryPreviewsFromDb } from "../queries";
-import { CreateOneReviewBody, CreateOneReviewRes, DeleteOnReviewQuery, DeleteOneReviewRes, UpdateOneReviewBody, UpdateOneReviewRes } from "~/packages/types/request/review.types";
-import { createOneReviewSchema, deleteOneReviewSchema } from "~/packages/schemas/review.schemas";
-
+import { StoryReviewInstance } from '~/packages/types';
+import { authUser, catchControllerError, onSuccess, validBody, validQueryData, validQueryId } from '../functions';
+import { StoryReview } from '../models';
+import { CustomError } from '~/packages/classes';
+import { getOneFinishedStoryById, getOneStoryReviewById, getStoryPreviewsFromDb } from '../queries';
+import {
+    CreateOneReviewBody,
+    CreateOneReviewRes,
+    DeleteOnReviewQuery,
+    DeleteOneReviewRes,
+    UpdateOneReviewBody,
+    UpdateOneReviewRes,
+} from '~/packages/types/request/review.types';
+import { createOneReviewSchema, deleteOneReviewSchema } from '~/packages/schemas/review.schemas';
 
 export const getOneStoryReview = catchControllerError(async (req, res) => {
     const id = validQueryId(req);
@@ -18,7 +24,7 @@ export const getOneStoryReview = catchControllerError(async (req, res) => {
 });
 
 export const getStoryReviews = catchControllerError(async (req, res) => {
-    const storyReviews = await getStoryPreviewsFromDb(req)
+    const storyReviews = await getStoryPreviewsFromDb(req);
     onSuccess(200, { storyReviews }, res);
 });
 
@@ -43,7 +49,7 @@ export const createOneReview = catchControllerError(async (req, res) => {
     });
 
     story.reviews.push({ author: user.id, review: review.id });
-    story.numbOfReviews++
+    story.numbOfReviews++;
     await story.updateStoryRatings();
     const reviewData = review.getData();
     onSuccess<CreateOneReviewRes>(201, { review: reviewData, storyRatings: story.ratings }, res);
@@ -64,9 +70,10 @@ export const updateOneReview = catchControllerError(async (req, res) => {
     review.textRating = textRating;
     review.imageRating = imageRating;
     await review.save();
+    const reviewData = review.getData();
     const story = await getOneFinishedStoryById(storyId);
     await story.updateStoryRatings();
-    onSuccess<UpdateOneReviewRes>(200, { storyRatings: story.ratings }, res);
+    onSuccess<UpdateOneReviewRes>(200, { review: reviewData, storyRatings: story.ratings }, res);
 });
 
 export const deleteOneReview = catchControllerError(async (req, res) => {
@@ -74,13 +81,12 @@ export const deleteOneReview = catchControllerError(async (req, res) => {
     const user = await authUser(req);
     const review = await getOneStoryReviewById(reviewId);
     if (!review.isAuthor(user.id)) {
-        {
-        }
         throw CustomError.FORBIDEN;
     }
-    await review.remove();
+    await review.delete();
     const story = await getOneFinishedStoryById(storyId);
     story.reviews = story.reviews.filter((review) => review.review.toString() !== reviewId);
+    story.numbOfReviews--;
     await story.updateStoryRatings();
     onSuccess<DeleteOneReviewRes>(200, { storyRatings: story.ratings }, res);
 });

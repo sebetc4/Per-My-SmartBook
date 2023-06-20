@@ -32,7 +32,7 @@ export type StoryReviewData = {
     id: string;
     title?: string;
     text?: string;
-    author: string;
+    author: { username: string };
     textRating: number;
     imageRating: number;
     createdAt: string;

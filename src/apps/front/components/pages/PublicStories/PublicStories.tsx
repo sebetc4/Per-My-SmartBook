@@ -7,12 +7,12 @@ import { Box, Container, Divider, Typography, useTheme } from '@mui/material';
 import { FinishedPublicStoryPreview } from '../../../../../packages/types';
 import { useAppMediaQuery } from '../../../hooks';
 import { StoryCard } from './components';
+import { BookNotFoundIllustration } from '../../illustrations/BookNotFoundIllustration/BookNotFoundIllustration';
+import { SearchBar } from '../../SearchBar/SearchBar';
 // Images
 import GreenGirlIllustration from '../../../../../../public/images/illustrations/green-girl-illustration.png';
 import BoyAndBirdIllustration from '../../../../../../public/images/illustrations/boy-and-bird-illustration.png';
 import BlackGirlIllustration from '../../../../../../public/images/illustrations/back-girl-illustration..png';
-import { BookNotFoundIllustration } from '../../illustrations/BookNotFoundIllustration/BookNotFoundIllustration';
-import { SearchBar } from '../../SearchBar/SearchBar';
 
 type PublicStoriesProps = {
     stories: FinishedPublicStoryPreview[];
@@ -24,6 +24,7 @@ export const PublicStories = ({ stories, total }: PublicStoriesProps) => {
     const { t: publicStoriesT } = useTranslation('public-stories');
     const theme = useTheme();
     const { mediaQuery } = useAppMediaQuery();
+    console.log(stories)
 
     return (
         <>

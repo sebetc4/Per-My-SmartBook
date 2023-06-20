@@ -12,7 +12,10 @@
     "SearchBar.summary.options" : "Options",
 
     "StoryDetails.text.commun-story" : "Histoire commune",
-    "StoryDetails.text.rating" : "Note:",
+    "StoryDetails.text.rating" : "Note",
+    "StoryDetails.text.review.by" : "Par",
+    "StoryDetails.text.review.text-rating": "Texte",
+    "StoryDetails.text.review.image-rating": "Image",
     "StoryDetails.text.numb-of-reviews" : "avis",
     "StoryDetails.title.h3.summary" : "Résumé",
     "StoryDetails.title.h3.review" : "Avis"
