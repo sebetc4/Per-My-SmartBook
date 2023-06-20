@@ -1,0 +1,1 @@
+export const isValidId = (value: any) => value.match(/^[0-9a-fA-F]{24}$/)

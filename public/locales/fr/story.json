@@ -1,0 +1,16 @@
+{
+    "text.end": "~ Fin ~",
+
+    "Cover.text.author": "Écrit par",
+    "Cover.text.commun": "Écrit par la communautée",
+
+    "Summary.title.h2": "Sommaire",
+    "Chapter.title.h2.chapter": "Chapitre",
+
+    "Reviews.title.h1": "Avis",
+    "Reviews.customAutoResize.placeholder": "Votre avis...",
+
+    "Reviews.label.text": "Texte",
+    "Reviews.label.image": "Image"
+
+}

@@ -1,0 +1,17 @@
+{
+    "page.title": "Home",
+
+    "CommonStoriesSection.title.h2": "Stories from the community",
+    "CommonStoriesSection.text": "Join us each evening for a unique and exciting adventure! At 6pm, 7pm and 8pm, we offer you a new interactive story where you will have the power, along with the rest of the community, to decide the fate of the characters. Don't miss this daily appointment to immerse yourself in imaginary worlds and contribute to their evolution!",
+    "CommonStoriesSection.wait-common-story-timer.text": "The next story will start in",
+    "CommonStoriesSection.wait-common-story-timer.endText": "To view the current stories refresh your page",
+
+    "UserStorySection.title.h2": "Personal stories",
+    "UserStorySection.text": "We offer stories with various themes and a starting point that sets up the plot. From that point on, you are the only one in charge and you make all the decisions that will influence the course of the story. Will you be able to make the right decisions to solve the challenges you face?",
+
+    "CommonStoryCard.text.theme": "Theme:",
+    "CommonStoryCard.timer.text": "This story will start in",
+    "CommonStoryCard.timer.endText.generating": "This story is in progress",
+    "CommonStoryCard.timer.endText.stopped": "This story is stopped",
+    "CommonStoryCard.timer.endText.finished": "This story is finished"
+}

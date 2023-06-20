@@ -1,0 +1,44 @@
+{
+    "OptionsForm.title.h1": "Start a new story",
+    "OptionsForm.button.start": "Start",
+
+    "TopicsScreen.title.h1": "Choose a topic for your story",
+
+    "Chapter.title.h2.chapter": "Chapter",
+
+    "FinishedStory.text.end": "~ End ~",
+    "FinishedStory.button.delete": "Delete",
+    "FinishedStory.button.save-public": "Save and publish in public",
+    "FinishedStory.button.save-private": "Save in private",
+
+    "SaveModal.public.title": "Save and publish your story",
+    "SaveModal.private.title": "Save your story in private",
+    "SaveModal.public.text": "By posting your story, you will allow all users to see it. To continue, please choose a title for your story.",
+    "SaveModal.private.text": "By choosing to save your story as private, only you will be able to view it. You can change this setting later. You can change this choice later. Choose a title for your story.",
+    "SaveModal.input.title.label": "Story title",
+    "SaveModal.input.title.error.is-required": "The title is required",
+    "SaveModal.input.title.error.too-long": "The title is too long",
+    "SaveModal.input.title.error.too-short": "The title is too short",
+    "SaveModal.button.cancel": "Cancel",
+    "SaveModal.public.button.save": "Save and publish",
+    "SaveModal.private.button.save": "Save",
+
+    "ActionButtons.button.restart-story.tooltip": "Start a new story",
+
+    "RestartStoryModal.title": "Start a new story",
+    "RestartStoryModal.text": "Want to start a new story? You can delete the current story or save it to resume later.",
+    "RestartStoryModal.button.cancel": "Cancel",
+    "RestartStoryModal.button.delete-restart": "Delete and restart",
+    "RestartStoryModal.button.restart": "Restart",
+
+    "ConfirmRedirectToSettingsModal.title.openai-key-not-valid": "Invalid OpenAI key",
+    "ConfirmRedirectToSettingsModal.title.openai-no-credit": "No credit on your OpenAI key",
+    "ConfirmRedirectToSettingsModal.title.openai-no-key": "No OpenAI key",
+
+    "ConfirmRedirectToSettingsModal.text.openai-key-not-valid": "Your OpenAI key is not valid. Do you want to be redirected to the settings to change your key?",
+    "ConfirmRedirectToSettingsModal.text.openai-no-credit": "Your OpenAI key does not have enough credit. Do you want to be redirected to the settings to change your key?",
+    "ConfirmRedirectToSettingsModal.text.openai-no-key": "You don't have an OpenAI key. Do you want to be redirected to the settings to add one?",
+    
+    "ConfirmRedirectToSettingsModal.button.confirm" : "Confirm",
+    "ConfirmRedirectToSettingsModal.button.cancel" : "Cancel"
+}

@@ -1,0 +1,17 @@
+{
+    "title.h1" : "Sign in",
+    "title.h2": "Glad to see you back! Log in to access your account.",
+    "text.account-already-exists-with-this-email": "An account is already linked to this address with another connection method",
+    "text.no-account": "Don't have an account?",
+    "button.signin": "Sign in",
+    "button.signup": "Sign up",
+
+    "input.email.label": "Email address",
+    "input.email.error.no-associated-account": "No account is registered with this email address",
+    "input.email.error.is-required": "Email address is required",
+    "input.email.error.not-valid": "Invalid email address",
+
+    "input.password.label": "Password",
+    "input.password.error.is-required": "Password is required",
+    "input.password.error.wrong": "Wrong password"
+}

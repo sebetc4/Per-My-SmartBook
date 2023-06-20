@@ -1,0 +1,25 @@
+{
+    "title.h1" : "Créer un compte",
+    "title.h2": "Vous souhaitez vivre vos propres aventures? Rejoignez notre communauté.",
+    "text.already-signup": "Vous avez déjà un compte ?",
+    "button.signup": "S'inscrire",
+    "button.signin": "Connectez-vous",
+    
+    "input.username.label": "Pseudo",
+    "input.username.error.is-required": "Le pseudo est requis",
+    "input.username.error.too-short": "Le pseudo doit faire au minimum 6 caractères",
+    "input.username.error.too-long": "Le pseudo doit faire au maximum 20 caractères",
+
+    "input.email.label": "Adresse e-mail",
+    "input.email.error.already-associated-account": "Un compte est déjà lié à cette adresse e-mail",
+    "input.email.error.is-required": "L'adresse e-mail est requise",
+    "input.email.error.not-valid": "Adresse e-mail non valide",
+
+    "input.password.label": "Mot de passe",
+    "input.password.error.is-required": "Le mot de passe est requis",
+    "input.password.error.too-short": "Le mot de passe doit faire au minimum 6 caractères",
+    "input.password.error.too-long": "Le mot de passe doit faire au maximum 40 caractères"
+
+    
+
+}

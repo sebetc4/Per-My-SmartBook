@@ -1,0 +1,44 @@
+{
+    "OptionsForm.title.h1": "Commencer une nouvelle histoire",
+    "OptionsForm.button.start": "Commencer",
+
+    "TopicsScreen.title.h1": "Choisissez un sujet pour votre histoire",
+
+    "Chapter.title.h2.chapter": "Chapitre",
+    
+    "FinishedStory.text.end": "~ Fin ~",
+    "FinishedStory.button.delete": "Supprimer",
+    "FinishedStory.button.save-public": "Sauvegarder et publier en public",
+    "FinishedStory.button.save-private": "Sauvegarder en privé",
+    
+    "SaveModal.public.title": "Sauvegarder et publier votre histoire",
+    "SaveModal.private.title": "Sauvegarder votre histoire en privé",
+    "SaveModal.public.text": "En publiant votre histoire, vous permettrez à tous les utilisateurs de la voir. Pour continuer, veuillez choisir un titre pour votre histoire.",
+    "SaveModal.private.text": "En choisissant de sauvegarder votre histoire en privé, seul vous pourrez la consulter. Vous pourrez changer ce réglage plus tard. Vous pourrez modifier ce choix par la suite. Choisissez une titre pour votre histoire.",
+    "SaveModal.input.title.label": "Titre de l'histoire",
+    "SaveModal.input.title.error.is-required": "Le titre est requis",
+    "SaveModal.input.title.error.too-long": "Le titre est trop long",
+    "SaveModal.input.title.error.too-short": "Le titre est trop court",
+    "SaveModal.button.cancel": "Annuler",
+    "SaveModal.public.button.save": "Sauvegarder et publier",
+    "SaveModal.private.button.save": "Sauvegarder",
+    
+    "ActionButtons.button.restart-story.tooltip": "Commencer une nouvelle histoire",
+
+    "RestartStoryModal.title": "Commencer une nouvelle histoire",
+    "RestartStoryModal.text": "Vous souhaitez démarrer une histoire nouvelle ? Vous pouvez supprimer l'histoire en cours ou de la sauvegarder pour la reprendre plus tard.",
+    "RestartStoryModal.button.cancel": "Annuler",
+    "RestartStoryModal.button.delete-restart": "Supprimer et recommencer",
+    "RestartStoryModal.button.restart": "Recommencer",
+
+    "ConfirmRedirectToSettingsModal.title.openai-key-not-valid": "Clé OpenAI invalide",
+    "ConfirmRedirectToSettingsModal.title.openai-no-credit": "Pas de crédit sur la clé OpenAI",
+    "ConfirmRedirectToSettingsModal.title.openai-no-key": "Pas de clé OpenAI",
+
+    "ConfirmRedirectToSettingsModal.text.openai-key-not-valid": "Votre clé OpenAI n'est pas valide. Voulez-vous être redirigé vers les paramètres pour modifier votre clé ?",
+    "ConfirmRedirectToSettingsModal.text.openai-no-credit": "Votre clé OpenAI ne possède pas assez de crédit. Voulez-vous être redirigé vers les paramètres pour modifier votre clé ?",
+    "ConfirmRedirectToSettingsModal.text.openai-no-key": "Vous n'avez pas de clé OpenAI. Voulez vous être redirigé vers les paramètres pour en ajouter une ?",
+    
+    "ConfirmRedirectToSettingsModal.button.confirm" : "Confirmer",
+    "ConfirmRedirectToSettingsModal.button.cancel" : "Annuler"
+}

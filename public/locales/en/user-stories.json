@@ -1,0 +1,14 @@
+{
+    "title.h2.unfinished-stories": "Your ongoing stories",
+    "title.h2.finished-stories": "Your finished stories",
+    "text.no-unfinished-story": "No story in progress",
+    "button.start-new-story": "Start a new story",
+
+    "DeleteUnfinishedStoryConfirmModal.title": "Delete history",
+    "DeleteUnfinishedStoryConfirmModal.text": "Would you like to erase this story permanently?",
+    "DeleteUnfinishedStoryConfirmModal.button.cancel": "Cancel",
+    "DeleteUnfinishedStoryConfirmModal.button.confirm": "Confirm",
+
+    "FinishedStoryDetails.options.visibility.tooltip.public": "Publique",
+    "FinishedStoryDetails.options.visibility.tooltip.private": "Private"
+}

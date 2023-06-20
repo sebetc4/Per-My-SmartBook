@@ -1,0 +1,38 @@
+{
+    "theme.label": "Story theme",
+    "theme.item.all": "All themes",
+    "theme.item.travel": "Travel",
+    "theme.item.funny": "Happiness",
+    "theme.item.love": "Love",
+    "theme.item.history": "Historical",
+    "theme.item.bordedom": "Bordedom",
+    "theme.item.horror": "Horror",
+    "theme.item.dream": "Dream",
+    "theme.item.fantastic": "Fantastic",
+    "theme.item.technology": "Technology",
+    "theme.item.ecology": "Ecology",
+    "theme.error.is-required": "The story theme is required",
+
+    "style.label": "Image style",
+    "style.item.realistic": "Realistic",
+    "style.item.drawing": "Drawing",
+    "style.item.comicStyle": "Comic style",
+    "style.item.digitalArt": "Digital art",
+    "style.item.painting": "Painting",
+    "style.error.is-required": "The image style is required",
+
+    "duration.label": "Story duration",
+    "duration.item.all": "All durations",
+    "duration.item.veryShort": "Very short",
+    "duration.item.short": "Short",
+    "duration.item.medium": "Medium",
+    "duration.item.long": "Long",
+    "duration.item.veryLong": "Very long",
+    "duration.error.is-required": "The story duration is required",
+
+    "language.label": "Language",
+    "language.item.all": "All languages",
+    "language.item.en": "English",
+    "language.item.fr": "French",
+    "language.error.is-required": "The story duration is required"
+}

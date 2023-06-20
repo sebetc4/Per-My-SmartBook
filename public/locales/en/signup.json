@@ -1,0 +1,22 @@
+{
+    "title.h1": "Create an account",
+    "title.h2": "Want to have your own adventures? Join our community.",
+    "text.already-signup": "Already have an account?",
+    "button.signup": "Sign up",
+    "button.signin": "Sign in",
+
+    "input.username.label": "Username",
+    "input.username.error.is-required": "Username is required",
+    "input.username.error.too-short": "Username must be at least 6 characters long",
+    "input.username.error.too-long": "Username must be at most 20 characters long",
+
+    "input.email.label": "Email address",
+    "input.email.error.already-associated-account": "An account is already linked to this email address",
+    "input.email.error.is-required": "Email address is required",
+    "input.email.error.not-valid": "Invalid email address",
+
+    "input.password.label": "Password",
+    "input.password.error.is-required": "Password is required",
+    "input.password.error.too-short": "Password must be at least 6 characters long",
+    "input.password.error.too-long": "Password must be at most 20 characters long"
+}

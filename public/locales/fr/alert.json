@@ -1,0 +1,25 @@
+{
+    "success.update-data": "Vos modifications ont été enregistrées.",
+    "success.update-password": "Votre mot de passe a été mis à jour.",
+    "success.add-openai-key": "Votre clé OpenAI a été ajoutée.",
+    "success.modify-openai-key": "Votre clé OpenAI a été modifiée.",
+    "success.user-story-saved": "Votre histoire a été sauvegardée.",
+
+    "error.login.default": "Une erreur s'est produite lors de la tentative de connecion. Veuillez réessayer ultérieurement.",
+    "error.userStoryBeingGenerated.select-chapter-choice": "Une erreur s'est produite lors de la génération du chapitre. Veuillez réessayer ultérieurement.",
+    "error.userStoryBeingGenerated.select-story-topic": "Une erreur s'est produite lors du choix du sujet de votre histoire. Veuillez réessayer ultérieurement.",
+    "error.userStoryBeingGenerated.select-story-options": "Une erreur s'est produite lors de la création de votre histoire. Veuillez réessayer ultérieurement.",
+    "error.userStoryBeingGenerated.init-story": "Une erreur s'est produite lors de l'initialisation de votre histoire. Veuillez réessayer ultérieurement.",
+    "error.userStoryBeingGenerated.restart-story": "Une erreur s'est produite lors de la réinitialisation de votre histoire. Veuillez réessayer ultérieurement.",
+    "error.userStoryBeingGenerated.resume-story": "Une erreur s'est produite lors de la récupération des données de votre histoire. Veuillez réessayer ultérieurement.",
+    "error.userStoryBeingGenerated.save-finished-story": "Une erreur s'est produite lors de la sauvegarde de votre histoire. Veuillez réessayer ultérieurement.",
+    
+    "error.update-data.default" : "Une erreur s'est produite lors de l'enregistrement de vos modifications. Veuillez réessayer ultérieurement.",
+    "error.update-password.default": "Une erreur s'est produite lors de la modification de votre mot de passe. Veuillez réessayer ultérieurement.",
+
+    "error.add-openai-key" : "Une erreur s'est produite lors de l'ajout de votre clé OpenAI. Veuillez réessayer ultérieurement.",
+    "error.modify-openai-key" : "Une erreur s'est produite lors de la modification de votre clé OpenAI. Veuillez réessayer ultérieurement.",
+
+    "error.openai-service-unavailable": "OpenAI n'est pas en mesure de traiter votre reqûete. Veuillez réessayer ultérieurement."
+}
+

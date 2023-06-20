@@ -1,0 +1,19 @@
+{
+    "title.h1": "Retrouver toutes nos histoires",
+    
+    "input.search.label" : "Texte de la recherche",
+    "input.search.placeholder" : "Rechercher une histoire...",
+
+    "StoryCard.option-item.author": "Auteur", 
+    "StoryCard.option-item.theme" : "Thème",
+    "StoryCard.option-item.duration" : "Durée",
+    "StoryCard.option-item.language" : "Langue",
+
+    "SearchBar.summary.options" : "Options",
+
+    "StoryDetails.text.commun-story" : "Histoire commune",
+    "StoryDetails.text.rating" : "Note:",
+    "StoryDetails.text.numb-of-reviews" : "avis",
+    "StoryDetails.title.h3.summary" : "Résumé",
+    "StoryDetails.title.h3.review" : "Avis"
+}

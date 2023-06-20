@@ -1,0 +1,16 @@
+{
+    "title.h2.unfinished-stories": "Vos histoires en cours",
+    "title.h2.finished-stories": "Vos histoires terminées",
+    "text.no-unfinished-story": "Aucune histoire en cours",
+    "button.start-new-story": "Commencer une nouvelle histoire",
+
+    "DeleteUnfinishedStoryConfirmModal.title": "Supprimer l'histoire",
+    "DeleteUnfinishedStoryConfirmModal.text": "Souhaitez-vous effacer définitivement cette histoire?",
+    "DeleteUnfinishedStoryConfirmModal.button.cancel": "Annuler",
+    "DeleteUnfinishedStoryConfirmModal.button.confirm": "Confirmer",
+
+    "FinishedStoryDetails.options.visibility.tooltip.public": "Publique",
+    "FinishedStoryDetails.options.visibility.tooltip.private": "Privée",
+
+    "FinishedStorySection-no.finished-story": "Vous n'avez terminé aucune histoire"
+}

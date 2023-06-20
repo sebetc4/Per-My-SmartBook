@@ -1,0 +1,10 @@
+{
+    "title.h1": "Find all our stories",
+
+    "input.search.label" : "Text to search",
+    "input.search.placeholder" : "Search a story...",
+
+    "StoryItem.option-item.theme" : "Theme",
+    "StoryItem.option-item.duration" : "Duration",
+    "StoryItem.option-item.language" : "Language"
+}

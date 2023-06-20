@@ -1,0 +1,23 @@
+{
+    "success.update-data": "Your changes have been saved.",
+    "success.update-password": "Your password has been updated.",
+    "success.add-openai-key": "Your OpenAI key has been added.",
+    "success.modify-openai-key": "Your OpenAI key has been changed.",
+
+    "error.login.default": "An error occurred while attempting to connect. Please try again later.",
+    "error.userStoryBeingGenerated.select-chapter-choice": "An error occurred while generating the chapter. Please try again later.",
+    "error.userStoryBeingGenerated.select-story-topic": "There was an error in selecting the subject of your story. Please try again later.",
+    "error.userStoryBeingGenerated.select-story-options": "An error occurred while creating your story. Please try again later.",
+    "error.userStoryBeingGenerated.init-story": "An error occurred while initializing your story. Please try again later.",
+    "error.userStoryBeingGenerated.restart-story": "An error occurred while resetting your history. Please try again later.",
+    "error.userStoryBeingGenerated.resume-story": "An error occurred while retrieving data from your memory. Please try again later.",
+    "error.userStoryBeingGenerated.save-finished-story": "An error occurred while saving your story. Please try again later.",
+
+    "error.update-data.default" : "An error occurred while saving your changes. Please try again later.",
+    "error.update-password.default": "An error occurred while changing your password. Please try again later.",
+
+    "error.add-openai-key" : "An error occurred while adding your OpenAI key. Please try again later.",
+    "error.modify-openai-key" : "An error occurred while editing your OpenAI key. Please try again later.",
+
+    "error.openai-service-unavailable": "OpenAI is unable to process your request. Please try again later."
+}

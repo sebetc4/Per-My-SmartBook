@@ -1,0 +1,15 @@
+{
+    "navigation.home" : "Accueil",
+    "navigation.signin": "Connexion",
+    "navigation.signup": "Inscription",
+    "navigation.logout": "Déconnexion",
+    "navigation.settings": "Paramètres",
+    "navigation.bookstore": "Librairie",
+    "navigation.new-story": "Histoire",
+    "navigation.story-generator": "Générateur d'histoire",
+    "navigation.user-stories": "Vos histoires",
+    
+    "right-button.tooltip": "Compte",
+    
+    "language.tooltip": "Langue"
+}

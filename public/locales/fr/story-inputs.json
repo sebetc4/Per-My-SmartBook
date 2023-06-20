@@ -1,0 +1,41 @@
+{
+    "theme.label": "Thème de l'histoire",
+    "theme.item.all": "Tous les thèmes",
+    "theme.item.travel": "Voyage",
+    "theme.item.funny": "Joie",
+    "theme.item.love": "Amour",
+    "theme.item.history": "Histoire",
+    "theme.item.bordedom": "Ennui",
+    "theme.item.horror": "Horreur",
+    "theme.item.dream": "Rêves",
+    "theme.item.fantastic": "Fantastique",
+    "theme.item.technology": "Technologie",
+    "theme.item.ecology": "Ecologie",
+    "theme.error.is-required": "Le thème est requis",
+
+    "author.item.common": "Commun",
+    "author.item.user": "Utilisateur",
+
+    "style.label": "Style des images",
+    "style.item.realistic": "Réaliste",
+    "style.item.drawing": "Dessin",
+    "style.item.comicStyle": "Comic style",
+    "style.item.digitalArt": "Digital art",
+    "style.item.painting": "Peinture",
+    "style.error.is-required": "Le style est requis",
+
+    "duration.label": "Durée de l'histoire",
+    "duration.item.all": "Toutes les durées",
+    "duration.item.veryShort": "Très courte",
+    "duration.item.short": "Courte",
+    "duration.item.medium": "Moyenne",
+    "duration.item.long": "Longue",
+    "duration.item.veryLong": "Très longue",
+    "duration.error.is-required": "La durée est requise",
+
+    "language.label": "Langue de l'histoire",
+    "language.item.all": "Toutes les langues",
+    "language.item.en": "Anglais",
+    "language.item.fr": "Français",
+    "language.error.is-required": "La langue est requise"
+}
