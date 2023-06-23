@@ -1,17 +1,25 @@
-import { StoryReviewInstance } from '~/packages/types';
-import { authUser, catchControllerError, onSuccess, validBody, validQueryData, validQueryId } from '../functions';
-import { StoryReview } from '../models';
-import { CustomError } from '~/packages/classes';
-import { getOneFinishedStoryById, getOneStoryReviewById, getStoryPreviewsFromDb } from '../queries';
 import {
+    StoryReviewInstance,
     CreateOneReviewBody,
     CreateOneReviewRes,
     DeleteOnReviewQuery,
     DeleteOneReviewRes,
     UpdateOneReviewBody,
     UpdateOneReviewRes,
-} from '~/packages/types/request/review.types';
-import { createOneReviewSchema, deleteOneReviewSchema } from '~/packages/schemas/review.schemas';
+    GetStoryPreviewsQuery,
+    LikeOrDislikeOneReviewBody,
+    LikeOrDislikeOneReviewRes,
+} from '~/packages/types';
+import { authUser, catchControllerError, onSuccess, validBody, validQueryData, validQueryId } from '../functions';
+import { StoryReview } from '../models';
+import { CustomError } from '~/packages/classes';
+import { getOneFinishedStoryById, getOneStoryReviewById, getStoryReviewsFromDb } from '../queries';
+import {
+    createOneReviewSchema,
+    deleteOneReviewSchema,
+    getStoryPreviewsSchema,
+    likeOrDislikeOneReviewSchema,
+} from '~/packages/schemas';
 
 export const getOneStoryReview = catchControllerError(async (req, res) => {
     const id = validQueryId(req);
@@ -24,7 +32,8 @@ export const getOneStoryReview = catchControllerError(async (req, res) => {
 });
 
 export const getStoryReviews = catchControllerError(async (req, res) => {
-    const storyReviews = await getStoryPreviewsFromDb(req);
+    const { storyId, reviewNumber, start } = await validQueryData<GetStoryPreviewsQuery>(getStoryPreviewsSchema, req);
+    const storyReviews = await getStoryReviewsFromDb(storyId, reviewNumber, start);
     onSuccess(200, { storyReviews }, res);
 });
 
@@ -36,7 +45,6 @@ export const createOneReview = catchControllerError(async (req, res) => {
     const user = await authUser(req);
     const story = await getOneFinishedStoryById(storyId);
     if (story.hasVoted(user.id)) {
-        console.log('has voted');
         throw CustomError.FORBIDEN;
     }
     const review = await StoryReview.create({
@@ -89,4 +97,35 @@ export const deleteOneReview = catchControllerError(async (req, res) => {
     story.numbOfReviews--;
     await story.updateStoryRatings();
     onSuccess<DeleteOneReviewRes>(200, { storyRatings: story.ratings }, res);
+});
+
+export const likeOrDislikeOneReview = catchControllerError(async (req, res) => {
+    const { reviewId, value } = await validBody<LikeOrDislikeOneReviewBody>(likeOrDislikeOneReviewSchema, req);
+    const { id: userId } = await authUser(req);
+    const review = await getOneStoryReviewById(reviewId);
+    const lastVote = review.likes.find((like) => like.userId.toString() === userId);
+    const lastValue = lastVote?.value;
+    if ((!lastVote && value === 0) || lastValue === value) {
+        throw CustomError.BAD_REQUEST;
+    }
+    if (value === 0) {
+        review.likes = review.likes.filter((like) => like.userId.toString() !== userId);
+        review.reviewRating -= lastVote!.value;
+    } else {
+        if (lastValue) {
+            review.reviewRating -= lastValue;
+            review.reviewRating += value;
+            review.likes.map((like) => {
+                if (like.userId.toString() === userId) {
+                    like.value = value;
+                }
+                return like;
+            });
+        } else {
+            review.reviewRating += value;
+            review.likes.push({ userId, value });
+        }
+    }
+    await review.save();
+    onSuccess<LikeOrDislikeOneReviewRes>(200, { userHasAlreadyVoted: !!lastVote, lastValue, userId }, res);
 });

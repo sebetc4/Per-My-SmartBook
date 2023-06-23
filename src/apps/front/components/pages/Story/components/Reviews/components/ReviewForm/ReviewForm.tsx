@@ -57,7 +57,7 @@ export const ReviewForm = () => {
                 textRating,
                 imageRating,
             })
-        )
+        );
         setIsBeingModified(false);
     };
 
@@ -70,13 +70,13 @@ export const ReviewForm = () => {
     };
 
     return (
-        <Accordion sx={{width: '100%'}}>
+        <Accordion sx={{ width: '100%' }}>
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon />}
                 aria-controls='panel1a-content'
                 id='panel1a-header'
             >
-                <Typography>Ajouter un commentaire</Typography>
+                <Typography>{storyT('ReviewForm.text.add-review')}</Typography>
             </AccordionSummary>
             <AccordionDetails>
                 <Box
@@ -93,10 +93,17 @@ export const ReviewForm = () => {
                         onChange={(e) => setTitleReview(e.target.value)}
                         value={titleReview}
                         disabled={!!userReview && !isBeingModified}
-                        sx={{ width: '350px'}}
+                        sx={{ width: '350px' }}
                     />
                     <Box sx={{ display: 'flex', gap: 2 }}>
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                            <Typography
+                                color={theme.text.body}
+                                component='legend'
+                                sx={{ ml: 1, fontSize: '1.2rem' }}
+                            >
+                                {storyT('ReviewForm.label.text')}
+                            </Typography>
                             <Rating
                                 name='text-rating'
                                 value={textRating}
@@ -107,15 +114,15 @@ export const ReviewForm = () => {
                                 precision={0.5}
                                 readOnly={!!userReview && !isBeingModified}
                             />
+                        </Box>
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             <Typography
                                 color={theme.text.body}
                                 component='legend'
                                 sx={{ ml: 1, fontSize: '1.2rem' }}
                             >
-                                {storyT('Reviews.label.text')}
+                                {storyT('ReviewForm.label.image')}
                             </Typography>
-                        </Box>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                             <Rating
                                 name='image-rating'
                                 value={imageRating}
@@ -126,18 +133,10 @@ export const ReviewForm = () => {
                                 precision={0.5}
                                 readOnly={!!userReview && !isBeingModified}
                             />
-
-                            <Typography
-                                color={theme.text.body}
-                                component='legend'
-                                sx={{ ml: 1, fontSize: '1.2rem' }}
-                            >
-                                {storyT('Reviews.label.image')}
-                            </Typography>
                         </Box>
                     </Box>
                     <CustomAutoResize
-                        placeholder={storyT('Reviews.customAutoResize.placeholder')}
+                        placeholder={storyT('ReviewForm.customAutoResize.placeholder')}
                         minRows={4}
                         maxRows={8}
                         disabled={!!userReview && !isBeingModified}
@@ -152,7 +151,7 @@ export const ReviewForm = () => {
                                 onClick={handleSubmit}
                                 loading={isLoading}
                             >
-                                Soumettre
+                                {storyT('ReviewForm.button.submit')}
                             </LoadingButton>
                         ) : !isBeingModified ? (
                             <Box sx={{ display: 'flex', gap: 3 }}>
@@ -161,7 +160,7 @@ export const ReviewForm = () => {
                                     sx={{ fontSize: '1.2rem' }}
                                     onClick={() => setIsBeingModified(true)}
                                 >
-                                    Modifier
+                                    {storyT('ReviewForm.button.modify')}
                                 </Button>
                                 <LoadingButton
                                     variant='outlined'
@@ -170,7 +169,7 @@ export const ReviewForm = () => {
                                     onClick={handleDelete}
                                     loading={isLoading}
                                 >
-                                    Supprimer
+                                    {storyT('ReviewForm.button.delete')}
                                 </LoadingButton>
                             </Box>
                         ) : (
@@ -180,7 +179,7 @@ export const ReviewForm = () => {
                                 loading={isLoading}
                                 onClick={handleUpadte}
                             >
-                                Valider
+                                {storyT('ReviewForm.button.confirm')}
                             </LoadingButton>
                         )}
                     </Box>

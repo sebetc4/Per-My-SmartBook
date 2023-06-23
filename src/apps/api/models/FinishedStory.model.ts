@@ -24,7 +24,7 @@ import {
 
 import { imageSchema } from './common.models';
 import { roundNearestTenth } from '~/packages/functions/number/number.functions';
-import { getAllStoryReviewRatingsFromDb, getThreeBestStoryPreviewsFromDb } from '../queries';
+import { getAllStoryReviewRatingsFromDb, getStoryReviewsFromDb } from '../queries';
 
 const schema = new Schema<FinishedStorySchema, IFinishedStoryModel, FinishedStoryMethods>(
     {
@@ -119,6 +119,10 @@ const schema = new Schema<FinishedStorySchema, IFinishedStoryModel, FinishedStor
             default: [],
         },
         ratings: {
+            globalRating: {
+                type: Number,
+                default: 0,
+            },
             textRating: {
                 type: Number,
                 default: 0,
@@ -143,7 +147,7 @@ const schema = new Schema<FinishedStorySchema, IFinishedStoryModel, FinishedStor
         numbOfReviews: {
             type: Number,
             default: 0,
-        }
+        },
     },
     {
         timestamps: true,
@@ -173,20 +177,20 @@ schema.methods.hasVoted = function (this: FinishedStoryInstance, userId: string)
 };
 
 schema.methods.updateStoryRatings = async function (this: FinishedStoryInstance): Promise<void> {
-    console.log('updateStoryRatings')
     const allReviewRatings = await getAllStoryReviewRatingsFromDb(this.id);
-    console.log('allReviewRatings', allReviewRatings)
     if (allReviewRatings.length !== 0) {
-    const { imageRating, textRating } = allReviewRatings.reduce(
-        (acc, { imageRating, textRating }) => ({
-            imageRating: acc.imageRating + imageRating,
-            textRating: acc.textRating + textRating,
-        }),
-        { imageRating: 0, textRating: 0 }
-    );
-    this.ratings.imageRating = roundNearestTenth(imageRating / allReviewRatings.length);
-    this.ratings.textRating = roundNearestTenth(textRating / allReviewRatings.length);
+        const { imageRating, textRating } = allReviewRatings.reduce(
+            (acc, { imageRating, textRating }) => ({
+                imageRating: acc.imageRating + imageRating,
+                textRating: acc.textRating + textRating,
+            }),
+            { imageRating: 0, textRating: 0 }
+        );
+        this.ratings.imageRating = roundNearestTenth(imageRating / allReviewRatings.length);
+        this.ratings.textRating = roundNearestTenth(textRating / allReviewRatings.length);
+        this.ratings.globalRating = roundNearestTenth((this.ratings.imageRating + this.ratings.textRating) / 2);
     } else {
+        this.ratings.globalRating = 0;
         this.ratings.imageRating = 0;
         this.ratings.textRating = 0;
     }
@@ -203,7 +207,7 @@ schema.methods.getPublicPreview = async function (): Promise<FinishedPublicStory
             ? await convertToImageOnClient(this.author.avatar)
             : undefined;
     }
-    publicPreview.reviews = await getThreeBestStoryPreviewsFromDb(this._id)
+    publicPreview.reviews = await getStoryReviewsFromDb(this._id, 3, 0);
     delete publicPreview._id;
     return publicPreview;
 };

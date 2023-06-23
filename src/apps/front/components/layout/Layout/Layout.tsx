@@ -9,7 +9,7 @@ import { SessionStatus } from '~/packages/types';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { AlertComponent } from '../Alert/Alert';
-import { LoadingContainer } from '../../loading/LoadingContainer/LoadingContainer';
+import { LoadingBall } from '../../loading/LoadingBall/LoadingBall';
 
 type LayoutProps = {
     initializedApp: boolean;
@@ -62,6 +62,6 @@ export const Layout = ({ initializedApp, children }: LayoutProps) => {
             <AlertComponent />
         </Box>
     ) : (
-        <LoadingContainer />
+        <LoadingBall />
     );
 };

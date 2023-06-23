@@ -38,7 +38,7 @@ interface GetStaticPropsWithLocale extends GetStaticProps {
 export async function getStaticProps({ locale }: GetStaticPropsWithLocale) {
     return {
         props: {
-            ...(await customServerSideTranslations(locale, ['home', 'timer', 'story-inputs', 'buttons'])),
+            ...(await customServerSideTranslations(locale, ['home', 'date', 'story-inputs', 'buttons'])),
         },
     };
 }

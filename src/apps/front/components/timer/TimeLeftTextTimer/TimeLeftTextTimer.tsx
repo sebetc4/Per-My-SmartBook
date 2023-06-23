@@ -28,7 +28,7 @@ export const TimeLeftTextTimer = ({
 }: TimeLeftTextTimerProps) => {
     // Hooks
     const { timeLeft } = useTimeLeftTimer(endAt);
-    const { t: timerT } = useTranslation('timer');
+    const { t: dateT } = useTranslation('date');
     const theme = useTheme();
 
     const timerIsOver = timeLeft.m === 0 && timeLeft.s === 0;
@@ -42,9 +42,9 @@ export const TimeLeftTextTimer = ({
                     {text && <Typography  color={theme.text.body} sx={textSx}>{text}</Typography>}
                     {}
                     <Typography  color={theme.text.body} sx={timeSx}>
-                        {`${withHours ? `${timeLeft.h} ${timerT('TimeLeftTextTimer.hours')} ` : ''}${
+                        {`${withHours ? `${timeLeft.h} ${dateT('TimeLeftTextTimer.hours')} ` : ''}${
                             timeLeft.m
-                        } ${timerT('TimeLeftTextTimer.minutes')} ${timeLeft.s} ${timerT('TimeLeftTextTimer.seconds')}`}
+                        } ${dateT('TimeLeftTextTimer.minutes')} ${timeLeft.s} ${dateT('TimeLeftTextTimer.seconds')}`}
                     </Typography>
                 </Box>
             )}

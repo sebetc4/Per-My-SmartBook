@@ -11,12 +11,11 @@ export type StoryReviewSchema = {
     title?: string;
     textRating: number;
     imageRating: number;
-    likes: [
-        {
-            userId: string;
-            value: StoryReviewOpinion;
-        }
-    ];
+    likes: {
+        userId: ObjectId;
+        value: number;
+    }[];
+    reviewRating: number;
 };
 
 export type StoryReviewMethods = {
@@ -35,11 +34,11 @@ export type StoryReviewData = {
     author: { username: string };
     textRating: number;
     imageRating: number;
+    likes: {
+        userId: string;
+        value: number;
+    }[];
+    reviewRating: number;
     createdAt: string;
     updatedAt: string;
 };
-
-export enum StoryReviewOpinion {
-    LIKE = 'like',
-    DISLIKE = 'dislike',
-}

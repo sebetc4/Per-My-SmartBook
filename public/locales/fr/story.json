@@ -8,9 +8,27 @@
     "Chapter.title.h2.chapter": "Chapitre",
 
     "Reviews.title.h1": "Avis",
-    "Reviews.customAutoResize.placeholder": "Votre avis...",
+    "Reviews.link.no-login": "Connectez-vous pour écrire un avis",
 
-    "Reviews.label.text": "Texte",
-    "Reviews.label.image": "Image"
+    "ReviewForm.text.add-review": "Ajouter votre évaluation",
+    "ReviewForm.customAutoResize.placeholder": "Votre avis...",
+    "ReviewForm.label.text": "Texte",
+    "ReviewForm.label.image": "Image",
+    "ReviewForm.button.submit": "Soumettre",
+    "ReviewForm.button.modify": "Modifier",
+    "ReviewForm.button.delete": "Supprimer",
+    "ReviewForm.button.confirm": "Valider",
+
+    "GlobalRatings.text.global-rating": "Note globale",
+    "GlobalRatings.text.numb-of-review": "évaluation",
+    "GlobalRatings.text.numb-of-reviews": "évaluations",
+    "GlobalRatings.text.text-rating": "Texte",
+    "GlobalRatings.text.image-rating": "Image",
+
+    "Review.text.by": "Par",
+    "Review.text.global-rating": "Globale",
+    "Review.text.text-rating": "Texte",
+    "Review.text.image-rating": "Image"
+
 
 }

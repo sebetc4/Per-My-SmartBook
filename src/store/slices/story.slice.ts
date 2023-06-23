@@ -8,6 +8,7 @@ import {
     DeleteOneReviewRes,
     UpdateOneReviewBody,
     UpdateOneReviewRes,
+    LikeOrDislikeOneReviewBody,
 } from '~/packages/types';
 import { api } from '~/services';
 import { AxiosError } from 'axios';
@@ -32,14 +33,19 @@ export const storySlice = createSlice({
     name: 'story',
     initialState,
     reducers: {
-        setStoryDataAndUserPreview(
+        setStoryDataAndReviews(
             state,
-            action: PayloadAction<{ storyData: FinishedStoryData; userReview: StoryReviewData | null }>
+            action: PayloadAction<{
+                storyData: FinishedStoryData;
+                userReview: StoryReviewData | null;
+                reviews: StoryReviewData[];
+            }>
         ) {
-            const { storyData, userReview } = action.payload;
+            const { storyData, userReview, reviews } = action.payload;
             state.isLoading = false;
             state.storyData = storyData;
             state.userReview = userReview;
+            state.allReviews = reviews;
         },
     },
     extraReducers: (builder) => {
@@ -55,6 +61,7 @@ export const storySlice = createSlice({
             state.userReview = review;
             state.isLoading = false;
             state.storyData!.ratings = storyRatings;
+            state.storyData!.numbOfReviews++;
         });
         builder.addCase(createOneReview.rejected, (state, action) => {
             state.isLoading = false;
@@ -73,6 +80,9 @@ export const storySlice = createSlice({
             state.userReview = review;
             state.isLoading = false;
             state.storyData!.ratings = storyRatings;
+            state.allReviews = state.allReviews.map((review) =>
+                review.id === action.payload.review.id ? action.payload.review : review
+            );
         });
         builder.addCase(updateOneReview.rejected, (state, action) => {
             state.isLoading = false;
@@ -90,8 +100,40 @@ export const storySlice = createSlice({
             state.isLoading = false;
             state.storyData!.ratings = action.payload.storyRatings;
             state.userReview = null;
+            state.allReviews = state.allReviews.filter((review) => review.id !== action.payload.reviewId);
+            state.storyData!.numbOfReviews--;
         });
         builder.addCase(deleteOneReview.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload || action.error.message || null;
+        });
+
+        /**
+         * Like or dislike one review
+         */
+        builder.addCase(likeOrDislikeOneReview.pending, (state) => {
+            state.isLoading = true;
+            state.error = null;
+        });
+        builder.addCase(likeOrDislikeOneReview.fulfilled, (state, action) => {
+            state.isLoading = false;
+            const { reviewId, value, userId, userHasAlreadyVoted, lastValue } = action.payload;
+            const review = state.allReviews.find((review) => review.id === reviewId);
+            if (value === 0) {
+                review!.likes = review!.likes.filter((like) => like.userId !== userId);
+                review!.reviewRating -= lastValue!;
+            } else {
+                if (userHasAlreadyVoted) {
+                    review!.likes = review!.likes.map((like) => (like.userId !== userId ? like : { ...like, value }));
+                    review!.reviewRating -= lastValue!;
+                    review!.reviewRating += value;
+                } else {
+                    review!.likes.push({ userId, value });
+                    review!.reviewRating += value;
+                }
+            }
+        });
+        builder.addCase(likeOrDislikeOneReview.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.payload || action.error.message || null;
         });
@@ -128,21 +170,40 @@ export const updateOneReview = createAsyncThunk<UpdateOneReviewRes, UpdateOneRev
     }
 );
 
-export const deleteOneReview = createAsyncThunk<DeleteOneReviewRes, DeleteOnReviewQuery, { rejectValue: string }>(
-    'story/deleteOneReview',
-    async (data, { rejectWithValue }) => {
-        try {
-            const { reviewId, storyId } = data;
-            const res = await api.deleteOneReview(reviewId, storyId);
-            return { storyRatings: res.data.storyRatings };
-        } catch (err) {
-            if (err instanceof AxiosError) {
-                return rejectWithValue(err.response?.data.message);
-            }
-            throw err;
+export const deleteOneReview = createAsyncThunk<
+    DeleteOneReviewRes & { reviewId: string },
+    DeleteOnReviewQuery,
+    { rejectValue: string }
+>('story/deleteOneReview', async (body, { rejectWithValue }) => {
+    try {
+        const { reviewId, storyId } = body;
+        const res = await api.deleteOneReview(reviewId, storyId);
+        return { storyRatings: res.data.storyRatings, reviewId };
+    } catch (err) {
+        if (err instanceof AxiosError) {
+            return rejectWithValue(err.response?.data.message);
         }
+        throw err;
     }
-);
+});
 
-export const { setStoryDataAndUserPreview } = storySlice.actions;
+export const likeOrDislikeOneReview = createAsyncThunk<
+    { reviewId: string; value: number; userId: string; userHasAlreadyVoted: boolean; lastValue?: number },
+    LikeOrDislikeOneReviewBody,
+    { rejectValue: string }
+>('story/likeOrDislikeOneReview', async (body, { rejectWithValue }) => {
+    try {
+        const { reviewId, value } = body;
+        const { data } = await api.likeOrDislikeOneReview(body);
+        const { userHasAlreadyVoted, userId, lastValue } = data;
+        return { reviewId, value, userId, userHasAlreadyVoted, lastValue };
+    } catch (err) {
+        if (err instanceof AxiosError) {
+            return rejectWithValue(err.response?.data.message);
+        }
+        throw err;
+    }
+});
+
+export const { setStoryDataAndReviews } = storySlice.actions;
 export const storyReducer = storySlice.reducer;

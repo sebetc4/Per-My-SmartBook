@@ -1,8 +1,9 @@
-import { FinishedStoryData } from "../story"
+import { FinishedStoryData, StoryReviewData } from "../story"
 
 /**
- * Get one finished story data
+ * Get one finished story data and Reviews
  */
-export type GetOneFinishedStoryDataRes = {
+export type GetOneFinishedStoryDataAndReviewsRes = {
     story: FinishedStoryData
+    reviews: StoryReviewData[]
 }

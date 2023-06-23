@@ -10,6 +10,8 @@ import { IoClose } from 'react-icons/io5';
 import { placeholderValue } from '../../../../../utils';
 import { CustomAvatar } from '../../../../CustomAvatar/CustomAvatar';
 import { FinishedPublicStoryPreview } from '../../../../../../../packages/types';
+import { CreationDate } from '~/apps/front/components/dates/CreationDate/CreationDate';
+import { useRouter } from 'next/router';
 
 const Transition = forwardRef(function Transition(
     props: TransitionProps & {
@@ -37,6 +39,7 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
     // Hooks
     const { t: storyInputsT } = useTranslation('story-inputs');
     const { t: publicStoriesT } = useTranslation('public-stories');
+    const { locale } = useRouter();
 
     const rating = (story.ratings.imageRating + story.ratings.textRating) / 2;
 
@@ -135,7 +138,7 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
                                 readOnly
                             />
                             <Typography>{rating}</Typography>
-                            <Typography>{`(${story.numbOfReviews} ${publicStoriesT(
+                            <Typography sx={{ fontStyle: 'italic' }}>{`(${story.numbOfReviews} ${publicStoriesT(
                                 'StoryDetails.text.numb-of-reviews'
                             )})`}</Typography>
                         </Box>
@@ -181,22 +184,21 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
                             component='article'
                             key={`review-${index}`}
                         >
-                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                <Typography
-                                    sx={{
-                                        fontSize: '1.2rem',
-                                        fontWeight: 700,
-                                    }}
-                                >{`${publicStoriesT('StoryDetails.text.review.by')}`}</Typography>
-                                <Typography
-                                    sx={{
-                                        fontSize: '1.2rem',
-                                        fontWeight: 700,
-                                    }}
-                                >
-                                    {review.author.username}
-                                </Typography>
-                            </Box>
+                            <Typography
+                                sx={{
+                                    fontSize: '1.2rem',
+                                    fontWeight: 700,
+                                    fontStyle: 'italic',
+                                }}
+                            >{`${publicStoriesT('StoryDetails.text.review.by')} ${review.author.username}`}</Typography>
+                            <CreationDate
+                                locale={locale!}
+                                date={review.createdAt}
+                                sx={{
+                                    mt: 1,
+                                    fontStyle: 'italic'
+                                }}
+                            />
                             <Box
                                 sx={{
                                     display: 'flex',

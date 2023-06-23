@@ -23,7 +23,7 @@ export type UpdateOneReviewBody = {
 };
 
 export type UpdateOneReviewRes = {
-    review: StoryReviewData
+    review: StoryReviewData;
     storyRatings: StoryRatings;
 };
 
@@ -40,4 +40,15 @@ export type GetStoryPreviewsQuery = {
     storyId: string;
     reviewNumber: number;
     start: number;
+};
+
+export type LikeOrDislikeOneReviewBody = {
+    reviewId: string;
+    value: number;
+};
+
+export type LikeOrDislikeOneReviewRes = {
+    userHasAlreadyVoted: boolean;
+    lastValue?: number;
+    userId: string;
 };

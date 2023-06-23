@@ -37,17 +37,24 @@ const schema = new Schema<StoryReviewSchema, IStoryReviewModel, StoryReviewMetho
             min: 1,
             max: 5,
         },
-        likes: [{
-            userId:  {
+        likes: [
+            {
+                userId: {
                     type: mongoose.Types.ObjectId,
                     ref: 'User',
                     required: true,
+                },
+                value: {
+                    type: Number,
+                    required: true,
+                },
             },
-            value: {
-                type: String,
-                required: true,
-            }
-    }]},
+        ],
+        reviewRating: {
+            type: Number,
+            default: 0,
+        },
+    },
     {
         timestamps: true,
     }
@@ -67,6 +74,8 @@ schema.methods.getData = function (): StoryReviewData {
         author: this.author,
         textRating: this.textRating,
         imageRating: this.imageRating,
+        likes: this.likes,
+        reviewRating: this.reviewRating,
         createdAt: this.createdAt!.toString(),
         updatedAt: this.updatedAt!.toString(),
     };

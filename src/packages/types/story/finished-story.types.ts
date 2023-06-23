@@ -64,8 +64,8 @@ export type FinishedStoryChapterWithImageOnClient = Omit<FinishedStoryChapter, '
 /**
  * Ratings
  */
-
 export type StoryRatings = {
+    globalRating: number;
     textRating: number;
     imageRating: number;
 };
@@ -90,6 +90,7 @@ export type FinishedStoryData = {
         author: string;
         review: string;
     }[];
+    numbOfReviews: number;
     createdAt: string;
 };
 

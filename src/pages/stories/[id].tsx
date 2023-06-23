@@ -4,7 +4,7 @@ import { Story } from '~/apps/front/components';
 import { isValidId } from '~/packages/functions';
 import { Path, StoryReviewData } from '~/packages/types';
 import { api } from '~/services';
-import { setStoryDataAndUserPreview, wrapper } from '~/store';
+import { setStoryDataAndReviews, wrapper } from '~/store';
 
 export default function StoryPage() {
     return (
@@ -21,7 +21,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
     if (typeof storyId === 'string' && isValidId(storyId)) {
         try {
             let userReview: StoryReviewData | null = null;
-            const storyRes = await api.getOneStory(storyId);
+            const storyRes = await api.getOneStoryAndReviews(storyId);
             const { data } = await api.getSessionServerSide(context.req.headers.cookie);
             const userId = data.session?.user?.id;
             if (userId && storyRes.data.story.reviews.some((review) => review.author === userId)) {
@@ -31,10 +31,10 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
                     userReview = reviewRes.data.review;
                 }
             }
-            store.dispatch(setStoryDataAndUserPreview({ storyData: storyRes.data.story, userReview }));
+            store.dispatch(setStoryDataAndReviews({ storyData: storyRes.data.story, userReview, reviews: storyRes.data.reviews }));
             return {
                 props: {
-                    ...(await customServerSideTranslations(context.locale!, ['story'])),
+                    ...(await customServerSideTranslations(context.locale!, ['story', 'date'])),
                 },
             };
         } catch (err) {

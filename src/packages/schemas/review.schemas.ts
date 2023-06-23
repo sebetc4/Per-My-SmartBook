@@ -3,6 +3,7 @@ import {
     CreateOneReviewBody,
     DeleteOnReviewQuery,
     GetStoryPreviewsQuery,
+    LikeOrDislikeOneReviewBody,
     UpdateOneReviewBody,
 } from '../types/request/review.types';
 import { idSchema } from './common.schemas';
@@ -35,4 +36,9 @@ export const updateOneReviewSchema: yup.SchemaOf<UpdateOneReviewBody> = yup.obje
 export const deleteOneReviewSchema: yup.SchemaOf<DeleteOnReviewQuery> = yup.object().shape({
     storyId: idSchema,
     reviewId: idSchema,
+});
+
+export const likeOrDislikeOneReviewSchema: yup.SchemaOf<LikeOrDislikeOneReviewBody> = yup.object().shape({
+    reviewId: idSchema,
+    value: yup.number().min(-1).max(1).required(),
 });

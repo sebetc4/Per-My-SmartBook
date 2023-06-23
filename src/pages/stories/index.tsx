@@ -52,7 +52,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query, locale }) 
         props: {
             stories: data.stories,
             total: data.total,
-            ...(await customServerSideTranslations(locale!, ['public-stories', 'story-inputs', 'illustrations'])),
+            ...(await customServerSideTranslations(locale!, ['public-stories', 'story-inputs', 'illustrations', 'date'])),
         },
     };
 };

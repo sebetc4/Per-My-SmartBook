@@ -3,6 +3,7 @@ import {
     getStoriesPreviewsFromDb,
     getOneFinishedStoryById,
     getUserStoryPreviousFromDb,
+    getStoryReviewsFromDb,
 } from '../queries';
 import { catchControllerError, authUser, authUserAndSession, validQueryId, onSuccess } from '../functions';
 
@@ -10,15 +11,28 @@ export const getOneStory = catchControllerError(async (req, res) => {
     const id = validQueryId(req);
     const story = await getOneFinishedStoryById(id);
     if (story.visibility === 'private') {
-        const {id: userId} = await authUser(req, res);
-        story.isAuthor(userId)
+        const { id: userId } = await authUser(req, res);
+        story.isAuthor(userId);
     }
     const storyData = await story.getData();
     onSuccess(200, { story: storyData }, res);
 });
 
+export const getOneStoryAndReviews = catchControllerError(async (req, res) => {
+    const id = validQueryId(req);
+    const story = await getOneFinishedStoryById(id);
+    if (story.visibility === 'private') {
+        const { id: userId } = await authUser(req, res);
+        story.isAuthor(userId);
+    }
+    const reviews = await getStoryReviewsFromDb(story.id, 10, 0);
+    const storyData = await story.getData();
+    const reviewsData = reviews.map((review) => review.getData());
+    onSuccess(200, { story: storyData, reviews: reviewsData }, res);
+});
+
 export const getPublicStoriesPreviews = catchControllerError(async (req, res) => {
-    const {total, stories} = await getStoriesPreviewsFromDb(req, true);
+    const { total, stories } = await getStoriesPreviewsFromDb(req, true);
     onSuccess(200, { total, stories }, res);
 });
 

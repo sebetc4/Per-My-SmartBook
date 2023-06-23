@@ -21,6 +21,7 @@ export { Header } from './layout/Header/Header';
 export { Layout } from './layout/Layout/Layout';
 
 // Loading
+export { LoadingBall } from './loading/LoadingBall/LoadingBall';
 export { LoadingContainer } from './loading/LoadingContainer/LoadingContainer';
 
 // Modals
@@ -48,6 +49,7 @@ export { TimeLeftTextTimer } from './timer/TimeLeftTextTimer/TimeLeftTextTimer';
 
 // Dates
 export { DateFromNow } from './dates/FromNow/FromNow';
+export { CreationDate } from './dates/CreationDate/CreationDate';
 
 // Avatar
 export { CustomAvatar } from './CustomAvatar/CustomAvatar';

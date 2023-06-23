@@ -12,7 +12,7 @@ import userStories from '../../../public/locales/fr/user-stories.json';
 import publicStories from '../../../public/locales/fr/public-stories.json';
 import story from '../../../public/locales/fr/story.json';
 import home from '../../../public/locales/fr/home.json';
-import timer from '../../../public/locales/fr/timer.json';
+import date from '../../../public/locales/fr/date.json';
 import storyInputs from '../../../public/locales/fr/story-inputs.json';
 import buttons from '../../../public/locales/fr/buttons.json';
 import illustrations from '../../../public/locales/fr/illustrations.json';
@@ -47,7 +47,7 @@ declare module 'i18next' {
             buttons: typeof buttons;
 
             // Other
-            timer: typeof timer;
+            date: typeof date;
             illustrations: typeof illustrations;
         };
     }

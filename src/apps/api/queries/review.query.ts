@@ -19,23 +19,15 @@ export const getOneStoryReviewById = async (reviewId: string) => {
     return review;
 };
 
-export const getStoryPreviewsFromDb = async (req: NextApiRequest) => {
-    const { storyId, reviewNumber, start } = await validQueryData<GetStoryPreviewsQuery>(getStoryPreviewsSchema, req);
+export const getStoryReviewsFromDb = async (storyId: ObjectId | string, reviewNumber: number, start: number) => {
     const storiesReviews: StoryReviewInstance[] = await StoryReview.find({ story: storyId })
         .sort({ previewRating: -1 })
         .limit(reviewNumber)
-        .skip(start);
-    return storiesReviews;
-};
-
-export const getThreeBestStoryPreviewsFromDb = async (storyId: ObjectId) => {
-    const storiesReviews: StoryReviewInstance[] = await StoryReview.find({ story: storyId })
-        .sort({ previewRating: -1 })
-        .limit(3)
-        .skip(0)
+        .skip(start)
         .populate({
             path: 'author',
             select: 'username',
         });
     return storiesReviews;
 };
+

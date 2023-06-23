@@ -11,11 +11,11 @@ import {
     UpdateAccountReq,
     UpdateAISettingsReq,
     UpdatePasswordReq,
-    GetOneFinishedStoryDataRes,
     PublicStoriesSearchQuery,
     PublicStoriesSearchRes,
+    GetOneFinishedStoryDataAndReviewsRes,
 } from '../packages/types';
-import { CreateOneReviewBody, CreateOneReviewRes, DeleteOneReviewRes, UpdateOneReviewBody, UpdateOneReviewRes } from '~/packages/types/request/review.types';
+import { CreateOneReviewBody, CreateOneReviewRes, DeleteOneReviewRes, LikeOrDislikeOneReviewBody, LikeOrDislikeOneReviewRes, UpdateOneReviewBody, UpdateOneReviewRes } from '~/packages/types/request/review.types';
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -86,8 +86,8 @@ class ApiService {
     /**
      * Public stories
      */
-    getOneStory(storyId: string) {
-        return this.api.get<GetOneFinishedStoryDataRes>(`/story/${storyId}`);
+    getOneStoryAndReviews(storyId: string) {
+        return this.api.get<GetOneFinishedStoryDataAndReviewsRes>(`/story/${storyId}`);
     }
 
     getPublicStories({ search, theme, duration, language, page }: PublicStoriesSearchQuery) {
@@ -118,7 +118,6 @@ class ApiService {
         return this.api.get(`/story/review/reviews?storyId=${storyId}&reviewNumber=${reviewNumber}&start=${start}`);
     }
     createOneReview(body: CreateOneReviewBody) {
-        console.log('test')
         return this.api.post<CreateOneReviewRes>(`/story/review`, body);
     }
     updateOneReview(body: UpdateOneReviewBody) {
@@ -126,6 +125,9 @@ class ApiService {
     }
     deleteOneReview(reviewId: string, storyId: string) {
         return this.api.delete<DeleteOneReviewRes>(`/story/review?reviewId=${reviewId}&storyId=${storyId}`);
+    }
+    likeOrDislikeOneReview(body: LikeOrDislikeOneReviewBody) {
+        return this.api.post<LikeOrDislikeOneReviewRes>(`/story/review/like-dislike`, body);
     }
 }
 

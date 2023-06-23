@@ -24,7 +24,6 @@ export const PublicStories = ({ stories, total }: PublicStoriesProps) => {
     const { t: publicStoriesT } = useTranslation('public-stories');
     const theme = useTheme();
     const { mediaQuery } = useAppMediaQuery();
-    console.log(stories)
 
     return (
         <>
