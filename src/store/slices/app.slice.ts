@@ -31,8 +31,8 @@ export const appSlice = createSlice({
         setFooterHeight: (state, action: PayloadAction<number>) => {
             state.layout.footerHeight = action.payload;
         },
-        setFooterId: (state, action: PayloadAction<string | null>) => {
-            state.layout.footerId = action.payload;
+        setFooterRef: (state, action: PayloadAction<RefObject<HTMLDivElement> | null>) => {
+            state.layout.footerRef = action.payload as WritableDraft<RefObject<HTMLDivElement>>;
         },
         setColorMode: (state, action: PayloadAction<ColorMode>) => {
             state.colorMode = action.payload;
