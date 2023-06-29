@@ -28,10 +28,10 @@ export const getUserStoryPreviousFromDb = async (userId: ObjectId) => {
         return Promise.all(unfinishedStoriesPreviewsPromiseArray);
     };
     const finishedUserStoryPreviewsPromise = async () => {
-        const unfinishedStoryprojection = ['cover', 'topic', 'title', 'summary', 'options', 'visibility'];
+        const finishedStoryProjection = ['cover', 'topic', 'title', 'summary', 'options', 'visibility'];
         const allFinishedStories: FinishedStoryInstance[] = await FinishedStory.find(
-            { userId },
-            unfinishedStoryprojection
+            { userId, type: 'user' },
+            finishedStoryProjection
         );
         const finishedUserStoryPreviewsPromiseArray = allFinishedStories.map(
             async (story) => await story.getUserPreview()

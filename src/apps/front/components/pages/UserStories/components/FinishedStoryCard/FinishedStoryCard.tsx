@@ -11,7 +11,7 @@ import { deleteUnfinishedStory } from '~/store';
 import { ConfirmModal } from '../../../..';
 import { FinishedStoryDetails } from '..';
 import { useAppDispatch, useAppSelector } from '~/apps/front/hooks';
-import { getRandomHourglassImage, placeholderValue } from '~/apps/front/utils';
+import { getRandomBookImage, getRandomHourglassImage, placeholderValue } from '~/apps/front/utils';
 
 type FinishedStoryCardProps = {
     story: FinishedUserStoryPreview;
@@ -19,10 +19,8 @@ type FinishedStoryCardProps = {
 
 export const FinishedStoryCard = ({ story }: FinishedStoryCardProps) => {
     // Hooks
-    const { t } = useTranslation('user-stories');
+    const { t: userStoriesT } = useTranslation('user-stories');
     const dispatch = useAppDispatch();
-    const router = useRouter();
-    const contentBoxRef = useRef<HTMLDivElement>(null);
 
     // Store
     const { isLoading } = useAppSelector((state) => state.userStories);
@@ -30,13 +28,7 @@ export const FinishedStoryCard = ({ story }: FinishedStoryCardProps) => {
     // State
     const [openDeleteStoryConfirmModal, setOpenDeleteStoryConfirmModal] = useState(false);
     const [openDetailsModal, setOpenDetailsModal] = useState(false);
-
-    const handleContinueStory = async (storyId: string) => {
-        router.push({
-            pathname: Path.USER_STORY_GENERATOR,
-            query: { id: storyId },
-        });
-    };
+    const [bookImage] = useState(getRandomBookImage());
 
     const handleDeleteUnfinishedStory = async () => {
         await dispatch(deleteUnfinishedStory(story.id));
@@ -52,7 +44,6 @@ export const FinishedStoryCard = ({ story }: FinishedStoryCardProps) => {
                     maxWidth: '350px',
                     borderRadius: 6,
                     boxShadow: '0 2px 20px rgba(0, 0, 0, 0.2)',
-                    paddingBottom: `${contentBoxRef.current?.offsetHeight}px`,
                     cursor: 'pointer',
                     overflow: 'hidden',
                 }}
@@ -60,7 +51,7 @@ export const FinishedStoryCard = ({ story }: FinishedStoryCardProps) => {
             >
                 <Box sx={{ position: 'relative', width: '350px', height: '350px' }}>
                     <Image
-                        src={story.cover?.url || getRandomHourglassImage()}
+                        src={story.cover?.url || bookImage}
                         alt={"Illustration de l'histoire"}
                         placeholder={placeholderValue(!!story.cover)}
                         blurDataURL={story.cover?.plaiceholder}
@@ -69,11 +60,8 @@ export const FinishedStoryCard = ({ story }: FinishedStoryCardProps) => {
                 </Box>
                 <Box
                     sx={{
-                        position: 'absolute',
-                        boxSizing: 'border-box',
-                        bottom: 0,
-                        left: 0,
                         width: '100%',
+                        height: '100%',
                         borderTopLeftRadius: 32,
                         p: 4,
                         pt: 0,
@@ -84,26 +72,21 @@ export const FinishedStoryCard = ({ story }: FinishedStoryCardProps) => {
                 >
                     <Box>
                         <Typography
-                            textAlign='justify'
-                            sx={{ mt: 1 }}
+                            textAlign='center'
+                            sx={{ mt: 2, mb: 2, fontSize: '1.1rem', fontWeight: 'bold' }}
                         >
                             {story.title}
                         </Typography>
-                        <Typography
-                            textAlign='justify'
-                            sx={{ mt: 1 }}
-                        >
-                            {story.topic}
-                        </Typography>
+                        <Typography textAlign='justify'>{story.topic}</Typography>
                     </Box>
                 </Box>
             </Box>
             <ConfirmModal
                 open={openDeleteStoryConfirmModal}
-                title={t('DeleteUnfinishedStoryConfirmModal.title')}
-                text={t('DeleteUnfinishedStoryConfirmModal.text')}
-                cancelButtonText={t('DeleteUnfinishedStoryConfirmModal.button.cancel')}
-                confirmButtonText={t('DeleteUnfinishedStoryConfirmModal.button.confirm')}
+                title={userStoriesT('DeleteUnfinishedStoryConfirmModal.title')}
+                text={userStoriesT('DeleteUnfinishedStoryConfirmModal.text')}
+                cancelButtonText={userStoriesT('DeleteUnfinishedStoryConfirmModal.button.cancel')}
+                confirmButtonText={userStoriesT('DeleteUnfinishedStoryConfirmModal.button.confirm')}
                 handleClose={() => setOpenDeleteStoryConfirmModal(false)}
                 handleConfirm={handleDeleteUnfinishedStory}
                 isLoading={isLoading}
