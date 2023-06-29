@@ -5,14 +5,16 @@ import {
     updateAISettingsSchema,
     updatePasswordSchema,
     updateProfileSchema,
+    updateUserColorSchema,
 } from '../../../packages/schemas';
 import {
-    AddModifyOpenaiKeyReq,
+    AddModifyOpenaiKeyBody,
     ColorMode,
-    UpdateAccountReq,
-    UpdateAISettingsReq,
-    UpdatePasswordReq,
-    UpdateProfileReq,
+    UpdateAccountBody,
+    UpdateAISettingsBody,
+    UpdatePasswordBody,
+    UpdateProfileBody,
+    UpdateUserColorBody,
     Visibility,
 } from '../../../packages/types';
 import { deleteFileFromS3, uploadFileToS3 } from '../configs';
@@ -35,7 +37,7 @@ export const getUserSettingsAndSession = catchControllerError(async (req, res) =
 });
 
 export const updateAccount = catchControllerError(async (req, res) => {
-    const { email, username } = await validBody<UpdateAccountReq>(updateAccountSchema, req);
+    const { email, username } = await validBody<UpdateAccountBody>(updateAccountSchema, req);
     const user = await authUser(req);
     if (user.isEqualValues({ email, username })) {
         throw CustomError.BAD_REQUEST;
@@ -48,7 +50,7 @@ export const updateAccount = catchControllerError(async (req, res) => {
 });
 
 export const updateProfile = catchControllerError(async (req, res) => {
-    const { avatarFile } = await validParseFormidableData<UpdateProfileReq>(updateProfileSchema, req);
+    const { avatarFile } = await validParseFormidableData<UpdateProfileBody>(updateProfileSchema, req);
     const user = await authUser(req);
     if (avatarFile) {
         const readStream = createReadStream(avatarFile.filepath);
@@ -63,7 +65,7 @@ export const updateProfile = catchControllerError(async (req, res) => {
 });
 
 export const updatePassword = catchControllerError(async (req, res) => {
-    const { currentPassword, newPassword } = await validBody<UpdatePasswordReq>(updatePasswordSchema, req);
+    const { currentPassword, newPassword } = await validBody<UpdatePasswordBody>(updatePasswordSchema, req);
     const user = await authUser(req);
     if (user.authProvider !== 'credentials') {
         throw CustomError.BAD_REQUEST;
@@ -77,7 +79,7 @@ export const updatePassword = catchControllerError(async (req, res) => {
 });
 
 export const updateAISettings = catchControllerError(async (req, res) => {
-    const { maxTokens, temperature } = await validBody<UpdateAISettingsReq>(updateAISettingsSchema, req);
+    const { maxTokens, temperature } = await validBody<UpdateAISettingsBody>(updateAISettingsSchema, req);
     const user = await authUser(req);
     user.aiSettings.openai.maxTokens = maxTokens;
     user.aiSettings.openai.temperature = temperature;
@@ -86,7 +88,7 @@ export const updateAISettings = catchControllerError(async (req, res) => {
 });
 
 export const addModifyOpenaiKey = catchControllerError(async (req, res) => {
-    const { key } = await validBody<AddModifyOpenaiKeyReq>(addModifyOpenaiKeySchema, req);
+    const { key } = await validBody<AddModifyOpenaiKeyBody>(addModifyOpenaiKeySchema, req);
     const user = await authUser(req);
     const { encryptedKey, iv } = encryptKey(key);
     const placeholder = `sk-...${key.substring(key.length - 6)}`;
@@ -108,8 +110,16 @@ export const deleteOpenaiKey = catchControllerError(async (req, res) => {
 
 export const toggleColorMode = catchControllerError(async (req, res) => {
     const user = await authUser(req);
-    user.appearanceParameters.colorMode =
-        user.appearanceParameters.colorMode === ColorMode.LIGHT ? ColorMode.DARK : ColorMode.LIGHT;
+    user.uiSettings.colorMode =
+        user.uiSettings.colorMode === ColorMode.LIGHT ? ColorMode.DARK : ColorMode.LIGHT;
     await user.save();
     onSuccess(200, { message: 'Color mode is changed' }, res);
+});
+
+export const updateUserColor = catchControllerError(async (req, res) => {
+    const { color } = await validBody<UpdateUserColorBody>(updateUserColorSchema, req);
+    const user = await authUser(req);
+    user.uiSettings.userColor = color
+    await user.save();
+    onSuccess(200, { message: 'User color is changed' }, res);
 });

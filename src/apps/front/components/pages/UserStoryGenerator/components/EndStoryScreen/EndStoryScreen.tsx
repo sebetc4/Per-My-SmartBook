@@ -44,6 +44,7 @@ export const EndStoryScreen = () => {
                 component='h2'
                 textAlign='center'
                 color={theme.text.body}
+                sx={{mt: 6}}
             >
                 {storyGenerationT('FinishedStory.text.end')}
             </Typography>

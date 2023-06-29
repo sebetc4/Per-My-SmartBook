@@ -12,12 +12,11 @@ import { sockets } from '../../../../../../../services';
 import { CommonStoriesCarousel } from '..';
 
 import ImaginaryWorldBackground from '../../../../../../../../public/images/illustrations/imaginary-world3.png';
-import zIndex from '@mui/material/styles/zIndex';
 
 export const CommonStoriesSection = () => {
     // Hooks
     const router = useRouter();
-    const { t: homeT } = useTranslation('home');
+    const { t: newStoryT } = useTranslation('new-story');
     const theme = useTheme()
 
     // States
@@ -29,7 +28,7 @@ export const CommonStoriesSection = () => {
             const body = { language: router.locale };
             const { allStoriesTopics } = await sockets.emit(
                 SocketNamespace.COMMON_STORIES,
-                SocketEvent.GET_ALL_COMMON_STORIES_BEINGGENERATED_PREVIEWS,
+                SocketEvent.GET_ALL_COMMON_STORIES_BEING_GENERATED_PREVIEWS,
                 body
             );
             setCommonStoriesPreviews(allStoriesTopics);
@@ -55,7 +54,7 @@ export const CommonStoriesSection = () => {
                     pr: { ssx: 0, md: 8},
                 }}
             >
-                {homeT('CommonStoriesSection.title.h2')}
+                {newStoryT('CommonStoriesSection.title.h2')}
             </Typography>
             <Divider
                 sx={{
@@ -73,7 +72,7 @@ export const CommonStoriesSection = () => {
                     mr: 'auto',
                 }}
             >
-                {homeT('CommonStoriesSection.text')}
+                {newStoryT('CommonStoriesSection.text')}
             </Typography>
             <Divider
                 sx={{
@@ -99,6 +98,7 @@ export const CommonStoriesSection = () => {
                     <Box
                         sx={{
                             backgroundColor: theme.card.backgroundColor,
+                            boxShadow: theme.card.boxShadow,
                             borderRadius: 6,
                             p: {xxs:2, md: 6},
                             zIndex: 10,
@@ -106,9 +106,9 @@ export const CommonStoriesSection = () => {
                     >
                         <TimeLeftTextTimer
                             endAt={getNextDayOrTodayAtHour(18).getTime()}
-                            text={homeT('CommonStoriesSection.wait-common-story-timer.text')}
+                            text={newStoryT('CommonStoriesSection.wait-common-story-timer.text')}
                             textSx={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.1rem' }}
-                            endText={homeT('CommonStoriesSection.wait-common-story-timer.endText')}
+                            endText={newStoryT('CommonStoriesSection.wait-common-story-timer.endText')}
                             withHours
                             timeSx={{
                                 textAlign: 'center',

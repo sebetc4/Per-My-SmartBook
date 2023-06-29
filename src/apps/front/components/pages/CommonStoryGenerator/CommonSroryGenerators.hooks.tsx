@@ -5,18 +5,21 @@ import {
     CommonStoryChapterImageRes,
     CommonStoryStoryChapterChoiceAndAllNumbOfVotesRes,
     FirstCommonStoryChapterRes,
+    NewCommonStoryChatMessageRes,
+    Path,
     SocketEvent,
     SocketNamespace,
 } from '~/packages/types';
 import { sockets } from '~/services';
 import {
-    getCommonStoryBeingGeneratedData,
     setCommonStoryChapterData,
     setCommonUserStoryChapterImageRes,
     setFirstCommonStoryChapter,
     setCommonStoryChapterChoiceAndAllNumbOfVotes,
     setCommonStoryIsStopped,
     setCommonStoryIsFinished,
+    addNewChatMessage,
+    setCommonStoryBeingGeneratedData,
 } from '~/store';
 import { useAppDispatch } from '~/apps/front/hooks';
 
@@ -27,10 +30,21 @@ export const useSocketCommonSroryGenerators = () => {
 
     //State
     const [isInitialized, setIsInitialized] = useState(false);
+
     useEffect(() => {
         const initializeStorySocket = async () => {
             // Fetch story data
-            await dispatch(getCommonStoryBeingGeneratedData(router.query.id as string));
+            try {
+                const storyData = await sockets.emit(
+                    SocketNamespace.COMMON_STORIES,
+                    SocketEvent.GET_COMMON_STORY_BEING_GENERATED_DATA,
+                    { storyId: router.query.id as string }
+                );
+                dispatch(setCommonStoryBeingGeneratedData(storyData))
+            } catch (err) {
+                router.push(Path.STORY_NOT_FOUND)
+            }
+            // Story First Chapter
             sockets.on<FirstCommonStoryChapterRes>(
                 SocketNamespace.COMMON_STORIES,
                 SocketEvent.FIRST_COMMON_STORY_CHAPTER,
@@ -60,18 +74,17 @@ export const useSocketCommonSroryGenerators = () => {
                     dispatch(setCommonStoryChapterChoiceAndAllNumbOfVotes(data));
                 }
             );
-            sockets.on(
+            sockets.on(SocketNamespace.COMMON_STORIES, SocketEvent.COMMON_STORY_IS_STOPPED, () => {
+                dispatch(setCommonStoryIsStopped());
+            });
+            sockets.on(SocketNamespace.COMMON_STORIES, SocketEvent.COMMON_STORY_IS_FINISHED, () => {
+                dispatch(setCommonStoryIsFinished());
+            });
+            sockets.on<NewCommonStoryChatMessageRes>(
                 SocketNamespace.COMMON_STORIES,
-                SocketEvent.COMMON_STORY_IS_STOPPED,
-                () => {
-                    dispatch(setCommonStoryIsStopped());
-                }
-            );
-            sockets.on(
-                SocketNamespace.COMMON_STORIES,
-                SocketEvent.COMMON_STORY_IS_STOPPED,
-                () => {
-                    dispatch(setCommonStoryIsFinished());
+                SocketEvent.NEW_COMMON_STORY_CHAT_MESSAGE,
+                (data) => {
+                    dispatch(addNewChatMessage(data));
                 }
             );
             setIsInitialized(true);

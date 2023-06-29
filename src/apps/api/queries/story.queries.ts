@@ -91,7 +91,16 @@ export const getStoriesPreviewsFromDb = async (
 
     const options = { ...searchParams, ...filters };
     const total = await FinishedStory.find(options).count();
-    const projection: (keyof FinishedPublicStoryPreview)[] = ['type', 'title', 'topic', 'cover', 'summary', 'options', 'ratings', 'numbOfReviews'];
+    const projection: (keyof FinishedPublicStoryPreview)[] = [
+        'type',
+        'title',
+        'topic',
+        'cover',
+        'summary',
+        'options',
+        'ratings',
+        'numbOfReviews',
+    ];
 
     const query = FinishedStory.find(options, projection)
         .limit(publicStoriesPerPage)
@@ -107,9 +116,12 @@ export const getStoriesPreviewsFromDb = async (
 
     const stories: Partial<FinishedStoryInstance[]> = await query.exec();
 
+    console.log(stories)
+
     const storiesPreviewsPromiseArray = stories.map(async (story) => await story?.getPublicPreview());
 
     const storiesPreviews = await Promise.all(storiesPreviewsPromiseArray);
+
     return {
         total,
         stories: storiesPreviews,
@@ -121,7 +133,7 @@ export const getOneFinishedStoryById = async (storyId: ObjectId | string) => {
         path: 'author',
         select: 'username avatar',
         match: { author: { $exists: true } },
-    });;
+    });
     if (!story) {
         throw CustomError.BAD_REQUEST;
     }

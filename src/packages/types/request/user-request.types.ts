@@ -9,34 +9,39 @@ export type GetUserSettingsServerSideRes = ResWithSession<{
 }>;
 
 // Update Account
-export type UpdateAccountReq = {
+export type UpdateAccountBody = {
     username: string;
     email: string;
 };
 
 // Update Profile
-export type UpdateProfileReq = {
+export type UpdateProfileBody = {
     avatarFile?: File | null;
 };
 
 // Update Password
-export type UpdatePasswordReq = {
+export type UpdatePasswordBody = {
     currentPassword: string;
     newPassword: string;
     confirmPassword: string;
 };
 
 // Update AI Settings
-export type UpdateAISettingsReq = {
+export type UpdateAISettingsBody = {
     maxTokens: number;
     temperature: number;
 };
 
 // Add OpenAI key
-export type AddModifyOpenaiKeyReq = {
+export type AddModifyOpenaiKeyBody = {
     key: string;
 };
 
 export type AddModifyOpenaKeyRes = {
     key: string;
+};
+
+// Update user color
+export type UpdateUserColorBody = {
+    color: string;
 };

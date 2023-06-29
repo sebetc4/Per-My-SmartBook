@@ -1,14 +1,14 @@
-import React from 'react';
-
+// MUI
 import { Box, Container, Fab, useTheme } from '@mui/material';
 import Image from 'next/image';
 import { BackgroundPaper, CommonStoriesSection, UserStorySection } from './components';
-
+// App
 import { sockets } from '../../../../../services';
-import { ColorMode, SocketEvent, SocketNamespace } from '../../../../../packages/types';
-import { useAppMediaQuery, useAppSelector } from '../../../hooks';
-import HeroImage from '../../../../../../public/images/illustrations/hero-stories.png';
-import HeroImageDark from '../../../../../../public/images/illustrations/hero-stories-dark.png';
+import { ColorMode, SocketEvent, SocketNamespace } from '~/packages/types';
+import { enableCommonStoryDevMode } from '~/packages/constants';
+import HeroImage from 'public/images/illustrations/hero-stories.png';
+import HeroImageDark from 'public/images/illustrations/hero-stories-dark.png';
+import { useAppMediaQuery, useAppSelector } from '~/apps/front/hooks';
 
 export const NewStory = () => {
     // Hooks
@@ -106,14 +106,16 @@ export const NewStory = () => {
                     <UserStorySection />
                 )}
             </Box>
-            <Fab
-                variant='extended'
-                color='primary'
-                aria-label='add'
-                onClick={() => sockets.emit(SocketNamespace.COMMON_STORIES, SocketEvent.START_COMMON_STORY)}
-            >
-                Commencer une nouvelle histoire commune
-            </Fab>
+            {enableCommonStoryDevMode && (
+                <Fab
+                    variant='extended'
+                    color='primary'
+                    aria-label='add'
+                    onClick={() => sockets.emit(SocketNamespace.COMMON_STORIES, SocketEvent.START_COMMON_STORY)}
+                >
+                    Commencer une nouvelle histoire commune
+                </Fab>
+            )}
         </Container>
     );
 };

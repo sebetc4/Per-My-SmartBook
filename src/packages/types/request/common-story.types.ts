@@ -1,4 +1,4 @@
-import { CommonStoryChapterClientData, Language } from '..';
+import { ChatMessage, CommonStoryChapterClientData, Language } from '..';
 
 /**
  * Get all common stories being generated previex
@@ -61,3 +61,7 @@ export type CommonStoryStoryChapterChoiceAndAllNumbOfVotesRes = {
     selectedChoiceIndex: number;
     allNumbOfVotes: number[];
 };
+
+export type NewCommonStoryChatMessageRes = {
+    message: ChatMessage
+}

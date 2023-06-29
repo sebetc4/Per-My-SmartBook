@@ -2,10 +2,11 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 
 import {
-    AddModifyOpenaiKeyReq,
-    UpdateAccountReq,
-    UpdateAISettingsReq,
-    UpdatePasswordReq,
+    AddModifyOpenaiKeyBody,
+    UpdateAccountBody,
+    UpdateAISettingsBody,
+    UpdatePasswordBody,
+    UpdateUserColorBody,
     UserSessionData,
     UserSettings,
 } from '../../packages/types';
@@ -40,12 +41,6 @@ export const userSlice = createSlice({
         },
         setUserSettings(state, action: PayloadAction<UserSettings>) {
             state.settings = action.payload;
-        },
-        /*
-        /   Color
-        */
-        setUserColor(state, action: PayloadAction<string>) {
-            state.session!.userColor = action.payload;
         },
     },
     extraReducers: (builder) => {
@@ -154,10 +149,27 @@ export const userSlice = createSlice({
             state.isLoading = false;
             state.error = action.payload || action.error.message || null;
         });
+
+        /**
+         * Update user color
+         */
+        builder.addCase(updateUserColor.pending, (state) => {
+            state.isLoading = true;
+            state.error = null;
+        });
+        builder.addCase(updateUserColor.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.session!.userColor = action.payload;
+            state.error = null;
+        });
+        builder.addCase(updateUserColor.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload || action.error.message || null;
+        });
     },
 });
 
-export const updateAccount = createAsyncThunk<any, UpdateAccountReq, { rejectValue: string }>(
+export const updateAccount = createAsyncThunk<any, UpdateAccountBody, { rejectValue: string }>(
     'user/updateAccount',
     async (body, { rejectWithValue }) => {
         try {
@@ -187,7 +199,7 @@ export const updateProfile = createAsyncThunk<any, FormData, { rejectValue: stri
     }
 );
 
-export const updatePassword = createAsyncThunk<any, UpdatePasswordReq, { rejectValue: string }>(
+export const updatePassword = createAsyncThunk<any, UpdatePasswordBody, { rejectValue: string }>(
     'user/updatePassword',
     async (body, { rejectWithValue }) => {
         try {
@@ -202,7 +214,7 @@ export const updatePassword = createAsyncThunk<any, UpdatePasswordReq, { rejectV
     }
 );
 
-export const updateAISettings = createAsyncThunk<UpdateAISettingsReq, UpdateAISettingsReq, { rejectValue: string }>(
+export const updateAISettings = createAsyncThunk<UpdateAISettingsBody, UpdateAISettingsBody, { rejectValue: string }>(
     'user/updateAISettings',
     async (body, { rejectWithValue }) => {
         try {
@@ -217,7 +229,7 @@ export const updateAISettings = createAsyncThunk<UpdateAISettingsReq, UpdateAISe
     }
 );
 
-export const addModifyOpenaiKey = createAsyncThunk<string, AddModifyOpenaiKeyReq, { rejectValue: string }>(
+export const addModifyOpenaiKey = createAsyncThunk<string, AddModifyOpenaiKeyBody, { rejectValue: string }>(
     'user/addModifyOpenaiKey',
     async (body, { rejectWithValue }) => {
         try {
@@ -246,5 +258,20 @@ export const deleteOpenaiKey = createAsyncThunk<void, void, { rejectValue: strin
     }
 );
 
-export const { resetUserState, setUserSessionData, setUserSettings, setUserColor } = userSlice.actions;
+export const updateUserColor = createAsyncThunk<string, UpdateUserColorBody, { rejectValue: string }>(
+    'user/updateUserColor',
+    async (body, { rejectWithValue }) => {
+        try {
+            await api.updateUserColor(body);
+            return body.color;
+        } catch (err) {
+            if (err instanceof AxiosError) {
+                return rejectWithValue(err.response?.data.message);
+            }
+            throw err;
+        }
+    }
+);
+
+export const { resetUserState, setUserSessionData, setUserSettings } = userSlice.actions;
 export const userReducer = userSlice.reducer;

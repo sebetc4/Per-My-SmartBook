@@ -29,6 +29,7 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
 
     // State
     const [userVoteIndex, setUserVoteIndex] = useState<number | undefined>(undefined);
+    const [hourglassImage] = useState(getRandomHourglassImage());
 
     const handleClickOnChoice = async (selectedChoiceIndex: number) => {
         dispatch(selectCommonStoryStoryChapterChoice(selectedChoiceIndex));
@@ -59,7 +60,7 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                 }}
             >
                 <Image
-                    src={chapter.image?.url || getRandomHourglassImage()}
+                    src={chapter.image?.url || hourglassImage}
                     alt={chapter.description}
                     placeholder={placeholderValue(!!chapter.image?.plaiceholder)}
                     blurDataURL={chapter.image?.plaiceholder}
@@ -90,9 +91,9 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                     )}
                     <Stack
                         direction={{ xxs: 'column', md: 'row' }}
-                        spacing={4}
+                        spacing={8}
                         alignItems='stretch'
-                        sx={{ pl: 2, pr: 2 }}
+                        sx={{ pl: 4, pr: 4 }}
                     >
                         {chapter.allChoices.map((choice, i) => (
                             <ChapterChoiceButton
@@ -115,7 +116,7 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                     <Divider
                         flexItem
                         sx={{ mt: 4 }}
-                    />{' '}
+                    />
                 </>
             )}
         </Box>
@@ -172,6 +173,7 @@ const ChapterTimer = ({ chapter }: { chapter: CommonStoryChapterClientData }) =>
                 display: 'flex',
                 width: '100%',
                 alignItems: 'center',
+                mb: 3,
             }}
         >
             <Box

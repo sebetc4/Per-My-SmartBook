@@ -203,6 +203,9 @@ schema.methods.getPublicPreview = async function (): Promise<FinishedPublicStory
         id: this.id,
     };
     if (this.type === 'user') {
+        console.log('ttttttttttteeeeeeeeesssssstttttttttt')
+        console.log({publicAvatar: publicPreview.author})
+        console.log({authorAvatar: this.author!.avatar})
         publicPreview.author.avatar = this.author!.avatar?.key
             ? await convertToImageOnClient(this.author.avatar)
             : undefined;

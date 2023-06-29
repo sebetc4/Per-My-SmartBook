@@ -1,5 +1,5 @@
 // Librairies
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 // MUI
 import { Box, Container, useTheme } from '@mui/material';
 // App
@@ -16,26 +16,10 @@ export const CommonStoryGenerator = () => {
 
     // Store
     const { data: storyData } = useAppSelector((state) => state.commonStoryBeingGenerated);
-    const { layout } = useAppSelector((state) => state.app);
-
-    // State 
-    const [chatPaddingBottom, setChatPaddingBottom] = useState(0);
 
     useEffect(() => {
         lastChapterRef.current && window.scrollTo({ top: lastChapterRef.current.offsetTop, behavior: 'smooth' });
     }, [storyData?.allChapters.length]);
-
-    useEffect(() => {
-        addEventListener('scroll', (e) => {
-            const scrollBottomPosition = window.scrollY + window.innerHeight;
-            const pageHeight = document.documentElement.scrollHeight;
-            const footerHeight = layout.footerHeight;
-            const PaddingBottom = footerHeight + scrollBottomPosition - pageHeight;
-            if (PaddingBottom > 0) {
-                setChatPaddingBottom(PaddingBottom);
-            }
-        });
-    }, [layout.footerHeight]);
 
     return isInitialized ? (
         <Box
@@ -46,7 +30,7 @@ export const CommonStoryGenerator = () => {
                 justifyContent: 'center',
             }}
         >
-            <CommonChat paddingBottom={chatPaddingBottom}/>
+            <CommonChat />
             <Box sx={{ width: '100%', ml: '400px' }}>
                 <Container
                     maxWidth='xl'

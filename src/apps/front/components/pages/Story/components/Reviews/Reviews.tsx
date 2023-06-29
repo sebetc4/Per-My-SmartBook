@@ -49,15 +49,23 @@ export const Reviews = () => {
             </Container>
             <Divider
                 flexItem
-                sx={{ width: '50%', m: '0 auto', mt: 12, mb: 12 }}
+                sx={{ width: '50%', m: '0 auto', mt: 6, mb: 6 }}
             />
             <Container>
-                {allReviews.map((review) => (
-                    <Review
-                        key={review.id}
-                        review={review}
-                    />
-                ))}
+                {allReviews.length > 0 ? (
+                    allReviews.map((review) => (
+                        <Review
+                            key={review.id}
+                            review={review}
+                        />
+                    ))
+                ) : (
+                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                        <Typography sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                            {storyT('Reviews.text.no-review')}
+                        </Typography>
+                    </Box>
+                )}
             </Container>
         </Box>
     );

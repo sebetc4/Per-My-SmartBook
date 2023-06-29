@@ -10,7 +10,7 @@ import ImaginaryWorldBackground from '../../../../../../../../public/images/illu
 
 export const UserStorySection = () => {
     const theme = useTheme();
-    const { t: homeT } = useTranslation('home');
+    const { t: newStoryT } = useTranslation('new-story');
 
     return (
         <Box
@@ -32,7 +32,7 @@ export const UserStorySection = () => {
                         pr: { ssx: 0, md: 8 },
                     }}
                 >
-                    {homeT('UserStorySection.title.h2')}
+                    {newStoryT('UserStorySection.title.h2')}
                 </Typography>
                 <Divider
                     sx={{
@@ -50,7 +50,7 @@ export const UserStorySection = () => {
                         mr: 'auto',
                     }}
                 >
-                    {homeT('UserStorySection.text')}
+                    {newStoryT('UserStorySection.text')}
                 </Typography>
                 <Divider
                     sx={{

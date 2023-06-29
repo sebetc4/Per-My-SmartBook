@@ -5,8 +5,8 @@ import { useTranslation } from 'react-i18next';
 // MUI
 import { Box, Container, Typography, useTheme } from '@mui/material';
 // App
-import { setFooterHeight, setFooterId } from '~/store';
-import { useAppDispatch } from '~/apps/front/hooks';
+import { setFooterHeight } from '~/store';
+import { useAppDispatch, useLayout } from '~/apps/front/hooks';
 interface IFooterProps {}
 
 export const Footer = ({}: IFooterProps) => {
@@ -15,6 +15,7 @@ export const Footer = ({}: IFooterProps) => {
     const { t: commonT } = useTranslation();
     const dispatch = useAppDispatch();
     const theme = useTheme();
+    const {setFooterRef} = useLayout()
 
     useEffect(() => {
         footerRef.current?.offsetHeight && dispatch(setFooterHeight(footerRef.current?.offsetHeight));
@@ -22,10 +23,9 @@ export const Footer = ({}: IFooterProps) => {
 
     useEffect(() => {
         if (footerRef.current) {
-            const elementId = footerRef.current.id;
-            dispatch(setFooterId(elementId));
+            setFooterRef(footerRef)
         }
-    }, [footerRef, dispatch]);
+    }, [footerRef, setFooterRef, dispatch]);
 
     return (
         <Box

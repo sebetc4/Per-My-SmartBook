@@ -16,7 +16,7 @@ import {
 // App
 import {
     AddModifyOpenaiKeyError,
-    AddModifyOpenaiKeyReq,
+    AddModifyOpenaiKeyBody,
     allAddModifyOpenaiKeyErrors,
 } from '~/packages/types';
 import { CustomLoadingButton, CustomTextField } from '../../../..';
@@ -46,12 +46,12 @@ export const AddModifyOpenaiKeyModal = ({ action, open, handleClose }: AddModify
         handleSubmit,
         reset,
         formState: { errors },
-    } = useForm<AddModifyOpenaiKeyReq>({
+    } = useForm<AddModifyOpenaiKeyBody>({
         resolver: yupResolver(addModifyOpenaiKeySchema),
         mode: 'onTouched',
     });
 
-    const onSubmit = async (body: AddModifyOpenaiKeyReq) => {
+    const onSubmit = async (body: AddModifyOpenaiKeyBody) => {
         const res = await dispatch(addModifyOpenaiKey(body));
         if (res.meta.requestStatus === 'fulfilled') {
             dispatch(setAlert({ type: 'success', message: `success.${action}-openai-key` }));

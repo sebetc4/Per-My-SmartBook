@@ -25,10 +25,10 @@ export enum SocketEvent {
     
     // Common Story
     START_COMMON_STORY = 'start-common-story',
-    GET_ALL_COMMON_STORIES_BEINGGENERATED_PREVIEWS = 'get-all-common-being-generated-stories-previews',
-    GET_COMMON_STORY_BEINGGENERATED_DATA = 'get-common-story-being-generated-data',
+    GET_ALL_COMMON_STORIES_BEING_GENERATED_PREVIEWS = 'get-all-common-being-generated-stories-previews',
+    GET_COMMON_STORY_BEING_GENERATED_DATA = 'get-common-story-being-generated-data',
     SELECT_COMMON_STORY_CHAPTER_CHOICE = 'select-common-story-chapter-choice',
-    SEND_CHAT_MESSAGE = 'send-chat-message',
+    SEND_COMMON_STORY_CHAT_MESSAGE = 'send-common-story-chat-message',
     
 
     /**
@@ -49,5 +49,6 @@ export enum SocketEvent {
     COMMON_STORY_CHAPTER_IMAGE = 'common-story-chapter-image',
     COMMON_STORY_CHAPTER_CHOICE_AND_ALL_NUMB_OF_VOTES = 'common-story-chapter-choice-and-all-numb-of-votes',
     COMMON_STORY_IS_STOPPED = 'common-story-is-stopped',
-    COMMON_STORY_IS_FINISHED = 'common-story-is-finished'
+    COMMON_STORY_IS_FINISHED = 'common-story-is-finished',
+    NEW_COMMON_STORY_CHAT_MESSAGE = 'new-common-story-chat-message'
 }

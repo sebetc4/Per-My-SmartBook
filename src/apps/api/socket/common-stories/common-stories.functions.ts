@@ -1,35 +1,36 @@
 import { IncomingMessage } from 'http';
 import { Namespace } from 'socket.io';
-import { capitalizeFirstLetter } from '../../../../packages/functions';
+import { capitalizeFirstLetter } from '~/packages/functions';
 import {
     getAllUnfinishedCommonStoriesPreviewsSchema,
     getCommonStoriesBeingGeneratedDataSchema,
     selectCommonStoryStoryChapterChoiceSchema,
     sendChatMessageCommonStorySchema,
-} from '../../../../packages/schemas';
-
+} from '~/packages/schemas';
 import {
     GetAllCommonStoriesBeingGeneratedPreviewsBody,
     GetCommonStoriesBeingGeneratedDataBody,
     SelectCommonStoryStoryChapterChoiceBody,
     SendCommonStoryChatMessageBody,
     SocketEvent,
-
-} from '../../../../packages/types';
+} from '~/packages/types';
 import { FinishedStory } from '../../models';
-
 import {
     catchSocketError,
     validSocketData,
     authUser,
     generateStorySummaryAndTitle,
     emitToAllSocketsInRoom,
+    emitToOtherSocketsInRoom,
 } from '../../functions';
-
 import { commonStoriesSocketManager } from './common-stories.manager';
-import {generateCommonStoryIdAndOptions, handleCommonStoryTopic } from './functions';
-import { waitStartTime } from '../../../../packages/functions/time/time.functions';
-import { handleFirstCommonStoryChapter, handleNextCommonStoryChapter } from './functions/common-stories-chapter.functions';
+import {
+    handleFirstCommonStoryChapter,
+    handleNextCommonStoryChapter,
+    generateCommonStoryIdAndOptions,
+    handleCommonStoryTopic,
+} from './functions';
+import { waitStartTime } from '~/packages/functions';
 
 /**
  * Start a new story
@@ -95,9 +96,9 @@ export const getCommonStoryBeingGeneratedData = catchSocketError(async (data, so
         getCommonStoriesBeingGeneratedDataSchema,
         data
     );
-    const story = await commonStoriesSocketManager.getStoryData(storyId);
+    const {storyData, allChatMessages} = await commonStoriesSocketManager.getStoryData(storyId);
     commonStoriesSocketManager.joinRoom(storyId, socket);
-    cb({ story });
+    cb({ storyData, allChatMessages });
 });
 
 /**
@@ -116,12 +117,13 @@ export const selectCommonStoryStoryChapterChoice = catchSocketError(async (data,
 /**
  * Send message
  */
-export const sendNewMessage = catchSocketError(async (data, socket, _, cb) => {
+export const sendNewMessage = catchSocketError(async (data, socket, io, cb) => {
     const { storyId, message } = await validSocketData<SendCommonStoryChatMessageBody>(
         sendChatMessageCommonStorySchema,
         data
     );
     const user = await authUser(socket.request as IncomingMessage);
     const newMessage = commonStoriesSocketManager.addNewMessage(message, user, storyId);
+    emitToOtherSocketsInRoom(SocketEvent.NEW_COMMON_STORY_CHAT_MESSAGE, socket, storyId, { message: newMessage });
     cb(newMessage);
-})
+});

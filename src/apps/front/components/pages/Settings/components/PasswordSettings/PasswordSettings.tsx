@@ -14,7 +14,7 @@ import {
     PasswordFormConfirmPasswordError,
     PasswordFormCurrentPasswordError,
     PasswordFormNewPasswordError,
-    UpdatePasswordReq,
+    UpdatePasswordBody,
 } from '~/packages/types';
 import { updatePasswordSchema } from '~/packages/schemas';
 import { setAlert, updatePassword } from '~/store';
@@ -37,12 +37,12 @@ export const PasswordSettings = () => {
         reset,
         formState: { errors, isDirty },
         setError,
-    } = useForm<UpdatePasswordReq>({
+    } = useForm<UpdatePasswordBody>({
         resolver: yupResolver(updatePasswordSchema),
         mode: 'onTouched',
     });
 
-    const onSubmit = async (data: UpdatePasswordReq) => {
+    const onSubmit = async (data: UpdatePasswordBody) => {
         const res = await dispatch(updatePassword(data));
         if (res.meta.requestStatus === 'fulfilled') {
             dispatch(setAlert({ type: 'success', message: 'success.update-password' }));

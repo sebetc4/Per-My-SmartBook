@@ -8,7 +8,6 @@ import {
     UserMethods,
     UserSchema,
     UserSession,
-    UserSessionData,
     UserSettings,
     allVisibilityValues,
 } from '../../../packages/types';
@@ -48,7 +47,7 @@ const schema = new Schema<UserSchema, IUserModel, UserMethods>(
                 default: 'public',
             },
         },
-        appearanceParameters: {
+        uiSettings: {
             userColor: {
                 type: String,
             },
@@ -106,7 +105,9 @@ schema.pre('validate', async function () {
 });
 
 schema.pre('save', async function () {
-    this.appearanceParameters.userColor = stringToColor(this.username);
+    if (this.isNew) {
+        this.uiSettings.userColor = stringToColor(this.username);
+    }
     if (this.password && this.isModified('password')) {
         this.password = await bcrypt.hash(this.password, 10);
     }
@@ -122,8 +123,8 @@ schema.methods.getSessionData = async function (this: UserInstance): Promise<Use
         authProvider: this.authProvider,
         username: this.username,
         avatarUrl: this.avatar.key ? (await getUrlFromS3(this.avatar)) : null,
-        userColor: this.appearanceParameters.userColor,
-        colorMode: this.appearanceParameters.colorMode,
+        userColor: this.uiSettings.userColor,
+        colorMode: this.uiSettings.colorMode,
     };
 };
 

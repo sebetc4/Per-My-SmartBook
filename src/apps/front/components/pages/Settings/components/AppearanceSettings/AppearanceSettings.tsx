@@ -1,6 +1,6 @@
 // Libraries
 import { SketchPicker } from 'react-color';
-import React from 'react';
+import React, { useState } from 'react';
 // MUI
 import { Box, Container, Divider, FormControlLabel, Switch, Typography, useTheme } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -10,7 +10,7 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 // Api
 import { ColorMode } from '~/packages/types';
 import { useAppDispatch, useAppSelector } from '~/apps/front/hooks';
-import { setUserColor, toggleColorMode } from '~/store';
+import { toggleColorMode, updateUserColor } from '~/store';
 import { useTranslation } from 'react-i18next';
 
 export const AppearanceSettings = () => {
@@ -20,10 +20,12 @@ export const AppearanceSettings = () => {
     const { t: settingsT } = useTranslation('settings');
 
     const { session } = useAppSelector((state) => state.user);
-    const { colorMode } = useAppSelector((state) => state.app);
+    const { isLoading, colorMode } = useAppSelector((state) => state.app);
 
-    const handleColorChange = (color: any) => {
-        dispatch(setUserColor(color.hex));
+    const [userColor, setUserColor] = useState(session!.userColor);
+
+    const handleUpdateUserColor = () => {
+        dispatch(updateUserColor({ color: userColor }));
     };
 
     return (
@@ -53,6 +55,7 @@ export const AppearanceSettings = () => {
                         value={colorMode === ColorMode.LIGHT ? 'Clair' : 'Sombre'}
                         control={
                             <Switch
+                                disabled={isLoading}
                                 color='primary'
                                 checked={colorMode === ColorMode.DARK}
                                 onChange={() => dispatch(toggleColorMode())}
@@ -84,7 +87,7 @@ export const AppearanceSettings = () => {
                     </Typography>
                 </Divider>
                 <Box sx={{ mt: 6, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6 }}>
-                    <Typography sx={{ fontSize: '2rem', fontWeight: 500, color: session?.userColor }}>
+                    <Typography sx={{ fontSize: '2rem', fontWeight: 500, color: userColor }}>
                         {session?.username}
                     </Typography>
                     <Box
@@ -97,12 +100,15 @@ export const AppearanceSettings = () => {
                         }}
                     >
                         <SketchPicker
-                            color={session?.userColor}
-                            onChangeComplete={handleColorChange}
+                            color={userColor}
+                            onChangeComplete={(color) => setUserColor(color.hex)}
                         />
                         <LoadingButton
                             sx={{ mt: 2 }}
                             variant='outlined'
+                            disabled={isLoading}
+                            loading={isLoading}
+                            onClick={handleUpdateUserColor}
                         >
                             {settingsT('AppearanceSettings.button.confirm')}
                         </LoadingButton>

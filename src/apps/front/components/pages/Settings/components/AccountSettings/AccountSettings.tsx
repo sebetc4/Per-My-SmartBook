@@ -12,7 +12,7 @@ import {
     AccountFormUsernameError,
     allAccountFormEmailErrors,
     allAccountFormUsernameErrors,
-    UpdateAccountReq,
+    UpdateAccountBody,
 } from '~/packages/types';
 import { updateAccountSchema } from '~/packages/schemas';
 import { setAlert, updateAccount } from '~/store';
@@ -33,14 +33,14 @@ export const AccountSettings = () => {
         handleSubmit,
         reset,
         formState: { errors, isDirty },
-    } = useForm<UpdateAccountReq>({
+    } = useForm<UpdateAccountBody>({
         resolver: yupResolver(updateAccountSchema),
         mode: 'onTouched',
         defaultValues: { username: user?.username, email: settings?.email },
     });
 
     // Vérifier si le compte n'est pas déjà lié à une adresse!!!!
-    const onSubmit = async (data: UpdateAccountReq) => {
+    const onSubmit = async (data: UpdateAccountBody) => {
         if (settings?.email !== data.email || user?.username !== data.username) {
             const res = await dispatch(updateAccount(data));
             if (res.meta.requestStatus === 'fulfilled') {

@@ -13,13 +13,13 @@ import VpnKeyOutlinedIcon from '@mui/icons-material/VpnKeyOutlined';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import MonitorIcon from '@mui/icons-material/Monitor';
-import { useAppSelector } from '~/apps/front/hooks/redux.hook';
-import { useAppMediaQuery } from '~/apps/front/hooks';
-import { AISettings, AccountSettings, AppearanceSettings, PasswordSettings, ProfileSettings } from './compoents';
-import { setUrlWithoutReload } from '~/apps/front/utils';
-import { Path } from '~/packages/types';
-import { LoadingContainer } from '../../loading/LoadingContainer/LoadingContainer';
 // App
+import { setUrlWithoutReload } from '~/apps/front/utils';
+import { AISettings, AccountSettings, AppearanceSettings, PasswordSettings, ProfileSettings } from './components';
+import { useAppMediaQuery } from '~/apps/front/hooks';
+import { useAppSelector } from '~/apps/front/hooks/redux.hook';
+import { LoadingContainer } from '../..';
+import { Path } from '~/packages/types';
 
 
 type TabType = {

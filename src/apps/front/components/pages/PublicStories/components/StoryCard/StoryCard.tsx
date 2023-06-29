@@ -1,10 +1,11 @@
+// Librairies
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
-
+// MUI
 import { Box, Button, Divider, Stack, Typography, useTheme } from '@mui/material';
-
+// App
 import { FinishedPublicStoryPreview, Path } from '../../../../../../../packages/types';
 import { placeholderValue, getRandomBookImage } from '../../../../../utils';
 import { StoryDetails } from '..';
@@ -35,8 +36,8 @@ export const StoryCard = ({ story }: StoryItemProps) => {
                 sx={{
                     display: 'flex',
                     flexDirection: { xxs: 'column', md: 'row' },
-                    backgroundColor: theme.button.background,
-                    boxShadow: `${theme.button.boxShadow}, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;`,
+                    backgroundColor: theme.card.backgroundColor,
+                    boxShadow: theme.card.boxShadow,
                     borderRadius: 5,
                 }}
             >

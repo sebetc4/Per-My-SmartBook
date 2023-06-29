@@ -15,7 +15,7 @@ type CommonStoryBeingGeneratedCardProps = {
 };
 
 export const CommonStoryCard = ({ story }: CommonStoryBeingGeneratedCardProps) => {
-    const { t: homeT } = useTranslation('home');
+    const { t: newStoryT } = useTranslation('new-story');
     const { t: storyInputsT } = useTranslation('story-inputs');
 
     const [storyEndString, setStoryEndString] = useState<string>('');
@@ -23,15 +23,15 @@ export const CommonStoryCard = ({ story }: CommonStoryBeingGeneratedCardProps) =
     useEffect(() => {
         switch (story.state) {
             case 'stopped':
-                setStoryEndString(homeT('CommonStoryCard.timer.endText.stopped'));
+                setStoryEndString(newStoryT('CommonStoryCard.timer.endText.stopped'));
                 break;
             case 'finished':
-                setStoryEndString(homeT('CommonStoryCard.timer.endText.finished'));
+                setStoryEndString(newStoryT('CommonStoryCard.timer.endText.finished'));
                 break;
             default:
-                setStoryEndString(homeT('CommonStoryCard.timer.endText.generating'));
+                setStoryEndString(newStoryT('CommonStoryCard.timer.endText.generating'));
         }
-    }, [story.state, homeT]);
+    }, [story.state, newStoryT]);
 
     return (
         <Box
@@ -87,7 +87,7 @@ export const CommonStoryCard = ({ story }: CommonStoryBeingGeneratedCardProps) =
                         <Box sx={{ width: '100%', mt: 2 }}>
                             <TimeLeftTextTimer
                                 endAt={story.startAt}
-                                text={homeT('CommonStoryCard.timer.text')}
+                                text={newStoryT('CommonStoryCard.timer.text')}
                                 textSx={{
                                     textAlign: 'center',
                                     fontWeight: 'bold',
@@ -103,7 +103,7 @@ export const CommonStoryCard = ({ story }: CommonStoryBeingGeneratedCardProps) =
                     </Box>
                     <Divider sx={{ mt: 2, mb: 2 }} />
                     <Stack direction='row' spacing={1}>
-                        <Typography sx={{ fontWeight: 'bold' }}>{`${homeT('CommonStoryCard.text.theme')}`}</Typography>
+                        <Typography sx={{ fontWeight: 'bold' }}>{`${newStoryT('CommonStoryCard.text.theme')}`}</Typography>
                         <Typography>{`${storyInputsT(`theme.item.${story.theme}`)}`}</Typography>
                     </Stack>
                     <Divider sx={{ mt: 2, mb: 2 }} />

@@ -16,7 +16,7 @@ export const LoadingBall = () => {
         >
             <Typography
                 variant='logo'
-                color='#A7B677'
+                color='#3b5935'
                 sx={{
                     fontWeight: 700,
                     letterSpacing: '0.3rem',

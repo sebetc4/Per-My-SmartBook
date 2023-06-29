@@ -16,6 +16,7 @@ export const WaitingScreen = () => {
         m: 0,
         s: 0,
     });
+    const [hourglassImage] = useState(getRandomHourglassImage());
 
     // Effects
     useEffect(() => {
@@ -66,7 +67,7 @@ export const WaitingScreen = () => {
                     }}
                 >
                     <Image
-                        src={storyData?.cover?.url || getRandomHourglassImage()}
+                        src={storyData?.cover?.url || hourglassImage}
                         alt={"Couverture de l'histoire"}
                         placeholder={placeholderValue(!!storyData?.cover?.plaiceholder)}
                         blurDataURL={storyData?.cover?.plaiceholder}

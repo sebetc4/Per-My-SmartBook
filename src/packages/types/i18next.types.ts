@@ -11,7 +11,7 @@ import fourOhFour from '../../../public/locales/fr/404.json';
 import userStories from '../../../public/locales/fr/user-stories.json';
 import publicStories from '../../../public/locales/fr/public-stories.json';
 import story from '../../../public/locales/fr/story.json';
-import home from '../../../public/locales/fr/home.json';
+import newStory from '../../../public/locales/fr/new-story.json';
 import date from '../../../public/locales/fr/date.json';
 import storyInputs from '../../../public/locales/fr/story-inputs.json';
 import buttons from '../../../public/locales/fr/buttons.json';
@@ -27,7 +27,7 @@ declare module 'i18next' {
             header: typeof header;
 
             // Pages
-            home: typeof home;
+            'new-story': typeof newStory;
             login: typeof login;
             signup: typeof signup;
             'story-generator': typeof storyGenerator;

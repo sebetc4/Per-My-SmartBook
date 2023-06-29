@@ -11,6 +11,7 @@ import { selectUserStoryStoryChapterChoice } from '~/store';
 import type { UserStoryChapterWithImageOnClient } from '~/packages/types';
 import { useAppDispatch, useAppSelector } from '~/apps/front/hooks';
 import { getRandomHourglassImage, placeholderValue } from '~/apps/front/utils';
+import { useState } from 'react';
 
 type ChapterProps = {
     chapter: UserStoryChapterWithImageOnClient;
@@ -23,7 +24,11 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
     const dispatch = useAppDispatch();
     const theme = useTheme();
 
+    // Store
     const { isLoading, data: storyData } = useAppSelector((state) => state.userStoryBeingGenerated);
+
+    // State
+    const [hourglassImage] = useState(getRandomHourglassImage());
 
     const handleClickOnChoice = async (selectedChoiceIndex: number) => {
         dispatch(selectUserStoryStoryChapterChoice(selectedChoiceIndex));
@@ -63,7 +68,7 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                 }}
             >
                 <Image
-                    src={chapter.image?.url || getRandomHourglassImage()}
+                    src={chapter.image?.url || hourglassImage}
                     alt={chapter.description}
                     placeholder={placeholderValue(!!chapter.image?.plaiceholder)}
                     blurDataURL={chapter.image?.plaiceholder || undefined}
@@ -84,7 +89,7 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
             {chapter.allChoices && (
                 <>
                     {isLoading ? (
-                        <Box sx={{ display: 'flex', width: '100%, mb: 4' }}>
+                        <Box sx={{ display: 'flex', width: '100%', mb: 4 }}>
                             <Box
                                 sx={{
                                     flex: 1,

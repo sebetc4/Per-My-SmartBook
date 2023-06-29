@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 export default function HomePage() {
 
     const {t: commonT} = useTranslation('common')
-    const {t: homeT} = useTranslation('home')
+    const {t: newStoryT} = useTranslation('new-story')
 
     return (
         <>
@@ -38,7 +38,7 @@ interface GetStaticPropsWithLocale extends GetStaticProps {
 export async function getStaticProps({ locale }: GetStaticPropsWithLocale) {
     return {
         props: {
-            ...(await customServerSideTranslations(locale, ['home', 'date', 'story-inputs', 'buttons'])),
+            ...(await customServerSideTranslations(locale, ['new-story', 'date', 'story-inputs', 'buttons'])),
         },
     };
 }

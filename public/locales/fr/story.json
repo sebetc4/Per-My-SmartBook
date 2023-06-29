@@ -12,6 +12,7 @@
 
     "ReviewForm.text.add-review": "Ajouter votre évaluation",
     "ReviewForm.customAutoResize.placeholder": "Votre avis...",
+    "Reviews.text.no-review": "Aucun avis pour le moment",
     "ReviewForm.label.text": "Texte",
     "ReviewForm.label.image": "Image",
     "ReviewForm.button.submit": "Soumettre",

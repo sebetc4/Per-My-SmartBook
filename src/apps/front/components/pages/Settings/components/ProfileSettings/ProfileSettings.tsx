@@ -7,7 +7,7 @@ import { Box, Container, IconButton } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 
-import { UpdateProfileReq } from '~/packages/types';
+import { UpdateProfileBody } from '~/packages/types';
 import { updateProfileSchema } from '~/packages/schemas';
 import { setAlert, updateProfile } from '~/store';
 import { useAppDispatch, useAppSelector } from '~/apps/front/hooks';
@@ -28,7 +28,7 @@ export const ProfileSettings = () => {
     const {
         handleSubmit,
         formState: { isDirty },
-    } = useForm<UpdateProfileReq>({
+    } = useForm<UpdateProfileBody>({
         resolver: yupResolver(updateProfileSchema),
         mode: 'onTouched',
         defaultValues: {},
@@ -45,7 +45,7 @@ export const ProfileSettings = () => {
         setAvatarFile(file);
     };
 
-    const onSubmit = async (data: UpdateProfileReq) => {
+    const onSubmit = async (data: UpdateProfileBody) => {
         const formData = new FormData();
         avatarFile && formData.append('avatarFile', avatarFile);
         const res = await dispatch(updateProfile(formData));

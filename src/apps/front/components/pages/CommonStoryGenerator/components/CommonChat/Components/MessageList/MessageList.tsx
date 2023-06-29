@@ -10,7 +10,7 @@ export const MessageList
     return (
         <>
             {allMessages.length > 0 ? (
-                <Box sx={{ mt: 4, height: '500px' }}>
+                <Box sx={{ mt: 2}}>
                     {allMessages.map((message, index) => (
                         <>
                             <Box
@@ -24,7 +24,7 @@ export const MessageList
                                         left: '-10px',
                                         height: '100%',
                                         width: '1px',
-                                        backgroundColor: 'red',
+                                        backgroundColor: message.userColor,
                                     },
                                 }}
                             >

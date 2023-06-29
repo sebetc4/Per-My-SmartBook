@@ -1,11 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 
 import { Box, LinearProgress, Typography, useTheme } from '@mui/material';
 import { UserStoryTopic } from '~/packages/types';
 import { getRandomHourglassImage } from '~/apps/front/utils';
-
-
 
 type TopicCardProps = {
     topic: UserStoryTopic;
@@ -19,6 +17,9 @@ export const TopicCard = ({ topic, onClick, isLoading, isSelected, topicIsSelect
     // Hooks
     const theme = useTheme();
     const cardRef = useRef<HTMLElement>(null);
+
+    // State
+    const [hourglassImage] = useState(getRandomHourglassImage());
 
     return (
         <Box
@@ -69,7 +70,7 @@ export const TopicCard = ({ topic, onClick, isLoading, isSelected, topicIsSelect
                         </>
                     )}
                     <Image
-                        src={topic.imageUrl ? topic.imageUrl : getRandomHourglassImage()}
+                        src={topic.imageUrl ? topic.imageUrl : hourglassImage}
                         alt={topic.description}
                         fill
                         sizes='width 400px'

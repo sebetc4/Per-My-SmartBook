@@ -1,8 +1,9 @@
 import { useAppSelector } from '~/apps/front/hooks';
-import { getRandomHourglassImage, placeholderValue } from '~/apps/front/utils';
+import { getRandomBookImage, getRandomHourglassImage, placeholderValue } from '~/apps/front/utils';
 import { Box, Divider, Typography, useTheme } from '@mui/material';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
+import { useState } from 'react';
 
 export const Cover = () => {
     // Hooks
@@ -11,6 +12,9 @@ export const Cover = () => {
 
     // Store
     const { storyData } = useAppSelector((state) => state.story);
+
+    // State
+    const [bookImage] = useState(getRandomBookImage());
 
     return (
         <Box
@@ -44,7 +48,7 @@ export const Cover = () => {
                 }}
             >
                 <Image
-                    src={storyData!.cover?.url || getRandomHourglassImage()}
+                    src={storyData!.cover?.url || bookImage}
                     alt={"Couverture de l'histoire"}
                     placeholder={placeholderValue(!!storyData!.cover?.plaiceholder)}
                     blurDataURL={storyData!.cover?.plaiceholder}

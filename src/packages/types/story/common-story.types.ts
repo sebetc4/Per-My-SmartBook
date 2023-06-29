@@ -82,6 +82,11 @@ export type CommonStoryBeingGeneratedData = {
     startAt: number;
 };
 
+export type CommonStoryBeingGeneratedDataWithChatMessages = {
+    storyData: CommonStoryBeingGeneratedData;
+    allChatMessages: ChatMessage[];
+}
+
 /**
  * Front Data: Story preview
  */

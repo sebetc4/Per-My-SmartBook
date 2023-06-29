@@ -1,21 +1,30 @@
 import axios, { AxiosInstance } from 'axios';
 
 import {
-    AddModifyOpenaiKeyReq,
+    AddModifyOpenaiKeyBody,
     AddModifyOpenaKeyRes,
     GetUserStoriesServerSideRes,
     GetUserSettingsServerSideRes,
     GetSessionRes,
     LoginWithCredentialsBody,
     SignUpBody,
-    UpdateAccountReq,
-    UpdateAISettingsReq,
-    UpdatePasswordReq,
+    UpdateAccountBody,
+    UpdateAISettingsBody,
+    UpdatePasswordBody,
     PublicStoriesSearchQuery,
     PublicStoriesSearchRes,
     GetOneFinishedStoryDataAndReviewsRes,
+    UpdateUserColorBody,
 } from '../packages/types';
-import { CreateOneReviewBody, CreateOneReviewRes, DeleteOneReviewRes, LikeOrDislikeOneReviewBody, LikeOrDislikeOneReviewRes, UpdateOneReviewBody, UpdateOneReviewRes } from '~/packages/types/request/review.types';
+import {
+    CreateOneReviewBody,
+    CreateOneReviewRes,
+    DeleteOneReviewRes,
+    LikeOrDislikeOneReviewBody,
+    LikeOrDislikeOneReviewRes,
+    UpdateOneReviewBody,
+    UpdateOneReviewRes,
+} from '~/packages/types/request/review.types';
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL!;
 
@@ -61,19 +70,19 @@ class ApiService {
     /**
      * User
      */
-    updateAccount(body: UpdateAccountReq) {
+    updateAccount(body: UpdateAccountBody) {
         return this.api.put('/user/settings/account', body);
     }
     updateProfile(body: FormData) {
         return this.api.put('/user/settings/profile', body, { headers: { 'Content-Type': 'multipart/form-data' } });
     }
-    updatePassword(body: UpdatePasswordReq) {
+    updatePassword(body: UpdatePasswordBody) {
         return this.api.put('/user/settings/password', body);
     }
-    updateAISettings(body: UpdateAISettingsReq) {
+    updateAISettings(body: UpdateAISettingsBody) {
         return this.api.put('/user/settings/ai', body);
     }
-    addModifyOpenaiKey(body: AddModifyOpenaiKeyReq) {
+    addModifyOpenaiKey(body: AddModifyOpenaiKeyBody) {
         return this.api.post<AddModifyOpenaKeyRes>('/user/settings/openai-key', body);
     }
     deleteOpenaiKey() {
@@ -81,6 +90,9 @@ class ApiService {
     }
     toggleColorMode() {
         return this.api.put('/user/settings/color-mode');
+    }
+    updateUserColor(body: UpdateUserColorBody) {
+        return this.api.put('/user/settings/user-color', body);
     }
 
     /**
@@ -112,7 +124,7 @@ class ApiService {
      * Review
      */
     getOneStoryReview(reviewId: string) {
-        return this.api.get(`/story/review/${reviewId}`)
+        return this.api.get(`/story/review/${reviewId}`);
     }
     getStoryReviews(storyId: string, reviewNumber: number, start: number) {
         return this.api.get(`/story/review/reviews?storyId=${storyId}&reviewNumber=${reviewNumber}&start=${start}`);

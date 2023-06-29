@@ -12,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ChangeCircleIcon from '@mui/icons-material/ChangeCircle';
 import DeleteIcon from '@mui/icons-material/Delete';
 // App
-import { UpdateAISettingsReq } from '~/packages/types';
+import { UpdateAISettingsBody } from '~/packages/types';
 import { updateProfileSchema } from '~/packages/schemas';
 import { deleteOpenaiKey, setAlert, updateAISettings } from '~/store';
 import { AddModifyOpenaiKeyModal } from '..';
@@ -36,7 +36,7 @@ export const AISettings = () => {
         handleSubmit,
         reset,
         formState: { isDirty },
-    } = useForm<UpdateAISettingsReq>({
+    } = useForm<UpdateAISettingsBody>({
         resolver: yupResolver(updateProfileSchema),
         mode: 'onTouched',
         defaultValues: { maxTokens: openaiSettings?.maxTokens, temperature: openaiSettings?.temperature },
@@ -46,7 +46,7 @@ export const AISettings = () => {
     const [openModifyOpenaiKeyModal, setOpenModifyOpenaiKeyModal] = useState(false);
     const [openDeleteOpenaiKeyConfirmMoal, setOpenDeleteOpenaiKeyConfirmMoal] = useState(false);
 
-    const onSubmit = async (data: UpdateAISettingsReq) => {
+    const onSubmit = async (data: UpdateAISettingsBody) => {
         const res = await dispatch(updateAISettings(data));
         if (res.meta.requestStatus === 'fulfilled') {
             dispatch(setAlert({ type: 'success', message: 'success.update-data' }));

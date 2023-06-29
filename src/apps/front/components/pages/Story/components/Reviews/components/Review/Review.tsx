@@ -27,7 +27,7 @@ export const Review = ({ review }: ReviewProps) => {
 
     useEffect(() => {
         setUserVote(review.likes.find((like) => like.userId === userData?.id)?.value ?? 0);
-    }, [review.likes]);
+    }, [review.likes, userData]);
 
     const globalRating = (review.textRating + review.imageRating) / 2;
 

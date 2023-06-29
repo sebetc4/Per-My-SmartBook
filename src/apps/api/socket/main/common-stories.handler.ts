@@ -15,7 +15,7 @@ export const handleCommonStoriesSocket = (io: Server) => {
     commonStoriesIo.on('connection', async (socket) => {
         logIfDevEnv('User connected on common stories socket');
         // startNewStory(commonStoriesIo)
-        socket.on(SocketEvent.GET_ALL_COMMON_STORIES_BEINGGENERATED_PREVIEWS, (data, cb) => {
+        socket.on(SocketEvent.GET_ALL_COMMON_STORIES_BEING_GENERATED_PREVIEWS, (data, cb) => {
             getAllCommonStoriesBeingGeneratedPreviews(data, socket, commonStoriesIo, cb);
         });
 

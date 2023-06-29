@@ -1,7 +1,7 @@
 // Librairies
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 // App
-import { ChatMessage } from '../../packages/types';
+import { ChatMessage, CommonStoryBeingGeneratedDataWithChatMessages, NewCommonStoryChatMessageRes } from '~/packages/types';
 import { sockets } from '../../services';
 import { AppState } from '../store';
 // Types
@@ -15,7 +15,7 @@ import {
     FirstCommonStoryChapterRes,
     CommonStoryStoryChapterChoiceAndAllNumbOfVotesRes,
     SendCommonStoryChatMessageBody,
-} from '../../packages/types';
+} from '~/packages/types';
 
 type CommonStoryBeingGenerated = {
     isLoading: boolean;
@@ -39,6 +39,11 @@ export const commonStoryBeingGeneratedSlice = createSlice({
     name: 'commonStoryBeingGenerated',
     initialState,
     reducers: {
+        setCommonStoryBeingGeneratedData(state, action: PayloadAction<CommonStoryBeingGeneratedDataWithChatMessages>) {
+        const { storyData, allChatMessages } = action.payload;
+        state.data = storyData;
+        state.chat.allMessages = allChatMessages;
+        },
         /**
          * Story chapter Data
          */
@@ -88,27 +93,12 @@ export const commonStoryBeingGeneratedSlice = createSlice({
         /**
          * New chat message
          */
-        addNewChatMessage(state, action: PayloadAction<ChatMessage>) {
-            state.chat.allMessages.push(action.payload);
+        addNewChatMessage(state, action: PayloadAction<NewCommonStoryChatMessageRes>) {
+            console.log('add message')
+            state.chat.allMessages.push(action.payload.message);
         },
     },
     extraReducers: (builder) => {
-        /**
-         * Get common story being generated data
-         */
-        builder.addCase(getCommonStoryBeingGeneratedData.pending, (state) => {
-            state.isLoading = true;
-            state.error = null;
-        });
-        builder.addCase(getCommonStoryBeingGeneratedData.fulfilled, (state, action) => {
-            state.isLoading = false;
-            state.data = action.payload;
-        });
-        builder.addCase(getCommonStoryBeingGeneratedData.rejected, (state, action) => {
-            state.isLoading = false;
-            state.error = action.error.message || null;
-        });
-
         /**
          * Select Story Chapter Choice
          */
@@ -142,20 +132,6 @@ export const commonStoryBeingGeneratedSlice = createSlice({
     },
 });
 
-export const getCommonStoryBeingGeneratedData = createAsyncThunk<CommonStoryBeingGeneratedData, string>(
-    'commonStoryBeingGenerated/getCommonStoryBeingGenerated',
-    async (storyId) => {
-        try {
-            const { story } = await sockets.emit(
-                SocketNamespace.COMMON_STORIES,
-                SocketEvent.GET_COMMON_STORY_BEINGGENERATED_DATA,
-                { storyId }
-            );
-            return story;
-        } catch (err) {}
-    }
-);
-
 export const selectCommonStoryStoryChapterChoice = createAsyncThunk<void, number, { state: AppState }>(
     'commonStoryBeingGenerated/selectCommonStoryStoryChapterChoice',
     async (selectedChoiceIndex, { getState }) => {
@@ -180,7 +156,7 @@ export const sendCommonStoryChatMessage = createAsyncThunk<ChatMessage, string, 
             const { commonStoryBeingGenerated: story } = getState();
             const newMessage = await sockets.emit<SendCommonStoryChatMessageBody>(
                 SocketNamespace.COMMON_STORIES,
-                SocketEvent.SEND_CHAT_MESSAGE,
+                SocketEvent.SEND_COMMON_STORY_CHAT_MESSAGE,
                 {
                     storyId: story.data!.id!,
                     message,
@@ -192,12 +168,14 @@ export const sendCommonStoryChatMessage = createAsyncThunk<ChatMessage, string, 
 );
 
 export const {
+    setCommonStoryBeingGeneratedData,
     setFirstCommonStoryChapter,
     setCommonStoryChapterData,
     setCommonStoryChapterChoiceAndAllNumbOfVotes,
     setCommonUserStoryChapterImageRes,
     setCommonStoryIsStopped,
     setCommonStoryIsFinished,
+    addNewChatMessage
 } = commonStoryBeingGeneratedSlice.actions;
 
 export const commonStoryBeingGeneratedReducer = commonStoryBeingGeneratedSlice.reducer;

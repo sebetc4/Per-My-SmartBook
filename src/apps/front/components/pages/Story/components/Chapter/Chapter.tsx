@@ -5,7 +5,8 @@ import Image from 'next/image';
 import { Box, Grid, Typography, useTheme } from '@mui/material';
 import { FinishedStoryChapterWithImageOnClient } from '~/packages/types';
 import { toRoman } from '~/packages/functions';
-import { getRandomHourglassImage, placeholderValue } from '~/apps/front/utils';
+import { getRandomBookImage, getRandomHourglassImage, placeholderValue } from '~/apps/front/utils';
+import { useState } from 'react';
 // App
 
 type ChapterProps = {
@@ -17,6 +18,9 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
     // Hooks
     const { t: storyT } = useTranslation('story');
     const theme = useTheme();
+
+    // State
+    const [bookImage] = useState(getRandomBookImage());
 
     return (
         <Box
@@ -51,7 +55,7 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                 }}
             >
                 <Image
-                    src={chapter.image?.url || getRandomHourglassImage()}
+                    src={chapter.image?.url || bookImage}
                     alt={chapter.description}
                     placeholder={placeholderValue(!!chapter.image?.plaiceholder)}
                     blurDataURL={chapter.image?.plaiceholder || undefined}

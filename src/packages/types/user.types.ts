@@ -11,7 +11,7 @@ export type UserSchema = {
     email: string;
     password?: string;
     avatar: ImageOnDb;
-    appearanceParameters: UserAppearanceParameters;
+    uiSettings: UserAppearanceParameters;
     resetPasswordToken?: string;
     resetPasswordExpire?: Date;
     aiSettings: AISettings;

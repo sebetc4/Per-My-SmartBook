@@ -27,13 +27,14 @@ declare module '@mui/material/styles' {
         };
         card: {
             backgroundColor: React.CSSProperties['color'];
+            boxShadow: React.CSSProperties['boxShadow'];
         };
         textarea: {
             backgroundColor: React.CSSProperties['color'];
             color: React.CSSProperties['color'];
         };
         button: {
-            background: React.CSSProperties['color'];
+            backgroundColor: React.CSSProperties['color'];
             boxShadow: React.CSSProperties['boxShadow'];
             boxShadowHover: React.CSSProperties['boxShadow'];
             boxShadowSelected: React.CSSProperties['boxShadow'];
@@ -69,13 +70,14 @@ declare module '@mui/material/styles' {
         };
         card: {
             backgroundColor: React.CSSProperties['color'];
+            boxShadow: React.CSSProperties['boxShadow'];
         };
         textarea: {
             backgroundColor: React.CSSProperties['color'];
             color: React.CSSProperties['color'];
         };
         button: {
-            background: React.CSSProperties['color'];
+            backgroundColor: React.CSSProperties['color'];
             boxShadow: React.CSSProperties['boxShadow'];
             boxShadowHover: React.CSSProperties['boxShadow'];
             boxShadowSelected: React.CSSProperties['boxShadow'];
@@ -226,7 +228,7 @@ type ColorTheme = {
         body: string;
     };
     button: {
-        background: string;
+        backgroundColor: string;
         boxShadow: string;
         boxShadowHover: string;
         boxShadowSelected: string;
@@ -238,6 +240,7 @@ type ColorTheme = {
     };
     card: {
         backgroundColor: string;
+        boxShadow: string;
     };
     textarea: {
         backgroundColor: string;
@@ -270,7 +273,7 @@ export const lightTheme: ColorTheme = {
         body: 'black',
     },
     button: {
-        background: '#ece3cf',
+        backgroundColor: '#ece3cf',
         boxShadow: buttonBoxShadow,
         boxShadowHover: `${buttonBoxShadow}, ${lightPalette.primary.light}25 0px 54px 55px, ${lightPalette.primary.light}12 0px -12px 30px, ${lightPalette.primary.light}12 0px 4px 6px, ${lightPalette.primary.light}12 0px 12px 13px, ${lightPalette.primary.light}09 0px -3px 5px;`,
         boxShadowSelected: `${buttonBoxShadow}, ${lightPalette.primary.light}25 0px 54px 55px, ${lightPalette.secondary.light}12 0px -12px 30px, ${lightPalette.secondary.light}12 0px 4px 6px, ${lightPalette.secondary.light}12 0px 12px 13px, ${lightPalette.secondary.light}09 0px -3px 5px;`,
@@ -281,10 +284,11 @@ export const lightTheme: ColorTheme = {
         beforeAfterBoxShadow: '0 0 8px rgba(0,0,0,0.2), inset 0 0 300px rgba(222,198,122,0.7)',
     },
     card: {
-        backgroundColor: '#383838',
+        backgroundColor: '#ece3cf',
+        boxShadow: '0 0 8px rgba(0,0,0,0.2), inset 0 0 300px rgba(222,198,122,0.7), rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;'
     },
     textarea: {
-        backgroundColor: '#383838',
+        backgroundColor: 'transparent',
         color: 'inherit'
     },
     footer: {
@@ -317,13 +321,14 @@ export const darkTheme: ColorTheme = {
         beforeAfterBoxShadow: '0 0 8px rgba(0,0,0,0.2), inset 0 0 300px #211812',
     },
     button: {
-        background: '#383838',
+        backgroundColor: '#383838',
         boxShadow: '0 0 8px rgba(0,0,0,0.2), inset 0 0 300px #3d3d3d',
         boxShadowHover: `${buttonBoxShadow}, ${lightPalette.primary.light}25 0px 54px 55px, ${lightPalette.primary.light}12 0px -12px 30px, ${lightPalette.primary.light}12 0px 4px 6px, ${lightPalette.primary.light}12 0px 12px 13px, ${lightPalette.primary.light}09 0px -3px 5px;`,
         boxShadowSelected: `${buttonBoxShadow}, ${lightPalette.primary.light}25 0px 54px 55px, ${lightPalette.secondary.light}12 0px -12px 30px, ${lightPalette.secondary.light}12 0px 4px 6px, ${lightPalette.secondary.light}12 0px 12px 13px, ${lightPalette.secondary.light}09 0px -3px 5px;`,
     },
     card: {
         backgroundColor: '#383838',
+        boxShadow: '0 0 10px rgba(0,0,0,0.3), 0 0 300px 25px #211812 inset',
     },
     textarea: {
         backgroundColor: '#1E1E1E',

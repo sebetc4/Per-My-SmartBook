@@ -1,8 +1,11 @@
+// Librairies
+import { useState } from "react";
+// MUI
+import { Box, IconButton, TextareaAutosize } from "@mui/material";
+import SendIcon from '@mui/icons-material/Send';
+// App
 import { useAppDispatch } from "~/apps/front/hooks";
 import { sendCommonStoryChatMessage } from "~/store";
-import { Box, IconButton, TextareaAutosize } from "@mui/material";
-import { useState } from "react";
-import SendIcon from '@mui/icons-material/Send';
 
 export const SendMessageBar = () => {
     // Hooks
@@ -13,6 +16,7 @@ export const SendMessageBar = () => {
 
     const sendMessage = () => {
         dispatch(sendCommonStoryChatMessage(newMessage));
+        setNewMessage('');
     };
     return (
         <Box

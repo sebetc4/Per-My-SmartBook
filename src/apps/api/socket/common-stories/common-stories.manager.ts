@@ -1,9 +1,9 @@
 // Librairies
 import { Socket } from 'socket.io';
 // Api
-import { CustomError } from '../../../../packages/classes';
-import { enableLogCommonStoriesSocketManager } from '../../../../packages/constants';
-import { logIf } from '../../../../packages/functions';
+import { CustomError } from '~/packages/classes';
+import { enableLogCommonStoriesSocketManager } from '~/packages/constants';
+import { logIf } from '~/packages/functions';
 import { convertToImageOnClient } from '../../functions';
 // Types
 import {
@@ -14,8 +14,8 @@ import {
     ImageOnDb,
     Language,
     UserInstance,
-} from '../../../../packages/types';
-import { ChatMessage } from '../../../../packages/types/chat.types';
+    ChatMessage,
+} from '~/packages/types';
 
 export type CommonStoriesManagerAddNewStoryParams = {
     id: string;
@@ -72,7 +72,9 @@ class CommonStoriesSocketManager {
         return Promise.all(allStoriesPromises);
     }
 
-    async getStoryData(storyId: string): Promise<CommonStoryBeingGeneratedData> {
+    async getStoryData(
+        storyId: string
+    ): Promise<{ storyData: CommonStoryBeingGeneratedData; allChatMessages: ChatMessage[] }> {
         const story = this.getStory(storyId);
         if (!story) {
             throw CustomError.NOT_FOUND;
@@ -81,8 +83,7 @@ class CommonStoriesSocketManager {
             ...restChapter,
             image: image && (await convertToImageOnClient(image)),
         }));
-
-        return {
+        const storyData: CommonStoryBeingGeneratedData = {
             id: story.id,
             state: story.state,
             cover: story.cover && (await convertToImageOnClient(story.cover)),
@@ -90,6 +91,10 @@ class CommonStoriesSocketManager {
             currentStep: story.currentStep,
             allChapters: await Promise.all(allChaptersPromise),
             startAt: story.startAt,
+        };
+        return {
+            storyData,
+            allChatMessages: story.allChatMessages,
         };
     }
 
@@ -127,7 +132,7 @@ class CommonStoriesSocketManager {
         const newMessage: ChatMessage = {
             userId: user.id,
             username: user.username,
-            userColor: user.appearanceParameters.userColor,
+            userColor: user.uiSettings.userColor,
             message,
             date: Date.now(),
         };
