@@ -181,7 +181,7 @@ export const SearchBar = ({}: SearchBarProps) => {
             </Box>
 
             {/* Search bar options mobile*/}
-            <Accordion sx={{ display: { xxs: 'block', md: 'none' }, backgroundColor: themeUI.button.background }}>
+            <Accordion sx={{ display: { xxs: 'block', md: 'none' }, backgroundColor: themeUI.button.backgroundColor }}>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
                 >

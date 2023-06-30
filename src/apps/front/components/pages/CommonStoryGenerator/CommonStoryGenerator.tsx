@@ -5,7 +5,7 @@ import { Box, Container, useTheme } from '@mui/material';
 // App
 import { LoadingContainer } from '../..';
 import { Chapter, CommonChat, EndStoryScreen, WaitingScreen } from './components';
-import { useSocketCommonSroryGenerators } from './CommonSroryGenerators.hooks';
+import { useSocketCommonSroryGenerators } from './CommonStoryGenerators.hooks';
 import { useAppSelector } from '~/apps/front/hooks';
 
 export const CommonStoryGenerator = () => {

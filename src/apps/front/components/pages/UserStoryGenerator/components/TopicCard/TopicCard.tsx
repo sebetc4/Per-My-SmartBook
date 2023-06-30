@@ -31,7 +31,7 @@ export const TopicCard = ({ topic, onClick, isLoading, isSelected, topicIsSelect
                 width: '400px',
                 p: {xxs: 0, xs: 2},
                 cursor: isLoading ? 'default' : 'pointer',
-                backgroundColor: theme.button.background,
+                backgroundColor: theme.button.backgroundColor,
                 boxShadow: theme.button.boxShadow,
                 borderRadius: 2,
                 transition: 'all 0.3s ease',

@@ -91,7 +91,7 @@ export const useSocketCommonSroryGenerators = () => {
         };
         initializeStorySocket();
         return () => {};
-    }, [dispatch, router.query.id]);
+    }, [dispatch, router]);
 
     return { isInitialized };
 };

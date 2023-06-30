@@ -63,7 +63,7 @@ export const ChapterChoiceButton = ({
                     color: 'black',
                     cursor: 'pointer',
                     boxShadow: `0px 5px 10px 0px rgba(0, 0, 0, 0.5), ${theme.button.boxShadow}`,
-                    backgroundColor: theme.button.background,
+                    backgroundColor: theme.button.backgroundColor,
                     borderRadius: 2,
                     transition: 'all 0.3s ease-in-out',
                     textTransform: 'none',
