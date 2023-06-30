@@ -11,6 +11,7 @@ const postDeploy = process.env.ECOSYSTEM_POST_DEPLOY;
 module.exports = {
     apps: [
         {
+            name: 'my-storybook',
             script,
             watch: '.',
         },

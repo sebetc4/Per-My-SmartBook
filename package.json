@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev:watch": "nodemon --exec npm run dev",
+    "dev:watch": "nodemon --exec pnpm run dev",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start -p 8453",
     "lint": "next lint",
     "test": "vitest"
   },
