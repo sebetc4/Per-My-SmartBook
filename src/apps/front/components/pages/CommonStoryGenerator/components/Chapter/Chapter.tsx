@@ -184,6 +184,7 @@ const ChapterTimer = ({ chapter }: { chapter: CommonStoryChapterClientData }) =>
                 <LinearProgress
                     variant={progress === 100 ? 'indeterminate' : 'determinate'}
                     value={progress}
+                    color='secondary'
                 />
             </Box>
 
@@ -209,6 +210,7 @@ const ChapterTimer = ({ chapter }: { chapter: CommonStoryChapterClientData }) =>
                 <LinearProgress
                     variant={progress === 100 ? 'indeterminate' : 'determinate'}
                     value={progress}
+                    color='secondary'
                 />
             </Box>
         </Box>

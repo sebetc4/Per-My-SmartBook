@@ -116,8 +116,6 @@ export const getStoriesPreviewsFromDb = async (
 
     const stories: Partial<FinishedStoryInstance[]> = await query.exec();
 
-    console.log(stories)
-
     const storiesPreviewsPromiseArray = stories.map(async (story) => await story?.getPublicPreview());
 
     const storiesPreviews = await Promise.all(storiesPreviewsPromiseArray);

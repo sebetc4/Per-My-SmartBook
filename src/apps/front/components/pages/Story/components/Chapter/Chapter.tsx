@@ -1,13 +1,13 @@
 //Librairies
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
+import { useState } from 'react';
 // MUI
 import { Box, Grid, Typography, useTheme } from '@mui/material';
+// App
 import { FinishedStoryChapterWithImageOnClient } from '~/packages/types';
 import { toRoman } from '~/packages/functions';
-import { getRandomBookImage, getRandomHourglassImage, placeholderValue } from '~/apps/front/utils';
-import { useState } from 'react';
-// App
+import { getRandomBookImage, placeholderValue } from '~/apps/front/utils';
 
 type ChapterProps = {
     chapter: FinishedStoryChapterWithImageOnClient;
@@ -31,7 +31,8 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                 border: '1px solid #c2b5a3',
                 background: theme.papel.backgroundColor,
                 boxShadow: theme.papel.boxShadow,
-                padding: 8,
+                py: 8,
+                px: {xxs: 2, sm: 8},
             }}
         >
             <Typography
@@ -83,6 +84,7 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                         columnSpacing={4}
                         sx={{
                             width: '100%',
+                            mt: 4
                         }}
                     >
                         {chapter.allChoices.map((choice, choiceIndex) => (
@@ -90,13 +92,13 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                                 item
                                 xxs={12}
                                 md={4}
-                                key={`choice${choiceIndex}`}
+                                key={`choice-${choiceIndex}`}
                             >
                                 <Typography
                                     color={theme.text.body}
                                     textAlign='center'
                                     sx={{
-                                        p: 4,
+                                        p: {xxs:2, sm: 4},
                                         height: '100%',
                                         display: 'flex',
                                         alignItems: 'center',
@@ -104,7 +106,7 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                                         borderRadius: 4,
                                         boxShadow:
                                             chapter.selectedChoiceIndex == choiceIndex
-                                                ? '-5px -5px 9px rgba(255,255,255,0.45), 5px 5px 9px rgba(94,104,121,0.3)'
+                                                ? `0px 5px 15px 3px  ${theme.palette.primary.main}`
                                                 : '',
                                     }}
                                 >
@@ -121,7 +123,7 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                     position: 'absolute',
                     fontSize: '1.1rem',
                     fontWeight: 'bold',
-                    top: '30px',
+                    bottom: '50px',
                     right: '30px',
                 }}
             >

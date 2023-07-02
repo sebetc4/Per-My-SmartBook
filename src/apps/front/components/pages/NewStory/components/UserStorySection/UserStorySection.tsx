@@ -81,6 +81,7 @@ export const UserStorySection = () => {
                         zIndex: 0,
                         opacity: 0.6,
                     }}
+                    quality={100}
                 />
                 <Box
                     sx={{

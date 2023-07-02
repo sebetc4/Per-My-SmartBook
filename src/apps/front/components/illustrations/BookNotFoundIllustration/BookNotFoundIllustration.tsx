@@ -33,7 +33,7 @@ export const BookNotFoundIllustration = () => {
                     top: '19%',
                     Zindex: 10,
                     transform: 'translateX(-50%)',
-                    color: theme.palette.secondary.light,
+                    color: theme.palette.primary.light,
                     fontSize: { xxs: '1rem', xs: '1.2rem' },
                     fontWeight: '900',
                 }}
@@ -51,7 +51,7 @@ export const BookNotFoundIllustration = () => {
                     width: '100%',
                     bottom: 0,
                     zIndex: 10,
-                    color: theme.palette.secondary.light,
+                    color: theme.palette.primary.light,
                     backgroundColor: '#844c2a',
                     borderRadius: 5,
                 }}

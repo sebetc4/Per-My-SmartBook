@@ -8,3 +8,4 @@ export { OpenaiErrorModals } from './OpenaiErrorModals/OpenaiErrorModals';
 export { RestartStoryModal } from './RestartStoryModal/RestartStoryModal';
 export { StartStoryButton } from './StartStoryButton/StartStoryButton';
 export { TopicCard } from './TopicCard/TopicCard';
+export { DeleteModal } from './DeleteModal/DeleteModal';

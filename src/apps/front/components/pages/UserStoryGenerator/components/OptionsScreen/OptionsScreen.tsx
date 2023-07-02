@@ -32,6 +32,7 @@ import { useAppDispatch, useAppMediaQuery, useAppSelector } from '~/apps/front/h
 import Logo from '@/../public/images/logo/logo.png';
 import { CustomSelectInput } from '~/apps/front/components/inputs/CustomSelectInput/CustomSelectInput';
 import { StartStoryButton } from '../StartStoryButton/StartStoryButton';
+import { LoadingButton } from '@mui/lab';
 
 export const OptionsScreen = () => {
     // Hooks
@@ -148,7 +149,7 @@ export const OptionsScreen = () => {
                     mt: 4,
                 }}
             >
-                {storyGeneratorT('OptionsForm.title.h1')}
+                {storyGeneratorT('OptionsScreen.title.h1')}
             </Typography>
             <Box
                 component='form'
@@ -224,7 +225,7 @@ export const OptionsScreen = () => {
                 </Grid>
 
                 {isLoading ? (
-                    <Box sx={{ m: 8 }}>
+                    <Box sx={{ mt: {xxs: 4, sm: 8}, display: 'flex', flexDirection: 'column', gap: 2 }}>
                         <RingLoader
                             size={150}
                             color={theme.palette.secondary.dark}
@@ -233,11 +234,10 @@ export const OptionsScreen = () => {
                             color={theme.palette.secondary.dark}
                             textAlign='center'
                             sx={{
-                                mt: 2,
                                 fontSize: '1.5rem',
                             }}
                         >
-                            Chargement...
+                            {storyGeneratorT('OptionsScreen.text.loading')}
                         </Typography>
                     </Box>
                 ) : (
@@ -251,9 +251,10 @@ export const OptionsScreen = () => {
                                 fullWidth
                                 variant='contained'
                                 size='large'
+                                type='submit'
                                 sx={{ mt: 4 }}
                             >
-                                Commencer
+                                {storyGeneratorT('OptionsScreen.button.start')}
                             </Button>
                         )}
                     </>

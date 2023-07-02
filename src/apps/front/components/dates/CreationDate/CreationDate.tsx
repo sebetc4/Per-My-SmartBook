@@ -16,5 +16,5 @@ const format: { [key in CreationDateProps['locale']]: string } = {
 export const CreationDate = ({ locale, date, sx }: CreationDateProps) => {
     const {t: dateT} = useTranslation('date');
     dayjs.locale(locale);
-    return <Typography {...sx}>{`${dateT('CreationDate.text')}${dayjs(date).format(format[locale])}`}</Typography>;
+    return <Typography {...sx}>{`${dateT('CreationDate.text')} ${dayjs(date).format(format[locale])}`}</Typography>;
 };

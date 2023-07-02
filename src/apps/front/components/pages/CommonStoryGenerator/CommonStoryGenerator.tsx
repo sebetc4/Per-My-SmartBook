@@ -31,7 +31,7 @@ export const CommonStoryGenerator = () => {
             }}
         >
             <CommonChat />
-            <Box sx={{ width: '100%', ml: '400px' }}>
+            <Box sx={{ width: '100%', ml: {xxs: 0, md: '350px', lg: '400px'} }}>
                 <Container
                     maxWidth='xl'
                     sx={{

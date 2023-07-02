@@ -1,9 +1,12 @@
-import { Box, Button, Container, Divider, Typography, useTheme } from '@mui/material';
+//Librairies
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import Link from 'next/link';
+//MUI
+import { Box, Button, Container, Divider, Typography, useTheme } from '@mui/material';
+//App
 import { GlobalRatings, Review, ReviewForm } from './components';
 import { useAppSelector } from '~/apps/front/hooks';
-import Link from 'next/link';
 import { Path } from '~/packages/types';
 
 export const Reviews = () => {
@@ -29,7 +32,9 @@ export const Reviews = () => {
                     {storyT('Reviews.title.h1')}
                 </Typography>
             </Divider>
-            <Container sx={{ display: 'flex', justifyContent: 'space-between' }}>
+            <Container
+                sx={{ display: 'flex', flexDirection: { xxs: 'column', lg: 'row' }, justifyContent: 'space-between', gap: 6, p: 0 }}
+            >
                 <Box>
                     <GlobalRatings />
                 </Box>

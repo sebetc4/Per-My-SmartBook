@@ -49,7 +49,7 @@ export const PublicStories = ({ stories, total }: PublicStoriesProps) => {
                 </Typography>
                 <SearchBar />
                 <Box
-                    sx={{ mt: { xxs: 2, md: 6 }, ml: 'auto', mr: 'auto' }}
+                    sx={{ mt: 6, ml: 'auto', mr: 'auto' }}
                     maxWidth='lg'
                 >
                     {stories.length === 0 ? (

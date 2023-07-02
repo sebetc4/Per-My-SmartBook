@@ -5,7 +5,7 @@
     "success.modify-openai-key": "Votre clé OpenAI a été modifiée.",
     "success.user-story-saved": "Votre histoire a été sauvegardée.",
 
-    "error.login.default": "Une erreur s'est produite lors de la tentative de connecion. Veuillez réessayer ultérieurement.",
+    "error.login.default": "Une erreur s'est produite lors de la tentative de connexion. Veuillez réessayer ultérieurement.",
     "error.userStoryBeingGenerated.select-chapter-choice": "Une erreur s'est produite lors de la génération du chapitre. Veuillez réessayer ultérieurement.",
     "error.userStoryBeingGenerated.select-story-topic": "Une erreur s'est produite lors du choix du sujet de votre histoire. Veuillez réessayer ultérieurement.",
     "error.userStoryBeingGenerated.select-story-options": "Une erreur s'est produite lors de la création de votre histoire. Veuillez réessayer ultérieurement.",

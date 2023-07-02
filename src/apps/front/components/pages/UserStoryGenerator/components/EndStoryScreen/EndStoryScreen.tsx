@@ -6,7 +6,7 @@ import { useRouter } from 'next/router';
 import { Box, Button, Typography, useTheme } from '@mui/material';
 // App
 import { saveUserFinishedStory, setAlert } from '~/store';
-import { SaveModal } from '..';
+import { DeleteModal, SaveModal } from '..';
 import { FinishedStoryTitle, Path, Visibility } from '~/packages/types';
 import { useAppDispatch, useAppSelector } from '~/apps/front/hooks';
 
@@ -14,7 +14,7 @@ export const EndStoryScreen = () => {
     // Hooks
     const router = useRouter();
     const dispatch = useAppDispatch();
-    const theme = useTheme()
+    const theme = useTheme();
     const { t: storyGenerationT } = useTranslation('story-generator');
     const { t: alertT } = useTranslation('alert');
 
@@ -22,6 +22,7 @@ export const EndStoryScreen = () => {
     const { isLoading } = useAppSelector((state) => state.userStoryBeingGenerated);
 
     const [storyVisibity, setStoryVisibility] = useState<Visibility | null>(null);
+    const [openDeleteModal, setOpenDeleteModal] = useState<boolean>(false);
 
     const handleSaveStory = async ({ title }: FinishedStoryTitle) => {
         const res = await dispatch(saveUserFinishedStory({ visibility: storyVisibity!, title }));
@@ -44,19 +45,30 @@ export const EndStoryScreen = () => {
                 component='h2'
                 textAlign='center'
                 color={theme.text.body}
-                sx={{mt: 6}}
+                sx={{ mt: 6 }}
             >
                 {storyGenerationT('FinishedStory.text.end')}
             </Typography>
-            <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6, mb: 6, gap: 6 }}>
+            <Box
+                sx={{
+                    display: 'flex',
+                    flexDirection: { xxs: 'column', sm: 'row' },
+                    justifyContent: 'center',
+                    mt: 6,
+                    mb: 6,
+                    gap: { xxs: 4, sm: 6 },
+                }}
+            >
                 <Button
+                    size='large'
                     variant='outlined'
                     disabled={isLoading}
-                    onClick={() => handleOpenSaveModal(Visibility.PUBLIC)}
+                    onClick={() => setOpenDeleteModal(true)}
                 >
                     {storyGenerationT('FinishedStory.button.delete')}
                 </Button>
                 <Button
+                    size='large'
                     variant='outlined'
                     disabled={isLoading}
                     onClick={() => handleOpenSaveModal(Visibility.PUBLIC)}
@@ -64,6 +76,7 @@ export const EndStoryScreen = () => {
                     {storyGenerationT('FinishedStory.button.save-public')}
                 </Button>
                 <Button
+                    size='large'
                     variant='outlined'
                     disabled={isLoading}
                     onClick={() => handleOpenSaveModal(Visibility.PRIVATE)}
@@ -76,6 +89,10 @@ export const EndStoryScreen = () => {
                 handleClose={handleCloseSaveModal}
                 handleConfirm={handleSaveStory}
                 visibility={storyVisibity!}
+            />
+            <DeleteModal
+                open={openDeleteModal}
+                handleClose={() => setOpenDeleteModal(false)}
             />
         </>
     );

@@ -1,17 +1,18 @@
 // https://stackoverflow.com/questions/54375096/styling-bottomnavigation-in-react-js-material-ui
+//Libraries
 import { useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
-
-import { BottomNavigation, BottomNavigationAction, SvgIcon, Tooltip, useTheme } from '@mui/material';
+import Link from 'next/link';
+import { IconType } from 'react-icons';
+//MUI
+import { BottomNavigation, BottomNavigationAction, SvgIcon, useTheme } from '@mui/material';
 import { SvgIconComponent } from '@mui/icons-material';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
-
-import { Path } from '../../../../../../../packages/types';
-import Link from 'next/link';
-import { IconType } from 'react-icons';
+//aPP
+import { Path } from '~/packages/types';
 
 type NavbarItem = {
     icon: SvgIconComponent | IconType;
@@ -46,8 +47,6 @@ export const Navbar = () => {
         ],
         [headerT]
     );
-
-    const isDisabled = (item: NavbarItem) => router.pathname === item.href;
 
     return (
         <BottomNavigation

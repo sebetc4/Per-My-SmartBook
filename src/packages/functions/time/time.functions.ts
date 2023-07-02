@@ -5,11 +5,16 @@ export const waitStartTime = async (startAt: number) => {
     }
 };
 
+export const waitTime = async (seconds: number) => {
+    await new Promise((resolve) => setTimeout(resolve, seconds * 1000));
+};
+
 export const getNextDayOrTodayAtHour = (hour: number): Date => {
-    const now = new Date(); 
+    const now = new Date();
     if (now.getHours() < hour) {
-        return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour); 
+        return new Date(now.getFullYear(), now.getMonth(), now.getDate(), hour);
     } else {
-        const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1); 
-        return new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), hour);    }
+        const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+        return new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), hour);
+    }
 };

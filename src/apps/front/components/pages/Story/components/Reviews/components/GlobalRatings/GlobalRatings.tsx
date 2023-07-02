@@ -14,7 +14,7 @@ export const GlobalRatings = () => {
     return (
         <Box
             sx={{
-                width: '350px',
+                width: { xxs: '250 px', xs: '350px' },
                 display: 'flex',
                 flexDirection: 'column',
                 gap: 2,

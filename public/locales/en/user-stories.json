@@ -10,5 +10,7 @@
     "DeleteUnfinishedStoryConfirmModal.button.confirm": "Confirm",
 
     "FinishedStoryDetails.options.visibility.tooltip.public": "Publique",
-    "FinishedStoryDetails.options.visibility.tooltip.private": "Private"
+    "FinishedStoryDetails.options.visibility.tooltip.private": "Private",
+
+    "FinishedStorySection-no.finished-story": "You haven't finished any story"
 }

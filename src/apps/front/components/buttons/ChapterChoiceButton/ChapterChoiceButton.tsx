@@ -1,7 +1,7 @@
 import { Box, Button, useTheme } from '@mui/material';
 import React from 'react';
-import { boxShadowWithHexToRgb, lightenHexColor } from '../../../../../packages/functions';
-import { StoryChapterChoice } from '../../../../../packages/types';
+import { lightenHexColor } from '~/packages/functions';
+import { StoryChapterChoice } from '~/packages/types';
 import { CheckMarkSvg } from '../../svg/CheckMarkSvg/CheckMarkSvg';
 
 type ChapterChoiceButtonProps = {

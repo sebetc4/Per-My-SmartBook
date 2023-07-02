@@ -1,7 +1,34 @@
 {
     "text.end": "~ End ~",
 
+    "Cover.text.author": "Written by",
+    "Cover.text.commun": "Written by the community",
+
+    "Summary.title.h2": "Summary",
+
     "Chapter.title.h2.chapter": "Chaptre",
-    
-    "Review.text.by": "By"
+
+    "Reviews.title.h1": "Reviews",
+    "Reviews.link.no-login": "Login to write a review",
+
+    "ReviewForm.text.add-review": "Add your review",
+    "ReviewForm.customAutoResize.placeholder": "Your opinion...",
+    "Reviews.text.no-review": "No reviews yet",
+    "ReviewForm.label.text": "Text",
+    "ReviewForm.label.image": "Image",
+    "ReviewForm.button.submit": "Submit",
+    "ReviewForm.button.modify": "Modify",
+    "ReviewForm.button.delete": "Delete",
+    "ReviewForm.button.confirm": "Confirm",
+
+    "GlobalRatings.text.global-rating": "Overall rating",
+    "GlobalRatings.text.numb-of-review": "review",
+    "GlobalRatings.text.numb-of-reviews": "reviews",
+    "GlobalRatings.text.text-rating": "Text",
+    "GlobalRatings.text.image-rating": "Image",
+
+    "Review.text.by": "By",
+    "Review.text.global-rating": "Overall",
+    "Review.text.text-rating": "Text",
+    "Review.text.image-rating": "Image"
 }

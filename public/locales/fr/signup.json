@@ -19,7 +19,4 @@
     "input.password.error.is-required": "Le mot de passe est requis",
     "input.password.error.too-short": "Le mot de passe doit faire au minimum 6 caractères",
     "input.password.error.too-long": "Le mot de passe doit faire au maximum 40 caractères"
-
-    
-
 }

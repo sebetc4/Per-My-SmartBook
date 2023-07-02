@@ -1,7 +1,9 @@
+// Libraries
 import { useRef, useState } from 'react';
 import Image from 'next/image';
-
+// MUI
 import { Box, LinearProgress, Typography, useTheme } from '@mui/material';
+// App
 import { UserStoryTopic } from '~/packages/types';
 import { getRandomHourglassImage } from '~/apps/front/utils';
 
@@ -27,21 +29,20 @@ export const TopicCard = ({ topic, onClick, isLoading, isSelected, topicIsSelect
             onClick={onClick}
             sx={{
                 position: 'relative',
-                maxWidth: '100%',
-                width: '400px',
-                p: {xxs: 0, xs: 2},
+                width: '100%',
+                maxWidth: '400px',
+                p: { xxs: 0, xs: 2 },
                 cursor: isLoading ? 'default' : 'pointer',
                 backgroundColor: theme.button.backgroundColor,
                 boxShadow: theme.button.boxShadow,
                 borderRadius: 2,
                 transition: 'all 0.3s ease',
-                '&:hover':
-                    !isLoading || topicIsSelected
-                        ? {
-                              transform: 'scale(1.02)',
-                              boxShadow: `${theme.button.boxShadowHover}, `,
-                          }
-                        : {},
+                '&:hover': !isLoading
+                    ? {
+                          transform: 'scale(1.02)',
+                          boxShadow: `${theme.button.boxShadowHover}, `,
+                      }
+                    : {},
             }}
         >
             <Box
@@ -57,8 +58,7 @@ export const TopicCard = ({ topic, onClick, isLoading, isSelected, topicIsSelect
                 <Box
                     sx={{
                         m: 2,
-                        maxWidth: '100%',
-                        height: '350px',
+                        maxWidth: '350px',
                         position: 'relative',
                         aspectRatio: '1/1',
                     }}
@@ -94,7 +94,7 @@ export const TopicCard = ({ topic, onClick, isLoading, isSelected, topicIsSelect
                         textAlign='center'
                         color={theme.text.body}
                         sx={{
-                            p:2,
+                            p: 2,
                             fontSize: '1.2rem',
                         }}
                     >

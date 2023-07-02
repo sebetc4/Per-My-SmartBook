@@ -19,7 +19,8 @@ import {
     useTheme,
 } from '@mui/material';
 import { TransitionProps } from '@mui/material/transitions';
-import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import LibraryBooksOutlinedIcon from '@mui/icons-material/LibraryBooksOutlined';
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
@@ -56,7 +57,7 @@ const Transition = forwardRef(function Transition(
 
 export const NavMenu = ({ open, handleClose, handleLogout }: NavMenuProps) => {
     // Hooks
-    const { t } = useTranslation('header');
+    const { t: headerT } = useTranslation('header');
     const { t: commonT } = useTranslation();
     const theme = useTheme();
     const router = useRouter();
@@ -81,26 +82,31 @@ export const NavMenu = ({ open, handleClose, handleLogout }: NavMenuProps) => {
         () => [
             {
                 icon: HomeOutlinedIcon,
-                label: t('navigation.home'),
+                label: headerT('navigation.home'),
                 href: Path.HOME,
             },
             {
-                icon: MenuBookOutlinedIcon,
-                label: t('navigation.bookstore'),
+                icon: MenuBookIcon,
+                label: headerT('navigation.new-story'),
+                href: Path.NEW_STORY,
+            },
+            {
+                icon: LibraryBooksOutlinedIcon,
+                label: headerT('navigation.bookstore'),
                 href: Path.PUBLIC_STORIES,
             },
             {
                 icon: LocalLibraryIcon,
-                label: t('navigation.user-stories'),
+                label: headerT('navigation.user-stories'),
                 href: Path.USER_STORIES,
             },
             {
                 icon: SettingsOutlinedIcon,
-                label: t('navigation.settings'),
+                label: headerT('navigation.settings'),
                 href: Path.SETTINGS,
             },
         ],
-        [t]
+        [headerT]
     );
 
     const navMenuItems = allNavMenuItems.filter(
@@ -121,7 +127,7 @@ export const NavMenu = ({ open, handleClose, handleLogout }: NavMenuProps) => {
                     left: 0,
                 },
             }}
-            sx={{ zIndex: 1000 }}
+            sx={{ zIndex: 1500 }}
         >
             <Box
                 sx={{
@@ -143,6 +149,7 @@ export const NavMenu = ({ open, handleClose, handleLogout }: NavMenuProps) => {
                             textDecoration: 'none',
                             fontSize: { xxs: '1.6rem', xs: '2rem' },
                         }}
+                        color={theme.palette.primary.main}
                     >
                         {commonT('app-name')}
                     </Typography>
@@ -189,7 +196,7 @@ export const NavMenu = ({ open, handleClose, handleLogout }: NavMenuProps) => {
                             onClick={handleLogoutClick}
                             fullWidth
                         >
-                            {t('navigation.logout')}
+                            {headerT('navigation.logout')}
                         </Button>
                     ) : (
                         <>
@@ -200,7 +207,7 @@ export const NavMenu = ({ open, handleClose, handleLogout }: NavMenuProps) => {
                                 onClick={() => handleNavigation(Path.SIGNUP)}
                                 fullWidth
                             >
-                                {t('navigation.signup')}
+                                {headerT('navigation.signup')}
                             </Button>
                             <Button
                                 variant='contained'
@@ -208,7 +215,7 @@ export const NavMenu = ({ open, handleClose, handleLogout }: NavMenuProps) => {
                                 onClick={() => handleNavigation(Path.SIGNIN)}
                                 fullWidth
                             >
-                                {t('navigation.signin')}
+                                {headerT('navigation.signin')}
                             </Button>
                         </>
                     )}

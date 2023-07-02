@@ -49,47 +49,47 @@ export const StartUserStoryButton = () => {
                     opacity: 0,
                     transitionDelay: 0,
                 },
-                '& span:nth-child(1), & span:nth-child(3)': {
+                '& span:nth-of-type(1), & span:nth-of-type(3)': {
                     width: '40px',
                     height: '5px',
                 },
-                '& span:nth-child(2), & span:nth-child(4)': {
+                '& span:nth-of-type(2), & span:nth-of-type(4)': {
                     width: '5px',
                     height: '40px',
                 },
-                '&:hover span:nth-child(1), &:hover span:nth-child(3)': {
+                '&:hover span:nth-of-type(1), &:hover span:nth-of-type(3)': {
                     transform: 'translateY(0)',
                 },
-                '& span:nth-child(1)': {
+                '& span:nth-of-type(1)': {
                     top: 'calc(50% - 2px)',
                     left: '-50px',
                     transformOrigin: 'left',
                 },
-                '&:hover span:nth-child(1)': {
+                '&:hover span:nth-of-type(1)': {
                     left: '50%',
                 },
-                '&:hover span:nth-child(3)': {
+                '&:hover span:nth-of-type(3)': {
                     right: '50%',
                 },
-                '& span:nth-child(3)': {
+                '& span:nth-of-type(3)': {
                     top: 'calc(50% - 2px)',
                     right: '-50px',
                     transformOrigin: 'right',
                 },
-                '& span:nth-child(2)': {
+                '& span:nth-of-type(2)': {
                     left: 'calc(50% - 2px)',
                     top: '-50px',
                     transformOrigin: 'top',
                 },
-                '&:hover span:nth-child(2)': {
+                '&:hover span:nth-of-type(2)': {
                     top: '50%',
                 },
-                '& span:nth-child(4)': {
+                '& span:nth-of-type(4)': {
                     left: 'calc(50% - 2px)',
                     bottom: '-50px',
                     transformOrigin: 'bottom',
                 },
-                '&:hover span:nth-child(4)': {
+                '&:hover span:nth-of-type(4)': {
                     bottom: '50%',
                 },
             }}
@@ -115,7 +115,7 @@ const StartButton = () => {
             href={Path.USER_STORY_GENERATOR}
             variant='extended'
             sx={{
-                p: { xxs: 1, md: 4 },
+                p: { xxs: 2, xs: 4 },
                 position: 'relative',
                 zIndex: 8,
                 color: 'black',

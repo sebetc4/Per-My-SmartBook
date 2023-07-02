@@ -17,7 +17,7 @@ type RestartStoryModalProps = {
 export const RestartStoryModal = ({ open, handleClose }: RestartStoryModalProps) => {
     // Hooks
     const dispatch = useAppDispatch();
-    const { t } = useTranslation('story-generator');
+    const { t: storyGeneratorT } = useTranslation('story-generator');
 
     // Store
     const { data: storyData } = useAppSelector((state) => state.userStoryBeingGenerated);
@@ -42,10 +42,10 @@ export const RestartStoryModal = ({ open, handleClose }: RestartStoryModalProps)
                 aria-labelledby='restart-story-modal-title'
                 aria-describedby='restart-story-mmodal-description'
             >
-                <DialogTitle id='restart-story-modal-title'>{t('RestartStoryModal.title')}</DialogTitle>
+                <DialogTitle id='restart-story-modal-title'>{storyGeneratorT('RestartStoryModal.title')}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id='restart-story-mmodal-description'>
-                        {t('RestartStoryModal.text')}
+                        {storyGeneratorT('RestartStoryModal.text')}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -53,21 +53,21 @@ export const RestartStoryModal = ({ open, handleClose }: RestartStoryModalProps)
                         disabled={deleteStoryIsLoading}
                         onClick={handleClose}
                     >
-                        {t('RestartStoryModal.button.cancel')}
+                        {storyGeneratorT('RestartStoryModal.button.cancel')}
                     </Button>
                     <CustomLoadingButton
                         disabled={deleteStoryIsLoading}
                         loading={deleteStoryIsLoading}
                         onClick={handleDeleteAndRestartStory}
                     >
-                        {t('RestartStoryModal.button.delete-restart')}
+                        {storyGeneratorT('RestartStoryModal.button.delete-restart')}
                     </CustomLoadingButton>
                     <Button
                         disabled={deleteStoryIsLoading}
                         onClick={handleRestartStory}
                         autoFocus
                     >
-                        {t('RestartStoryModal.button.restart')}
+                        {storyGeneratorT('RestartStoryModal.button.restart')}
                     </Button>
                 </DialogActions>
             </Dialog>

@@ -50,8 +50,8 @@ export const CommonStoriesSection = () => {
                 textAlign='center'
                 color={theme.text.title}
                 sx={{
-                    pl:{ ssx: 0, md: 8},
-                    pr: { ssx: 0, md: 8},
+                    pl:{ ssx: 4, md: 8},
+                    pr: { ssx: 4, md: 8},
                 }}
             >
                 {newStoryT('CommonStoriesSection.title.h2')}
@@ -131,7 +131,7 @@ export const CommonStoriesSection = () => {
                             position: 'absolute',
                             inset: 0,
                             zIndex: 1,
-                            boxShadow: `inset 0px 0px 40px 10px ${theme.papel.backgroundColor}`,
+                            boxShadow: `inset 0px 0px 40px 10px ${theme.card.backgroundColor}`,
                         }}
                     />
                 </Box>

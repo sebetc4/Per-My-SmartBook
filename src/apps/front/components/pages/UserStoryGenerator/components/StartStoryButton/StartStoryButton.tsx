@@ -10,7 +10,10 @@ import { useAppSelector } from '~/apps/front/hooks';
 import ButtonBackground from 'public/images/buttons/start-new-story.png';
 
 export const StartStoryButton = () => {
+    // Hooks
     const { t: storyGeneratorT } = useTranslation('story-generator');
+
+    // Store
     const { isLoading } = useAppSelector((app) => app.userStoryBeingGenerated);
 
     return (
@@ -40,7 +43,7 @@ export const StartStoryButton = () => {
                     fontSize: '1.1rem',
                 }}
             >
-                {storyGeneratorT('OptionsForm.button.start')}
+                {storyGeneratorT('OptionsScreen.button.start')}
             </Fab>
 
             <Image

@@ -49,7 +49,7 @@ export const UserStoryGenerator = () => {
                     </Box>
                 )}
                 {storyData.state === 'finished' && <EndStoryScreen />}
-                <Box sx={{ position: 'fixed', left: '50px', top: '120px' }}>
+                <Box sx={{ position: 'fixed', left: { xxs: '20px', md: '50px' }, top: { xxs: '80px', md: '120px' } }}>
                     <ActionButtons />
                 </Box>
             </Container>

@@ -5,6 +5,7 @@
     "Cover.text.commun": "Écrit par la communautée",
 
     "Summary.title.h2": "Sommaire",
+
     "Chapter.title.h2.chapter": "Chapitre",
 
     "Reviews.title.h1": "Avis",
@@ -30,6 +31,4 @@
     "Review.text.global-rating": "Globale",
     "Review.text.text-rating": "Texte",
     "Review.text.image-rating": "Image"
-
-
 }

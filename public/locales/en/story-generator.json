@@ -1,6 +1,7 @@
 {
-    "OptionsForm.title.h1": "Start a new story",
-    "OptionsForm.button.start": "Start",
+    "OptionsScreen.title.h1": "Start a new story",
+    "OptionsScreen.button.start": "Start",
+    "OptionsScreen.text.loading": "Loading...",
 
     "TopicsScreen.title.h1": "Choose a topic for your story",
 
@@ -31,6 +32,11 @@
     "RestartStoryModal.button.delete-restart": "Delete and restart",
     "RestartStoryModal.button.restart": "Restart",
 
+    "DeleteModal.title": "Delete story",
+    "DeleteModal.text": "Are you sure you want to delete this story?",
+    "DeleteModal.button.cancel": "Cancel",
+    "DeleteModal.button.delete": "Delete",
+
     "ConfirmRedirectToSettingsModal.title.openai-key-not-valid": "Invalid OpenAI key",
     "ConfirmRedirectToSettingsModal.title.openai-no-credit": "No credit on your OpenAI key",
     "ConfirmRedirectToSettingsModal.title.openai-no-key": "No OpenAI key",
@@ -38,7 +44,11 @@
     "ConfirmRedirectToSettingsModal.text.openai-key-not-valid": "Your OpenAI key is not valid. Do you want to be redirected to the settings to change your key?",
     "ConfirmRedirectToSettingsModal.text.openai-no-credit": "Your OpenAI key does not have enough credit. Do you want to be redirected to the settings to change your key?",
     "ConfirmRedirectToSettingsModal.text.openai-no-key": "You don't have an OpenAI key. Do you want to be redirected to the settings to add one?",
-    
-    "ConfirmRedirectToSettingsModal.button.confirm" : "Confirm",
-    "ConfirmRedirectToSettingsModal.button.cancel" : "Cancel"
+
+    "ConfirmRedirectToSettingsModal.button.confirm": "Confirm",
+    "ConfirmRedirectToSettingsModal.button.cancel": "Cancel",
+
+    "CommonChat.title": "Chat",
+    "CommonChat.placeholder.your-message": "Your message...",
+    "CommonChat.aria-label.send": "Send"
 }

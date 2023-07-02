@@ -7,7 +7,7 @@ import { Path } from '../../../../../../../packages/types';
 export const PageTitle = () => {
     // Hooks
     const { pathname } = useRouter();
-    const { t } = useTranslation('header');
+    const { t: headerT } = useTranslation('header');
 
     // States
     const [pageTitle, setPageTitle] = useState('');
@@ -16,29 +16,35 @@ export const PageTitle = () => {
     useEffect(() => {
         switch (pathname) {
             case Path.HOME:
-                setPageTitle(t('navigation.home'));
+                setPageTitle(headerT('navigation.home'));
                 break;
             case Path.SIGNIN:
-                setPageTitle(t('navigation.signin'));
+                setPageTitle(headerT('navigation.signin'));
                 break;
             case Path.SIGNUP:
-                setPageTitle(t('navigation.signup'));
+                setPageTitle(headerT('navigation.signup'));
                 break;
             case Path.USER_STORY_GENERATOR:
-                setPageTitle(t('navigation.story-generator'));
+                setPageTitle(headerT('navigation.user-story-generator'));
                 break;
             case Path.PUBLIC_STORIES:
-                setPageTitle(t('navigation.bookstore'));
+                setPageTitle(headerT('navigation.bookstore'));
                 break;
             case Path.SETTINGS:
-                setPageTitle(t('navigation.settings'));
+                setPageTitle(headerT('navigation.settings'));
                 break;
             case Path.USER_STORIES:
-                setPageTitle(t('navigation.user-stories'));
+                setPageTitle(headerT('navigation.user-stories'));
                 break;
+            case Path.NEW_STORY:
+                setPageTitle(headerT('navigation.new-story'));
+                break;
+            case Path.COMMON_STORY_GENERATOR:
+                setPageTitle(headerT('navigation.common-story-generator'));
+
             default:
                 setPageTitle('');
         }
-    }, [pathname, t]);
+    }, [pathname, headerT]);
     return <Typography sx={{ fontSize: '1.5rem', fontWeight: 'bold' }}>{pageTitle}</Typography>;
 };

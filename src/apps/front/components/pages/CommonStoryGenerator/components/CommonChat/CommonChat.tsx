@@ -1,20 +1,27 @@
-// MUI
-import { Box, Divider, Typography, useTheme } from '@mui/material';
-import { useAppSelector, useLayout } from '~/apps/front/hooks';
-
-import { MessageList, SendMessageBar } from './Components';
-import { useCallback, useEffect, useState } from 'react';
+//Libraries
+import { forwardRef, useCallback, useEffect, useState } from 'react';
+//MUI
+import { Box, Dialog, Divider, Fab, Slide, Typography } from '@mui/material';
+import ChatIcon from '@mui/icons-material/Chat';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // App
+import { MessageList, SendMessageBar } from './Components';
+import { useAppMediaQuery, useAppSelector, useLayout } from '~/apps/front/hooks';
+import { TransitionProps } from '@mui/material/transitions';
+import { useTranslation } from 'react-i18next';
 
 type CommonChatProps = {};
 
 export const CommonChat = ({}: CommonChatProps) => {
+    const { mediaQuery } = useAppMediaQuery();
+    return mediaQuery.upMd ? <DesktopChat /> : <MobileChat />;
+};
+
+const DesktopChat = () => {
     // Hooks
-    const theme = useTheme();
     const { footerRef } = useLayout();
 
     // Store
-    const { chat } = useAppSelector((state) => state.commonStoryBeingGenerated);
     const { layout } = useAppSelector((state) => state.app);
 
     // State
@@ -44,36 +51,108 @@ export const CommonChat = ({}: CommonChatProps) => {
                 pr: 2,
                 display: 'flex',
                 flexDirection: 'column',
-                width: '400px',
+                width: { md: '350px', lg: '400px' },
                 backgroundColor: '#eae7e3',
                 boxShadow:
                     'rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset',
                 overflowX: 'scroll',
             }}
         >
-            <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
-                {/* Title */}
-                <Typography
-                    textAlign={'center'}
-                    variant='h3'
-                    component='h2'
-                    sx={{ mt: 2 }}
-                >
-                    Chat
-                </Typography>
+            <Chat />
+        </Box>
+    );
+};
 
-                {/* Message list */}
+const Transition = forwardRef(function Transition(
+    props: TransitionProps & {
+        children: React.ReactElement<any, any>;
+    },
+    ref: React.Ref<unknown>
+) {
+    return (
+        <Slide
+            direction='right'
+            ref={ref}
+            {...props}
+        />
+    );
+});
+
+const MobileChat = () => {
+    // Store
+    const { layout } = useAppSelector((state) => state.app);
+
+    // State
+    const [open, setOpen] = useState(false);
+
+    return (
+        <>
+            <Fab
+                color='primary'
+                aria-label='open chat'
+                onClick={() => setOpen(true)}
+                sx={{
+                    position: 'fixed',
+                    top: '80px',
+                    left: '20px',
+                }}
+            >
+                <ChatIcon />
+            </Fab>
+            <Dialog
+                open={open}
+                onClose={() => setOpen(false)}
+                fullScreen
+                TransitionComponent={Transition}
+                transitionDuration={600}
+            >
+                <Box sx={{ position: 'relative', height: '100%', mt: `${layout.headerHeight}px` }}>
+                    <Fab
+                        color='primary'
+                        aria-label='open chat'
+                        onClick={() => setOpen(false)}
+                        sx={{
+                            position: 'absolute',
+                            top: '5px',
+                            left: '20px',
+                        }}
+                    >
+                        <ArrowBackIcon />
+                    </Fab>
+                    <Chat />
+                </Box>
+            </Dialog>
+        </>
+    );
+};
+
+const Chat = () => {
+    const { chat } = useAppSelector((state) => state.commonStoryBeingGenerated);
+    const {t: storyGeneratorT} = useTranslation('story-generator');
+
+    return (
+        <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
+            {/* Title */}
+            <Typography
+                textAlign={'center'}
+                variant='h3'
+                component='h2'
+                sx={{ mt: 2 }}
+            >
+                {storyGeneratorT('CommonChat.title')}
+            </Typography>
+
+            {/* Message list */}
+            <Divider sx={{ mt: 2, mb: 2 }} />
+            <Box sx={{ flex: 1 }}>
+                <MessageList allMessages={chat.allMessages} />
+            </Box>
+
+            {/* Message bar */}
+            <Box>
                 <Divider sx={{ mt: 2, mb: 2 }} />
-                <Box sx={{ flex: 1 }}>
-                    <MessageList allMessages={chat.allMessages} />
-                </Box>
-
-                {/* Message bar */}
-                <Box>
-                    <Divider sx={{ mt: 2, mb: 2 }} />
-                    <SendMessageBar />
-                    <Divider sx={{ mt: 2, mb: 2 }} />
-                </Box>
+                <SendMessageBar />
+                <Divider sx={{ mt: 2, mb: 2 }} />
             </Box>
         </Box>
     );

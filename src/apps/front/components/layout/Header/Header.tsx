@@ -7,11 +7,10 @@ import { useTranslation } from 'next-i18next';
 import AppBar from '@mui/material/AppBar';
 import { Box, Toolbar, Typography, Container, Button, Grid, useMediaQuery, useTheme } from '@mui/material';
 // App
-import { useAppDispatch, useAppSelector } from '~/apps/front/hooks';
+import { useAppDispatch, useAppMediaQuery, useAppSelector } from '~/apps/front/hooks';
 import { logout, setHeaderHeight } from '~/store';
 import { Path } from '~/packages/types';
 import { BurgerButton, LocaleSwitcher, NavMenu, Navbar, PageTitle, RightMenu } from './components';
-
 
 type HeaderProps = {};
 
@@ -20,11 +19,10 @@ export const Header = ({}: HeaderProps) => {
     const headerRef = useRef<HTMLDivElement>(null);
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const { t } = useTranslation('header');
+    const { t: headerT } = useTranslation('header');
     const { t: commonT } = useTranslation();
     const theme = useTheme();
-    const isUpMdScreen = useMediaQuery(theme.breakpoints.up('md'));
-    const isUpSmScreen = useMediaQuery(theme.breakpoints.up('sm'));
+    const { mediaQuery } = useAppMediaQuery();
 
     // Store
     const { isAuth } = useAppSelector((state) => state.auth);
@@ -36,12 +34,12 @@ export const Header = ({}: HeaderProps) => {
     // Set height header on the store
     useEffect(() => {
         headerRef.current?.offsetHeight && dispatch(setHeaderHeight(headerRef.current?.offsetHeight));
-    }, [isUpSmScreen, headerRef.current?.offsetHeight, dispatch]);
+    }, [mediaQuery.upSm, headerRef.current?.offsetHeight, dispatch]);
 
     // Close NavBar on resize
     useEffect(() => {
-        isUpMdScreen && setOpenNavModal(false);
-    }, [isUpMdScreen]);
+        mediaQuery.upMd && setOpenNavModal(false);
+    }, [mediaQuery.upMd]);
 
     // Handlers
     const handleCloseNavMenu = () => setOpenNavModal(false);
@@ -57,7 +55,7 @@ export const Header = ({}: HeaderProps) => {
             <AppBar
                 position='fixed'
                 ref={headerRef}
-                sx={{ background: theme.header.backgroundColor }}
+                sx={{ background: theme.header.backgroundColor, zIndex: 1600 }}
             >
                 <Container maxWidth='xl'>
                     <Toolbar disableGutters>
@@ -67,7 +65,7 @@ export const Header = ({}: HeaderProps) => {
                                 item
                                 xxs={2}
                                 xs={3}
-                                md={4}
+                                md={5}
                                 sx={{
                                     display: 'flex',
                                     alignItems: 'center',
@@ -134,7 +132,7 @@ export const Header = ({}: HeaderProps) => {
                                 item
                                 xxs={10}
                                 xs={6}
-                                md={4}
+                                md={3}
                                 sx={{
                                     display: 'flex',
                                     alignItems: 'center',
@@ -185,7 +183,7 @@ export const Header = ({}: HeaderProps) => {
                                             color='inherit'
                                             onClick={() => router.push(Path.SIGNIN)}
                                         >
-                                            {t('navigation.signin')}
+                                            {headerT('navigation.signin')}
                                         </Button>
                                     )}
                                 </Box>
@@ -211,14 +209,14 @@ export const Header = ({}: HeaderProps) => {
                                                 color='inherit'
                                                 onClick={() => router.push(Path.SIGNUP)}
                                             >
-                                                {t('navigation.signup')}
+                                                {headerT('navigation.signup')}
                                             </Button>
                                             <Button
                                                 variant='outlined'
                                                 color='inherit'
                                                 onClick={() => router.push(Path.SIGNIN)}
                                             >
-                                                {t('navigation.signin')}
+                                                {headerT('navigation.signin')}
                                             </Button>
                                         </Box>
                                     )}

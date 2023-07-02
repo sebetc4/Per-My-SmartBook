@@ -26,7 +26,8 @@ export const Summary = ({ navigateToSlide }: SummaryProps) => {
                 border: '1px solid #c2b5a3',
                 background: theme.papel.backgroundColor,
                 boxShadow: theme.papel.boxShadow,
-                padding: 8,
+                py: 8,
+                px: {xxs: 2, sm: 8},
             }}
         >
             <Divider>

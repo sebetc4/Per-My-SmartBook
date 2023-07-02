@@ -1,6 +1,6 @@
 import { IncomingMessage } from 'http';
 import { Namespace } from 'socket.io';
-import { capitalizeFirstLetter } from '~/packages/functions';
+import { capitalizeFirstLetter, waitTime } from '~/packages/functions';
 import {
     getAllUnfinishedCommonStoriesPreviewsSchema,
     getCommonStoriesBeingGeneratedDataSchema,
@@ -31,6 +31,7 @@ import {
     handleCommonStoryTopic,
 } from './functions';
 import { waitStartTime } from '~/packages/functions';
+import { minutesBeforeCommonStoryDelete } from '~/packages/constants';
 
 /**
  * Start a new story
@@ -53,7 +54,8 @@ export const startNewStory = async (io: Namespace) => {
     emitToAllSocketsInRoom(socketEvent, io, storyId);
 
     currentStoryStatus.state === 'finished' && saveFinishedStory(storyId);
-    /* commonStoriesSocketManager.deleteStory(storyId); */
+    await waitTime(minutesBeforeCommonStoryDelete * 60)
+    commonStoriesSocketManager.deleteStory(storyId);
 };
 
 /**

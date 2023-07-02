@@ -13,6 +13,9 @@
     "theme.item.ecology": "Ecology",
     "theme.error.is-required": "The story theme is required",
 
+    "author.item.common": "Common",
+    "author.item.user": "User",
+
     "style.label": "Image style",
     "style.item.realistic": "Realistic",
     "style.item.drawing": "Drawing",

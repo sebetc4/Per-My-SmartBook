@@ -1,8 +1,9 @@
 {
-    "settings-title.h1" : "Parameters",
+    "settings-title.h1": "Parameters",
 
     "tabs.general.label": "General",
     "tabs.profile.label": "Profile",
+    "tabs.profile.appearance": "Appearance",
     "tabs.connection.label": "Connection",
     "tabs.ai.label": "AI",
 
@@ -45,12 +46,18 @@
     "AddModifyOpenaiKeyModal.title.modify": "Change the key",
     "AddModifyOpenaiKeyModal.text.add": "Add a valid OpenAI key with credits to generate stories.",
     "AddModifyOpenaiKeyModal.text.modify": "Change your OpenAI key.",
-    "AddModifyOpenaiKeyModal.input.key.label" : "Key to OpenAI",
-    "AddModifyOpenaiKeyModal.input.key.error.is-required" : "The key is required",
-    "AddModifyOpenaiKeyModal.input.key.error.not-valid" : "The key is not valid",
+    "AddModifyOpenaiKeyModal.input.key.label": "Key to OpenAI",
+    "AddModifyOpenaiKeyModal.input.key.error.is-required": "The key is required",
+    "AddModifyOpenaiKeyModal.input.key.error.not-valid": "The key is not valid",
     "AddModifyOpenaiKeyModal.button.cancel": "Cancel",
     "AddModifyOpenaiKeyModal.button.confirm.add": "Add",
     "AddModifyOpenaiKeyModal.button.confirm.modify": "Edit",
+
+    "AppearanceSettings.title.h3.color-mode": "Color mode",
+    "AppearanceSettings.title.h3.user-color": "User color",
+    "AppearanceSettings.text.h3.light": "Light",
+    "AppearanceSettings.text.h3.dark": "Dark",
+    "AppearanceSettings.button.confirm": "Confirm",
 
     "DeleteOpenaiKeyConfirmMoal.title": "Delete your OpenAI key",
     "DeleteOpenaiKeyConfirmMoal.text": "Are you sure you want to delete your OpenAI key?",

@@ -94,7 +94,6 @@ export const commonStoryBeingGeneratedSlice = createSlice({
          * New chat message
          */
         addNewChatMessage(state, action: PayloadAction<NewCommonStoryChatMessageRes>) {
-            console.log('add message')
             state.chat.allMessages.push(action.payload.message);
         },
     },

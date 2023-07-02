@@ -29,6 +29,8 @@ export const StoryCard = ({ story }: StoryItemProps) => {
     const handleOpenDetails = () => setOpenDetails(true);
     const handleCloseDetails = () => setOpenDetails(false);
 
+    console.log({story})
+
     return (
         <>
             <Box

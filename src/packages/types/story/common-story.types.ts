@@ -63,7 +63,6 @@ export type CommonStoryChapterClientData = Omit<CommonStoryChapter, 'image' | 'v
 /**
  * Generated data
  */
-
 export type CommonStorySummaryAndTitleGenerated = {
     summary: string;
     title: string;

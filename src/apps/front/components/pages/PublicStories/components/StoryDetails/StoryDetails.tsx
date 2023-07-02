@@ -50,7 +50,9 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
             fullScreen
             TransitionComponent={Transition}
             transitionDuration={600}
-            PaperProps={{ sx: { position: 'fixed', width: { xxs: '100%', md: '50%' }, right: 0 } }}
+            scroll='paper'
+            PaperProps={{ sx: { position: 'fixed', width: { xxs: '100%', md: '75%', lg: '50%' }, right: 0 } }}
+            sx={{ zIndex: 1700 }}
         >
             <Box sx={{ p: 6 }}>
                 <Grid
@@ -157,7 +159,7 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
                 </Grid>
                 <Divider
                     textAlign='left'
-                    sx={{ mb: 2 }}
+                    sx={{ mt: 2, mb: 2 }}
                 >
                     <Typography
                         component={'h3'}
@@ -178,101 +180,113 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
                         {publicStoriesT('StoryDetails.title.h3.review')}
                     </Typography>
                 </Divider>
-                {story.reviews.map((review, index) => (
-                    <>
-                        <Box
-                            component='article'
-                            key={`review-${index}`}
-                        >
-                            <Typography
-                                sx={{
-                                    fontSize: '1.2rem',
-                                    fontWeight: 700,
-                                    fontStyle: 'italic',
-                                }}
-                            >{`${publicStoriesT('StoryDetails.text.review.by')} ${review.author.username}`}</Typography>
-                            <CreationDate
-                                locale={locale!}
-                                date={review.createdAt}
-                                sx={{
-                                    mt: 1,
-                                    fontStyle: 'italic'
-                                }}
-                            />
+                {story.reviews.length > 0 ? (
+                    story.reviews.map((review, index) => (
+                        <>
                             <Box
-                                sx={{
-                                    display: 'flex',
-                                    gap: 4,
-                                    mt: 2,
-                                }}
+                                component='article'
+                                key={`review-${index}`}
                             >
-                                <Box
+                                <Typography
                                     sx={{
-                                        display: 'flex',
-                                        flexDirection: 'column',
-                                        gap: 2,
+                                        fontSize: '1.2rem',
+                                        fontWeight: 700,
+                                        fontStyle: 'italic',
                                     }}
-                                >
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                        <Typography
-                                            sx={{
-                                                fontWeight: 700,
-                                            }}
-                                        >{`${publicStoriesT('StoryDetails.text.review.text-rating')}:`}</Typography>
-                                        <Rating
-                                            name={publicStoriesT('StoryDetails.text.review.text-rating')}
-                                            value={review.textRating}
-                                            readOnly
-                                        />
-                                        <Typography>{review.textRating}</Typography>
-                                    </Box>
-                                    <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                        <Typography
-                                            sx={{
-                                                fontWeight: 700,
-                                            }}
-                                        >{`${publicStoriesT('StoryDetails.text.review.image-rating')}:`}</Typography>
-                                        <Rating
-                                            name={publicStoriesT('StoryDetails.text.review.image-rating')}
-                                            value={review.imageRating}
-                                            readOnly
-                                        />
-                                        <Typography>{review.imageRating}</Typography>
-                                    </Box>
-                                </Box>
-                                <Divider
-                                    orientation='vertical'
-                                    flexItem
+                                >{`${publicStoriesT('StoryDetails.text.review.by')} ${
+                                    review.author.username
+                                }`}</Typography>
+                                <CreationDate
+                                    locale={locale!}
+                                    date={review.createdAt}
+                                    sx={{
+                                        mt: 1,
+                                        fontStyle: 'italic',
+                                    }}
                                 />
                                 <Box
                                     sx={{
                                         display: 'flex',
-                                        flexDirection: 'column',
-                                        gap: 1,
+                                        gap: 4,
+                                        mt: 2,
                                     }}
                                 >
-                                    <Typography
-                                        component='h4'
-                                        variant='h4'
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: 2,
+                                        }}
                                     >
-                                        {review.title}
-                                    </Typography>
-                                    <Typography>{review.text}</Typography>
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <Typography
+                                                sx={{
+                                                    fontWeight: 700,
+                                                }}
+                                            >{`${publicStoriesT('StoryDetails.text.review.text-rating')}:`}</Typography>
+                                            <Rating
+                                                name={publicStoriesT('StoryDetails.text.review.text-rating')}
+                                                value={review.textRating}
+                                                readOnly
+                                            />
+                                            <Typography>{review.textRating}</Typography>
+                                        </Box>
+                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                            <Typography
+                                                sx={{
+                                                    fontWeight: 700,
+                                                }}
+                                            >{`${publicStoriesT(
+                                                'StoryDetails.text.review.image-rating'
+                                            )}:`}</Typography>
+                                            <Rating
+                                                name={publicStoriesT('StoryDetails.text.review.image-rating')}
+                                                value={review.imageRating}
+                                                readOnly
+                                            />
+                                            <Typography>{review.imageRating}</Typography>
+                                        </Box>
+                                    </Box>
+                                    <Divider
+                                        orientation='vertical'
+                                        flexItem
+                                    />
+                                    <Box
+                                        sx={{
+                                            display: 'flex',
+                                            flexDirection: 'column',
+                                            gap: 1,
+                                        }}
+                                    >
+                                        <Typography
+                                            component='h4'
+                                            variant='h4'
+                                        >
+                                            {review.title}
+                                        </Typography>
+                                        <Typography>{review.text}</Typography>
+                                    </Box>
                                 </Box>
                             </Box>
-                        </Box>
-                        {index !== story.reviews.length - 1 && (
-                            <Divider
-                                sx={{
-                                    m: '0 auto',
-                                    mt: 4,
-                                    mb: 4,
-                                    maxWidth: '50%',
-                                }}
-                            />
-                        )}
-                    </>
-                ))}
+                            {index !== story.reviews.length - 1 && (
+                                <Divider
+                                    sx={{
+                                        m: '0 auto',
+                                        mt: 4,
+                                        mb: 4,
+                                        maxWidth: '50%',
+                                    }}
+                                />
+                            )}
+                        </>
+                    ))
+                ) : (
+                    <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+                        <Typography sx={{ fontSize: '1.1rem', fontWeight: 'bold' }}>
+                            {publicStoriesT('StoryDetails.text.no-review')}
+                        </Typography>
+                    </Box>
+                )}
             </Box>
         </Dialog>
     );

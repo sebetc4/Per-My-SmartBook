@@ -1,6 +1,7 @@
 {
-    "OptionsForm.title.h1": "Commencer une nouvelle histoire",
-    "OptionsForm.button.start": "Commencer",
+    "OptionsScreen.title.h1": "Commencer une nouvelle histoire",
+    "OptionsScreen.button.start": "Commencer",
+    "OptionsScreen.text.loading": "Chargement...",
 
     "TopicsScreen.title.h1": "Choisissez un sujet pour votre histoire",
 
@@ -31,6 +32,11 @@
     "RestartStoryModal.button.delete-restart": "Supprimer et recommencer",
     "RestartStoryModal.button.restart": "Recommencer",
 
+    "DeleteModal.title": "Supprimer l'histoire",
+    "DeleteModal.text": "Êtes-vous sûr de vouloir supprimer cette histoire ?",
+    "DeleteModal.button.cancel": "Annuler",
+    "DeleteModal.button.delete": "Supprimer",
+
     "ConfirmRedirectToSettingsModal.title.openai-key-not-valid": "Clé OpenAI invalide",
     "ConfirmRedirectToSettingsModal.title.openai-no-credit": "Pas de crédit sur la clé OpenAI",
     "ConfirmRedirectToSettingsModal.title.openai-no-key": "Pas de clé OpenAI",
@@ -40,5 +46,9 @@
     "ConfirmRedirectToSettingsModal.text.openai-no-key": "Vous n'avez pas de clé OpenAI. Voulez vous être redirigé vers les paramètres pour en ajouter une ?",
     
     "ConfirmRedirectToSettingsModal.button.confirm" : "Confirmer",
-    "ConfirmRedirectToSettingsModal.button.cancel" : "Annuler"
+    "ConfirmRedirectToSettingsModal.button.cancel" : "Annuler",
+
+    "CommonChat.title": "Chat",
+    "CommonChat.placeholder.your-message": "Votre message...",
+    "CommonChat.aria-label.send": "Envoyer"
 }

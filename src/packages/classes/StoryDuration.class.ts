@@ -1,8 +1,9 @@
+import { veryShortStoryDuration } from '../constants';
 import { StoryDuration } from '../types';
 
 export class StoryDurationClass {
     static list: StoryDurationClass[] = [];
-    static readonly VERY_SHORT = new StoryDurationClass('veryShort', 2);
+    static readonly VERY_SHORT = new StoryDurationClass('veryShort', veryShortStoryDuration);
     static readonly SHORT = new StoryDurationClass('short', 10);
     static readonly MEDIUM = new StoryDurationClass('medium', 15);
     static readonly LONG = new StoryDurationClass('long', 20);

@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 // MUI
-import { Container, Typography, Box, useTheme} from '@mui/material';
+import { Container, Typography, Box, useTheme } from '@mui/material';
 // App
 import { selectUserStoryTopic } from '~/store';
 import { TopicCard } from '..';
@@ -11,8 +11,8 @@ import { useAppDispatch, useAppSelector } from '~/apps/front/hooks';
 export const TopicsScreen = () => {
     // Hooks
     const dispatch = useAppDispatch();
-    const theme = useTheme()
-    const { t } = useTranslation('story-generator');
+    const theme = useTheme();
+    const { t: storyGeneratorT } = useTranslation('story-generator');
 
     // Store
     const { isLoading, data: storyData } = useAppSelector((state) => state.userStoryBeingGenerated);
@@ -40,8 +40,9 @@ export const TopicsScreen = () => {
                 component='h1'
                 variant='h2'
                 color={theme.text.title}
+                textAlign='center'
             >
-                {t('TopicsScreen.title.h1')}
+                {storyGeneratorT('TopicsScreen.title.h1')}
             </Typography>
             <Box sx={{ mt: 8, mb: 8, display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 8 }}>
                 {storyData.allTopics?.map((topic, i) => (
@@ -58,6 +59,3 @@ export const TopicsScreen = () => {
         </Container>
     );
 };
-
-
-

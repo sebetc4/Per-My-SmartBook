@@ -3,6 +3,7 @@
     "success.update-password": "Your password has been updated.",
     "success.add-openai-key": "Your OpenAI key has been added.",
     "success.modify-openai-key": "Your OpenAI key has been changed.",
+    "success.user-story-saved": "Your story has been saved.",
 
     "error.login.default": "An error occurred while attempting to connect. Please try again later.",
     "error.userStoryBeingGenerated.select-chapter-choice": "An error occurred while generating the chapter. Please try again later.",

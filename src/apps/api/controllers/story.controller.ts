@@ -6,11 +6,12 @@ import {
     getStoryReviewsFromDb,
 } from '../queries';
 import { catchControllerError, authUser, authUserAndSession, validQueryId, onSuccess } from '../functions';
+import { Visibility } from '~/packages/types';
 
 export const getOneStory = catchControllerError(async (req, res) => {
     const id = validQueryId(req);
     const story = await getOneFinishedStoryById(id);
-    if (story.visibility === 'private') {
+    if (story.visibility === Visibility.PRIVATE) {
         const { id: userId } = await authUser(req, res);
         story.isAuthor(userId);
     }
@@ -21,7 +22,7 @@ export const getOneStory = catchControllerError(async (req, res) => {
 export const getOneStoryAndReviews = catchControllerError(async (req, res) => {
     const id = validQueryId(req);
     const story = await getOneFinishedStoryById(id);
-    if (story.visibility === 'private') {
+    if (story.visibility === Visibility.PRIVATE) {
         const { id: userId } = await authUser(req, res);
         story.isAuthor(userId);
     }

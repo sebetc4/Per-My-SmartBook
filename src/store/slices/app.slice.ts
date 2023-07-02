@@ -8,7 +8,6 @@ type AppState = {
     layout: {
         headerHeight: number;
         footerHeight: number;
-        pageHeight: number;
     };
     colorMode: ColorMode;
     error: string | null;
@@ -19,7 +18,6 @@ const initialState: AppState = {
     layout: {
         headerHeight: 0,
         footerHeight: 0,
-        pageHeight: 0
     },
     colorMode: ColorMode.LIGHT,
     error: null

@@ -57,7 +57,7 @@ export const Settings = () => {
             },
             {
                 name: 'appearance',
-                label: settingsT('tabs.profile.Appearance'),
+                label: settingsT('tabs.profile.appearance'),
                 icon: MonitorIcon,
                 component: AppearanceSettings,
             },

@@ -18,5 +18,6 @@
     "StoryDetails.text.review.image-rating": "Image",
     "StoryDetails.text.numb-of-reviews" : "avis",
     "StoryDetails.title.h3.summary" : "Résumé",
-    "StoryDetails.title.h3.review" : "Avis"
+    "StoryDetails.title.h3.review" : "Avis",
+    "StoryDetails.text.no-review" : "Aucun avis pour le moment"
 }

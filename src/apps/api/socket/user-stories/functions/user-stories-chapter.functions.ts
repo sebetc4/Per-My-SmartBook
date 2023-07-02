@@ -1,6 +1,6 @@
 import { Namespace } from 'socket.io';
-import { StoryDurationClass } from '../../../../../packages/classes';
-import { imageGenerationIsEnable } from '../../../../../packages/constants';
+import { StoryDurationClass } from '~/packages/classes';
+import { imageGenerationIsEnable } from '~/packages/constants';
 import {
     CommonStoryBeingGenerated,
     ImageDirectory,

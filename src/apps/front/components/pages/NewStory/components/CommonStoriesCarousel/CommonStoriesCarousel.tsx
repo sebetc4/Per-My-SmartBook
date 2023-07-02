@@ -69,7 +69,7 @@ export const CommonStoriesCarousel = ({ commonStoriesPreviews }: CommonStoriesCa
                 grabCursor={true}
                 centeredSlides={true}
                 slidesPerView={ 'auto'}
-                navigation={isUpSmScreen}
+                navigation={isUpSmScreen && commonStoriesPreviews.length > 1}
                 pagination={{
                     clickable: true,
                 }}
@@ -84,6 +84,8 @@ export const CommonStoriesCarousel = ({ commonStoriesPreviews }: CommonStoriesCa
                 style={{
                     paddingLeft: mediaQuery.upSm ? '48px' : '0',
                     paddingRight: mediaQuery.upSm ? '48px' : '0',
+                    paddingTop: '24px',
+                    paddingBottom: '24px',
 
                 }}
             >

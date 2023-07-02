@@ -70,121 +70,123 @@ export const ReviewForm = () => {
     };
 
     return (
-        <Accordion sx={{ width: '100%' }}>
-            <AccordionSummary
-                expandIcon={<ExpandMoreIcon />}
-                aria-controls='panel1a-content'
-                id='panel1a-header'
-            >
-                <Typography>{storyT('ReviewForm.text.add-review')}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: 3,
-                        alignItems: 'center',
-                        width: '100%',
-                    }}
+        <Box sx={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <Accordion sx={{ width: '100%', maxWidth: '500px', p: 0 }}>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls='panel1a-content'
+                    id='panel1a-header'
                 >
-                    <TextField
-                        label='titre'
-                        onChange={(e) => setTitleReview(e.target.value)}
-                        value={titleReview}
-                        disabled={!!userReview && !isBeingModified}
-                        sx={{ width: '350px' }}
-                    />
-                    <Box sx={{ display: 'flex', gap: 2 }}>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Typography
-                                color={theme.text.body}
-                                component='legend'
-                                sx={{ ml: 1, fontSize: '1.2rem' }}
-                            >
-                                {storyT('ReviewForm.label.text')}
-                            </Typography>
-                            <Rating
-                                name='text-rating'
-                                value={textRating}
-                                onChange={(_, newValue) => {
-                                    setTextRating(newValue!);
-                                }}
-                                size='large'
-                                precision={0.5}
-                                readOnly={!!userReview && !isBeingModified}
-                            />
-                        </Box>
-                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Typography
-                                color={theme.text.body}
-                                component='legend'
-                                sx={{ ml: 1, fontSize: '1.2rem' }}
-                            >
-                                {storyT('ReviewForm.label.image')}
-                            </Typography>
-                            <Rating
-                                name='image-rating'
-                                value={imageRating}
-                                onChange={(_, newValue) => {
-                                    setImageRating(newValue!);
-                                }}
-                                size='large'
-                                precision={0.5}
-                                readOnly={!!userReview && !isBeingModified}
-                            />
-                        </Box>
-                    </Box>
-                    <CustomAutoResize
-                        placeholder={storyT('ReviewForm.customAutoResize.placeholder')}
-                        minRows={4}
-                        maxRows={8}
-                        disabled={!!userReview && !isBeingModified}
-                        onChange={(e) => setTextReview(e.target.value)}
-                        value={textReview}
-                    />
-                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                        {!userReview ? (
-                            <LoadingButton
-                                variant='outlined'
-                                sx={{ fontSize: '1.2rem' }}
-                                onClick={handleSubmit}
-                                loading={isLoading}
-                            >
-                                {storyT('ReviewForm.button.submit')}
-                            </LoadingButton>
-                        ) : !isBeingModified ? (
-                            <Box sx={{ display: 'flex', gap: 3 }}>
-                                <Button
-                                    variant='outlined'
-                                    sx={{ fontSize: '1.2rem' }}
-                                    onClick={() => setIsBeingModified(true)}
+                    <Typography>{storyT('ReviewForm.text.add-review')}</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            gap: 3,
+                            alignItems: 'center',
+                            width: '100%',
+                        }}
+                    >
+                        <TextField
+                            label='titre'
+                            onChange={(e) => setTitleReview(e.target.value)}
+                            value={titleReview}
+                            disabled={!!userReview && !isBeingModified}
+                            fullWidth
+                        />
+                        <Box sx={{ display: 'flex', flexDirection: { xxs: 'column', sm: 'row' }, gap: 4 }}>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <Typography
+                                    color={theme.text.body}
+                                    component='legend'
+                                    sx={{ ml: 1, fontSize: '1.1rem' }}
                                 >
-                                    {storyT('ReviewForm.button.modify')}
-                                </Button>
+                                    {storyT('ReviewForm.label.text')}
+                                </Typography>
+                                <Rating
+                                    name='text-rating'
+                                    value={textRating}
+                                    onChange={(_, newValue) => {
+                                        setTextRating(newValue!);
+                                    }}
+                                    size='large'
+                                    precision={0.5}
+                                    readOnly={!!userReview && !isBeingModified}
+                                />
+                            </Box>
+                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                                <Typography
+                                    color={theme.text.body}
+                                    component='legend'
+                                    sx={{ ml: 1, fontSize: '1.1rem' }}
+                                >
+                                    {storyT('ReviewForm.label.image')}
+                                </Typography>
+                                <Rating
+                                    name='image-rating'
+                                    value={imageRating}
+                                    onChange={(_, newValue) => {
+                                        setImageRating(newValue!);
+                                    }}
+                                    size='large'
+                                    precision={0.5}
+                                    readOnly={!!userReview && !isBeingModified}
+                                />
+                            </Box>
+                        </Box>
+                        <CustomAutoResize
+                            placeholder={storyT('ReviewForm.customAutoResize.placeholder')}
+                            minRows={4}
+                            maxRows={8}
+                            disabled={!!userReview && !isBeingModified}
+                            onChange={(e) => setTextReview(e.target.value)}
+                            value={textReview}
+                        />
+                        <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                            {!userReview ? (
                                 <LoadingButton
                                     variant='outlined'
-                                    color='error'
                                     sx={{ fontSize: '1.2rem' }}
-                                    onClick={handleDelete}
+                                    onClick={handleSubmit}
                                     loading={isLoading}
                                 >
-                                    {storyT('ReviewForm.button.delete')}
+                                    {storyT('ReviewForm.button.submit')}
                                 </LoadingButton>
-                            </Box>
-                        ) : (
-                            <LoadingButton
-                                variant='outlined'
-                                sx={{ fontSize: '1.2rem' }}
-                                loading={isLoading}
-                                onClick={handleUpadte}
-                            >
-                                {storyT('ReviewForm.button.confirm')}
-                            </LoadingButton>
-                        )}
+                            ) : !isBeingModified ? (
+                                <Box sx={{ display: 'flex', gap: 3 }}>
+                                    <Button
+                                        variant='outlined'
+                                        sx={{ fontSize: '1.2rem' }}
+                                        onClick={() => setIsBeingModified(true)}
+                                    >
+                                        {storyT('ReviewForm.button.modify')}
+                                    </Button>
+                                    <LoadingButton
+                                        variant='outlined'
+                                        color='error'
+                                        sx={{ fontSize: '1.2rem' }}
+                                        onClick={handleDelete}
+                                        loading={isLoading}
+                                    >
+                                        {storyT('ReviewForm.button.delete')}
+                                    </LoadingButton>
+                                </Box>
+                            ) : (
+                                <LoadingButton
+                                    variant='outlined'
+                                    sx={{ fontSize: '1.2rem' }}
+                                    loading={isLoading}
+                                    onClick={handleUpadte}
+                                >
+                                    {storyT('ReviewForm.button.confirm')}
+                                </LoadingButton>
+                            )}
+                        </Box>
                     </Box>
-                </Box>
-            </AccordionDetails>
-        </Accordion>
+                </AccordionDetails>
+            </Accordion>
+        </Box>
     );
 };
