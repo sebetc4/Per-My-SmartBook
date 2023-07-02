@@ -1,4 +1,10 @@
 {
+    "page.common-story.title": "Common story generator",
+    "page.common-story.description": "Discover a limitless interactive storytelling experience with our multiple-choice story generator that takes into account each user's choice.",
+    "page.user-story.title": "Personal story generator",
+    "page.user-story.description": "Discover a limitless interactive storytelling experience with our choice-based story generator. Immerse yourself in captivating adventures where your decisions influence the course of story.",
+    
+
     "OptionsScreen.title.h1": "Start a new story",
     "OptionsScreen.button.start": "Start",
     "OptionsScreen.text.loading": "Loading...",

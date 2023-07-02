@@ -2,7 +2,7 @@
 .plBall,
 .plBallInnerShadow,
 .plBallSideShadows,
-.plBall-texture,
+.plBallTexture,
 .plInnerRing,
 .plOuterRing,
 .plTrackCover {
@@ -75,7 +75,7 @@
 .plBallTexture:before {
     animation-name: ballTexture;
     animation-duration: 0.25s;
-    background: url('/images/textures/snow.jpg') 0 0 / 50% 100%;
+    background: url('/images/textures/ball.png') 0 0 / 50% 100%;
     content: '';
     display: block;
     filter: brightness(1.05);
@@ -102,7 +102,7 @@
 }
 .plTrackCover {
     animation-name: trackCover;
-    background-image: conic-gradient(hsla(223, 90%, 95%, 1) 210deg, hsla(223, 90%, 95%, 0) 270deg);
+    background-image: conic-gradient(rgb(255, 255, 255) 210deg, hsla(223, 90%, 95%, 0) 270deg);
     top: 0;
     left: 0;
     width: 100%;

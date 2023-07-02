@@ -1,4 +1,7 @@
 {
+    "page.title": "Sign in",
+    "page.description": "Connect to create and explore captivating stories, where every decision counts. Let yourself be swept away by fascinating worlds and unique characters.",
+
     "title.h1" : "Sign in",
     "title.h2": "Glad to see you back! Log in to access your account.",
     "text.account-already-exists-with-this-email": "An account is already linked to this address with another connection method",

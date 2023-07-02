@@ -1,5 +1,8 @@
 {
-    "title.h1" : "Connexion",
+    "page.title": "Connexion",
+    "page.description": "Connectez-vous pour créer et explorer des récits captivants, où chaque décision compte. Laissez-vous emporter par des mondes fascinants et des personnages uniques.",
+
+    "title.h1": "Connexion",
     "title.h2": "Heureux de vous retouver! Connectez-vous pour accéder à votre compte.",
     "text.account-already-exists-with-this-email": "Un compte est déjà lié à cette adresse e-mail avec une autre méthode de connexion",
     "text.no-account": "Vous n'avez pas de compte ?",

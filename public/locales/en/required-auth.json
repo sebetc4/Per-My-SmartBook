@@ -1,5 +1,7 @@
 {
     "page.title": "Authentication required",
+    "page.description": "You are trying to access a page that requires authentication. To continue, we invite you to log in or create an account. It will only take a few minutes and will allow you to discover all the possibilities of our application. Don't hesitate to register now to dive into the world of imagination and story creation!",
+    
     "title.h1": "Login required to access this page",
     "text.main": "You are trying to access a page that requires authentication. To continue, we invite you to log in or create an account. It will only take a few minutes and will allow you to discover all the possibilities of our application. Don't hesitate to register now to dive into the world of imagination and story creation!",
     "button.signup": "Sign up",

@@ -216,7 +216,7 @@ const LeftMenu = forwardRef((props: LeftMenuProps, ref) => {
                 sx={{ ml: 2 }}
                 textTransform='uppercase'
             >
-                {settingsT('settings-title.h1')}
+                {settingsT('settings.title.h1')}
             </Typography>
             <Tabs
                 orientation='vertical'

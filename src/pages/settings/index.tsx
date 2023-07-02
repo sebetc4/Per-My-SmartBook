@@ -6,12 +6,22 @@ import { api } from '~/services';
 import { setAuthIsChecked,setInvalidSession,setUserSettings } from '~/store';
 import { wrapper } from '~/store/store';
 import { setUserSession } from '~/apps/front/utils';
+import { useTranslation } from 'react-i18next';
 
 export default function SettingsPage() {
+    
+    // Hooks
+    const { t: commonT } = useTranslation('common');
+    const { t: settingsT } = useTranslation('settings');
+
     return (
         <>
             <Head>
-                <title>Paramètres - My StoryBook</title>
+            <title>{`${settingsT('page.title')} - ${commonT('app-name')}`}</title>
+                <meta
+                    name='description'
+                    content={settingsT('page.description')}
+                />
             </Head>
             <Settings />
         </>

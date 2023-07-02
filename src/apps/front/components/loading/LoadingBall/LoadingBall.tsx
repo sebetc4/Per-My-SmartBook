@@ -3,6 +3,7 @@ import styles from './LoadingBall.module.css';
 import { Container, Typography } from '@mui/material';
 
 export const LoadingBall = () => {
+
     return (
         <Container
             sx={{

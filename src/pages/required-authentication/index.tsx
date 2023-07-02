@@ -7,12 +7,17 @@ import { customServerSideTranslations, requireUnAuthUser } from '../../apps/api/
 export default function RequiredAuthPage() {
 
     // Hooks
-    const { t } = useTranslation('required-auth');
+    const { t: commonT } = useTranslation('common');
+    const { t: requiredAuthT } = useTranslation('required-auth');
 
     return (
         <>
             <Head>
-                <title>{`${t('page.title')} - My StoryBook`}</title>
+            <title>{`${requiredAuthT('page.title')} - ${commonT('app-name')}`}</title>
+                <meta
+                    name='description'
+                    content={requiredAuthT('page.description')}
+                />
             </Head>
             <RequiredAuth />
         </>

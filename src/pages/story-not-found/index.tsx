@@ -9,11 +9,16 @@ import { GetStaticPropsWithLocale } from '~/packages/types';
 
 export default function StoryNotFoundPage() {
     // Hooks
-    const { t: fourOfFourT } = useTranslation('404');
+    const { t: commonT } = useTranslation('common');
+    const { t: storyNotFoundT } = useTranslation('story-not-found');
     return (
         <>
             <Head>
-                <title>{`${fourOfFourT('page.title')} - My StoryBook`}</title>
+                <title>{`${storyNotFoundT('page.title')} - ${commonT('app-name')}`}</title>
+                <meta
+                    name='description'
+                    content={storyNotFoundT('page.description')}
+                />
             </Head>
             <StoryNotFound />
         </>

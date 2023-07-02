@@ -1,5 +1,8 @@
 {
-    "settings-title.h1": "Paramètres",
+    "page.title": "Paramètres",
+    "page.description": "Gérez vos paramètres de compte et de profil.",
+
+    "settings.title.h1": "Paramètres",
 
     "tabs.general.label": "Général",
     "tabs.profile.label": "Profil",

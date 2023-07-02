@@ -7,12 +7,16 @@ import { FourOhFour } from '../apps/front/components';
 import { GetStaticPropsWithLocale } from '../packages/types';
 
 export default function FourOhFourPage() {
-    // Hooks
+    const { t: commonT } = useTranslation('common');
     const { t: fourOfFourT } = useTranslation('404');
     return (
         <>
             <Head>
-                <title>{`${fourOfFourT('page.title')} - My StoryBook`}</title>
+                <title>{`${fourOfFourT('page.title')} - ${commonT('app-name')}`}</title>
+                <meta
+                    name='description'
+                    content={fourOfFourT('page.description')}
+                />
             </Head>
             <FourOhFour />
         </>

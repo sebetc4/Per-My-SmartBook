@@ -1,5 +1,7 @@
 {
     "page.title": "Page not found",
+    "page.description": "You've reached a page you can't find. Don't worry, we'll help you find your way back.",
+
     "title.h1": "Oh no! It seems that you are lost",
     "text.main": "You just landed on a page that cannot be found. This may be due to a broken link or a typo in the URL. Don't worry, there are probably plenty of other interesting things to discover on our site. Why don't you try going back to the home page and see what stories we have to offer?",
     "button.home": "Return to the home page"

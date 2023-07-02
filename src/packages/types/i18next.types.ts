@@ -1,7 +1,7 @@
 import 'i18next';
 import common from '../../../public/locales/fr/common.json';
 import header from '../../../public/locales/fr/header.json';
-import login from '../../../public/locales/fr/login.json';
+import signin from '../../../public/locales/fr/signin.json';
 import signup from '../../../public/locales/fr/signup.json';
 import storyGenerator from '../../../public/locales/fr/story-generator.json';
 import requiredAuth from '../../../public/locales/fr/required-auth.json';
@@ -16,7 +16,9 @@ import date from '../../../public/locales/fr/date.json';
 import storyInputs from '../../../public/locales/fr/story-inputs.json';
 import buttons from '../../../public/locales/fr/buttons.json';
 import illustrations from '../../../public/locales/fr/illustrations.json';
-import StoryNotFound from '../../../public/locales/fr/story-not-found.json';
+import storyNotFound from '../../../public/locales/fr/story-not-found.json';
+import forgotPassword from '../../../public/locales/fr/forgot-password.json';
+import home from '../../../public/locales/fr/home.json';
 
 declare module 'i18next' {
     interface CustomTypeOptions {
@@ -27,8 +29,9 @@ declare module 'i18next' {
             header: typeof header;
 
             // Pages
+            home: typeof home;
             'new-story': typeof newStory;
-            login: typeof login;
+            signin: typeof signin;
             signup: typeof signup;
             'story-generator': typeof storyGenerator;
             'required-auth': typeof requiredAuth;
@@ -38,7 +41,8 @@ declare module 'i18next' {
             'user-stories': typeof userStories,
             'public-stories': typeof publicStories,
             'story': typeof story,
-            'story-not-found': typeof StoryNotFound,
+            'story-not-found': typeof storyNotFound,
+            'forgot-password': typeof forgotPassword,
 
             // Inputs
             'story-inputs': typeof storyInputs,

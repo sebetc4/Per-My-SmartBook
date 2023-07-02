@@ -1,7 +1,9 @@
 {
-    "page.title": "Histoire introuvable",
-    "image.alt": "Livre avec une serrure",
-    "title.h1": "Histoire introuvable",
-    "text.main": "Malheureusement, il semblerait que cette histoire n'ait jamais vu le jour ou qu'elle ne soit plus accessible à présent, nous laissant ainsi dépourvus de son contenu autrefois potentiellement captivant et intrigant.",
-    "button.public-story": "Retour à la page d'acceuil"
+    "page.title": "Story not found",
+    "page.description": "Unfortunately, it seems that this story is not available. Don't worry, we've got plenty of other exciting stories waiting for you.",
+
+    "image.alt": "Book with a lock",
+    "title.h1": "Story not found",
+    "text.main": "Sadly, it would appear that this story never saw the light of day or is no longer accessible, leaving us bereft of its once potentially captivating and intriguing content.",
+    "button.public-story": "Back to the bookshop"
 }

@@ -1,5 +1,7 @@
 {
     "page.title": "Authentification requise",
+    "page.description": "Vous essayez d'accéder à une page qui nécessite une authentification. Pour continuer, nous vous invitons à vous connecter ou à créer un compte. Cela ne prendra que quelques minutes et vous permettra de découvrir toutes les possibilités de notre application. N'hésitez pas à vous inscrire dès maintenant pour plonger dans l'univers de l'imagination et de la création d'histoires !",
+    
     "title.h1": "Connexion requise pour accéder à cette page",
     "text.main": "Vous essayez d'accéder à une page qui nécessite une authentification. Pour continuer, nous vous invitons à vous connecter ou à créer un compte. Cela ne prendra que quelques minutes et vous permettra de découvrir toutes les possibilités de notre application. N'hésitez pas à vous inscrire dès maintenant pour plonger dans l'univers de l'imagination et de la création d'histoires !",
     "button.signup": "Inscription",

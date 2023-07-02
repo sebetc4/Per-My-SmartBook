@@ -1,16 +1,29 @@
 import Head from 'next/head';
+import { useTranslation } from 'react-i18next';
 import { customServerSideTranslations } from '~/apps/api/functions';
 import { Story } from '~/apps/front/components';
+import { useAppSelector } from '~/apps/front/hooks';
 import { isValidId } from '~/packages/functions';
 import { Path, StoryReviewData } from '~/packages/types';
 import { api } from '~/services';
 import { setStoryDataAndReviews, wrapper } from '~/store';
 
 export default function StoryPage() {
+
+    // Hooks
+    const { t: commonT } = useTranslation('common');
+
+    // Store
+    const {storyData} = useAppSelector((state) => state.story);
+
     return (
         <>
             <Head>
-                <title>{`Histoire - My-StoryBook`}</title>
+                <title>{`${storyData?.title} - ${commonT('app-name')}`}</title>
+                <meta
+                    name='description'
+                    content={storyData?.topic}
+                />
             </Head>
             <Story />
         </>
@@ -31,7 +44,9 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
                     userReview = reviewRes.data.review;
                 }
             }
-            store.dispatch(setStoryDataAndReviews({ storyData: storyRes.data.story, userReview, reviews: storyRes.data.reviews }));
+            store.dispatch(
+                setStoryDataAndReviews({ storyData: storyRes.data.story, userReview, reviews: storyRes.data.reviews })
+            );
             return {
                 props: {
                     ...(await customServerSideTranslations(context.locale!, ['story', 'date'])),

@@ -1,4 +1,9 @@
 {
+    "page.common-story.title": "Générateur d'histoire commune",
+    "page.common-story.description": "Découvrez une expérience de narration interactive sans limite avec notre générateur d'histoires à choix multiples prenant en compte le choix de chaque utilisateur.",
+    "page.user-story.title": "Générateur d'histoire personnelle",
+    "page.user-story.description": "Découvrez une expérience de narration interactive sans limite avec notre générateur d'histoires à choix. Plongez dans des aventures captivantes où vos décisions influencent le cours de l'histoire.",
+    
     "OptionsScreen.title.h1": "Commencer une nouvelle histoire",
     "OptionsScreen.button.start": "Commencer",
     "OptionsScreen.text.loading": "Chargement...",
