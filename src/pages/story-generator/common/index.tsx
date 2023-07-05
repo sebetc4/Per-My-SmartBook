@@ -28,7 +28,7 @@ export default function CommonStoryGeneratorPage() {
 export async function getStaticProps({ locale }: GetStaticPropsWithLocale) {
     return {
         props: {
-            ...(await customServerSideTranslations(locale, ['story-generator', 'story-inputs'])),
+            ...(await customServerSideTranslations(locale, ['story-generator', 'date', 'buttons'])),
         },
     };
 }

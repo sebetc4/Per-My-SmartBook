@@ -15,7 +15,7 @@ import PsychologyOutlinedIcon from '@mui/icons-material/PsychologyOutlined';
 import MonitorIcon from '@mui/icons-material/Monitor';
 // App
 import { setUrlWithoutReload } from '~/apps/front/utils';
-import { AISettings, AccountSettings, AppearanceSettings, PasswordSettings, ProfileSettings } from './components';
+import { AISettings, AccountSettings, UiSettings, PasswordSettings, ProfileSettings } from './components';
 import { useAppMediaQuery } from '~/apps/front/hooks';
 import { useAppSelector } from '~/apps/front/hooks/redux.hook';
 import { LoadingContainer } from '../..';
@@ -57,9 +57,9 @@ export const Settings = () => {
             },
             {
                 name: 'appearance',
-                label: settingsT('tabs.profile.appearance'),
+                label: settingsT('tabs.ui.label'),
                 icon: MonitorIcon,
-                component: AppearanceSettings,
+                component: UiSettings,
             },
             {
                 name: 'connection',

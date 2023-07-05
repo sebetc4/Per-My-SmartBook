@@ -70,9 +70,13 @@ export const PasswordSettings = () => {
                     alignItems: 'center',
                 }}
             >
-                <Grid
-                    container
-                    spacing={3}
+                <Box
+                    sx={{
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 2,
+                    }}
                 >
                     <CustomPasswordInput
                         name='currentPassword'
@@ -116,7 +120,7 @@ export const PasswordSettings = () => {
                                 : undefined
                         }
                     />
-                </Grid>
+                </Box>
 
                 <LoadingButton
                     loading={isLoading}
@@ -131,7 +135,7 @@ export const PasswordSettings = () => {
                             sx={{ mb: 0.5 }}
                         />
                     }
-                    sx={{ marginTop: 4, marginBottom: 2 }}
+                    sx={{ mt: 4, mb: 2 }}
                     fullWidth
                 >
                     {t('PasswordForm.button.save')}

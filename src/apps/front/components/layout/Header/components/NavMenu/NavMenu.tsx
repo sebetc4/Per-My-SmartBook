@@ -75,7 +75,7 @@ export const NavMenu = ({ open, handleClose, handleLogout }: NavMenuProps) => {
     const handleLogoutClick = () => {
         handleClose();
         handleLogout();
-    }
+    };
 
     // Constants
     const allNavMenuItems: NavMenuItem[] = useMemo(
@@ -110,7 +110,8 @@ export const NavMenu = ({ open, handleClose, handleLogout }: NavMenuProps) => {
     );
 
     const navMenuItems = allNavMenuItems.filter(
-        (item) => !(!isAuth && item.href !== Path.HOME && item.href !== Path.PUBLIC_STORIES)
+        (item) =>
+            !(!isAuth && item.href !== Path.HOME && item.href !== Path.NEW_STORY && item.href !== Path.PUBLIC_STORIES)
     );
 
     return (

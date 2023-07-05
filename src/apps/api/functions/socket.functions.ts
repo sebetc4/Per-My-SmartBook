@@ -12,3 +12,7 @@ export const emitToOtherSocketsInRoom = <T>(event: SocketEvent, socket: Socket, 
 export const emitToAllSocketsInRoom = <T>(event: SocketEvent, io: Namespace | Server, room: string, data?: T) => {
     io.to(room).emit(event, data);
 };
+
+export const emitToAllSocketsInNamespace = <T>(event: SocketEvent, io: Namespace | Server, data?: T) => {
+    io.emit(event, data);
+};

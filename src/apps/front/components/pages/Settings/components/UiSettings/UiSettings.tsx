@@ -10,10 +10,11 @@ import Brightness7Icon from '@mui/icons-material/Brightness7';
 // Api
 import { ColorMode } from '~/packages/types';
 import { useAppDispatch, useAppSelector } from '~/apps/front/hooks';
-import { toggleColorMode, updateUserColor } from '~/store';
+import { setAlert, toggleColorMode, updateUserColor } from '~/store';
 import { useTranslation } from 'react-i18next';
 
-export const AppearanceSettings = () => {
+export const UiSettings = () => {
+
     //Hooks
     const dispatch = useAppDispatch();
     const theme = useTheme();
@@ -24,8 +25,22 @@ export const AppearanceSettings = () => {
 
     const [userColor, setUserColor] = useState(session!.userColor);
 
-    const handleUpdateUserColor = () => {
-        dispatch(updateUserColor({ color: userColor }));
+    const handleUpdateUserColor = async () => {
+        const res = await dispatch(updateUserColor({ color: userColor }));
+        if (res.meta.requestStatus === 'fulfilled') {
+            dispatch(setAlert({ type: 'success', message: 'success.update-user-color' }));
+        } else {
+            dispatch(setAlert({ type: 'error', message: 'error.update-data.default' }));
+        }
+    };
+
+    const handleToggleColorMode = async () => {
+        const res = await dispatch(toggleColorMode());
+        if (res.meta.requestStatus === 'fulfilled') {
+            dispatch(setAlert({ type: 'success', message: 'success.toggle-color-mode' }));
+        } else {
+            dispatch(setAlert({ type: 'error', message: 'error.update-data.default' }));
+        }
     };
 
     return (
@@ -33,6 +48,7 @@ export const AppearanceSettings = () => {
             maxWidth='xl'
             sx={{
                 display: 'flex',
+                justifyContent: 'space-between',
                 gap: 6,
                 pt: theme.main.padding,
                 pb: theme.main.padding,
@@ -58,7 +74,7 @@ export const AppearanceSettings = () => {
                                 disabled={isLoading}
                                 color='primary'
                                 checked={colorMode === ColorMode.DARK}
-                                onChange={() => dispatch(toggleColorMode())}
+                                onChange={handleToggleColorMode}
                             />
                         }
                         label={

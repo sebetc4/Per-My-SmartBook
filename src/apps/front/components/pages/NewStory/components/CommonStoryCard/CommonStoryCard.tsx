@@ -1,10 +1,11 @@
+// Librairies
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
-
-import { Box, Divider, Stack, Typography } from '@mui/material';
-
+// MUI
+import { Box, Divider, Stack, Typography, useTheme } from '@mui/material';
+// App
 import { getRandomHourglassImage, placeholderValue } from '../../../../../utils';
 import { TimeLeftTextTimer } from '../../../..';
 
@@ -15,9 +16,12 @@ type CommonStoryBeingGeneratedCardProps = {
 };
 
 export const CommonStoryCard = ({ story }: CommonStoryBeingGeneratedCardProps) => {
+    // Hooks
     const { t: newStoryT } = useTranslation('new-story');
     const { t: storyInputsT } = useTranslation('story-inputs');
+    const theme = useTheme();
 
+    // State
     const [storyEndString, setStoryEndString] = useState<string>('');
 
     useEffect(() => {
@@ -73,7 +77,7 @@ export const CommonStoryCard = ({ story }: CommonStoryBeingGeneratedCardProps) =
                         borderTopLeftRadius: 32,
                         p: 4,
                         pt: 0,
-                        backgroundColor: '#fff',
+                        backgroundColor: theme.card.backgroundColor,
                         zIndex: 1,
                         overflow: 'hidden',
                     }}
@@ -103,14 +107,15 @@ export const CommonStoryCard = ({ story }: CommonStoryBeingGeneratedCardProps) =
                     </Box>
                     <Divider sx={{ mt: 2, mb: 2 }} />
                     <Stack direction='row' spacing={1}>
-                        <Typography sx={{ fontWeight: 'bold' }}>{`${newStoryT('CommonStoryCard.text.theme')}`}</Typography>
-                        <Typography>{`${storyInputsT(`theme.item.${story.theme}`)}`}</Typography>
+                        <Typography color={theme.text.body} sx={{ fontWeight: 'bold' }}>{`${newStoryT('CommonStoryCard.text.theme')}`}</Typography>
+                        <Typography color={theme.text.body}>{`${storyInputsT(`theme.item.${story.theme}`)}`}</Typography>
                     </Stack>
                     <Divider sx={{ mt: 2, mb: 2 }} />
                     <Box>
                         <Typography
                             textAlign='justify'
                             sx={{ mt: 1 }}
+                            color={theme.text.body}
                         >
                             {story.topic}
                         </Typography>

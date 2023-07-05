@@ -55,5 +55,11 @@
 
     "CommonChat.title": "Chat",
     "CommonChat.placeholder.your-message": "Votre message...",
-    "CommonChat.aria-label.send": "Envoyer"
+    "CommonChat.aria-label.send": "Envoyer",
+
+    "WaitingScreen.text.story-about-begin": "Votre histoire va commencer...",
+    "WaitingScreen.text.story-begins-in": "Votre histoire commencera dans",
+
+    "EndStoryScreen.text.story-is-stopped": "L'histoire a été arrêtée par manque de vote.",
+    "EndStoryScreen.text.redirect": "Vous serez automatiquement redirigé vers la création d'une nouvelle histoire dans"
 }

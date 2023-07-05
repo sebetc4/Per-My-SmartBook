@@ -54,11 +54,11 @@ export const SearchBar = ({}: SearchBarProps) => {
 
     // Form
     const {
-        page: queryPage,
-        theme: queryTheme,
-        search: querySearch,
-        duration: queryDuration,
-        language: queryLanguage,
+        p: queryPage,
+        t: queryTheme,
+        s: querySearch,
+        d: queryDuration,
+        l: queryLanguage,
     } = router.query;
     const page = typeof queryPage === 'string' ? +queryPage : 1;
     const search = typeof querySearch === 'string' ? querySearch : '';
@@ -70,7 +70,6 @@ export const SearchBar = ({}: SearchBarProps) => {
             : 'all';
     const language =
         typeof queryLanguage === 'string' && allLanguages.includes(queryLanguage as Language) ? queryLanguage : 'all';
-
     const {
         register,
         handleSubmit,

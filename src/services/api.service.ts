@@ -15,8 +15,6 @@ import {
     PublicStoriesSearchRes,
     GetOneFinishedStoryDataAndReviewsRes,
     UpdateUserColorBody,
-} from '../packages/types';
-import {
     CreateOneReviewBody,
     CreateOneReviewRes,
     DeleteOneReviewRes,
@@ -24,7 +22,7 @@ import {
     LikeOrDislikeOneReviewRes,
     UpdateOneReviewBody,
     UpdateOneReviewRes,
-} from '~/packages/types/request/review.types';
+} from '~/packages/types';
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL!;
 

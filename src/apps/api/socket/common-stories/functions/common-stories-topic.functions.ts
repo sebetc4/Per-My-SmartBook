@@ -3,7 +3,7 @@ import {
     imageGenerationIsEnable,
     minutesBeforeCommonStoryStart,
 } from '../../../../../packages/constants';
-import { logIf } from '../../../../../packages/functions';
+import { logIf, minutesToMilliseconds } from '../../../../../packages/functions';
 import {
     CommonStoryTopic,
     CommonStoryTopicGenerated,
@@ -38,7 +38,7 @@ export const handleCommonStoryTopic = async (storyId: string, storyOptions: Stor
         cover: imageGenerationIsEnable
             ? await generateCommonStoryTopicImage({ storyId, description, style })
             : undefined,
-        startAt: Date.now() + minutesBeforeCommonStoryStart * 60 * 1000,
+        startAt: Date.now() + minutesToMilliseconds(minutesBeforeCommonStoryStart),
     });
 };
 

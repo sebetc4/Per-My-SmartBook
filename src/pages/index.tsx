@@ -29,7 +29,7 @@ interface GetStaticPropsWithLocale extends GetStaticProps {
 export async function getStaticProps({ locale }: GetStaticPropsWithLocale) {
     return {
         props: {
-            ...(await customServerSideTranslations(locale, ['new-story', 'date', 'story-inputs', 'buttons'])),
+            ...(await customServerSideTranslations(locale, ['home'])),
         },
     };
 }

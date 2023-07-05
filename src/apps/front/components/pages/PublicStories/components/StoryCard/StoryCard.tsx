@@ -4,9 +4,9 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
 // MUI
-import { Box, Button, Divider, Stack, Typography, useTheme } from '@mui/material';
+import { Box, Button, Divider, Rating, Stack, Typography, useTheme } from '@mui/material';
 // App
-import { FinishedPublicStoryPreview, Path } from '../../../../../../../packages/types';
+import { FinishedPublicStoryPreview, Path } from '~/packages/types';
 import { placeholderValue, getRandomBookImage } from '../../../../../utils';
 import { StoryDetails } from '..';
 import { useAppMediaQuery } from '../../../../../hooks';
@@ -16,7 +16,6 @@ type StoryItemProps = {
 };
 
 export const StoryCard = ({ story }: StoryItemProps) => {
-
     // Hooks
     const theme = useTheme();
     const { mediaQuery } = useAppMediaQuery();
@@ -28,8 +27,6 @@ export const StoryCard = ({ story }: StoryItemProps) => {
     // Handlers
     const handleOpenDetails = () => setOpenDetails(true);
     const handleCloseDetails = () => setOpenDetails(false);
-
-    console.log({story})
 
     return (
         <>
@@ -44,7 +41,6 @@ export const StoryCard = ({ story }: StoryItemProps) => {
                 }}
             >
                 {/* Image and options */}
-
                 <Box
                     sx={{
                         p: 3,
@@ -135,7 +131,7 @@ const StoryOptions = ({ story }: StoryOptionsProps) => {
             sx={{
                 p: { xxs: 2, md: 0 },
                 width: { xxs: '100%', md: 'auto' },
-                minWidth: { xxs: 0, md: '200px' },
+                minWidth: { xxs: 0, md: '230px' },
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'center',
@@ -144,20 +140,61 @@ const StoryOptions = ({ story }: StoryOptionsProps) => {
             }}
         >
             <Box sx={{ display: 'flex', gap: 1 }}>
-                <Typography sx={{ fontWeight: 700 }} color={theme.text.body}>{publicStoriesT('StoryCard.option-item.author')} :</Typography>
+                <Typography
+                    sx={{ fontWeight: 700 }}
+                    color={theme.text.body}
+                >
+                    {publicStoriesT('StoryCard.option-item.rating')} :
+                </Typography>
+                <Rating
+                    value={story.ratings.globalRating}
+                    readOnly
+                    disabled={story.ratings.globalRating === 0}
+                    precision={0.5}
+                />
+                {story.ratings.globalRating !== 0 && (
+                    <Typography color={theme.text.body}>{`${story.ratings.globalRating}`}</Typography>
+                )}
+            </Box>
+            <Box sx={{ display: 'flex', gap: 1 }}>
+                <Typography
+                    sx={{ fontWeight: 700 }}
+                    color={theme.text.body}
+                >
+                    {publicStoriesT('StoryCard.option-item.author')} :
+                </Typography>
                 <Typography color={theme.text.body}>{storyInputsT(`author.item.${story.type}`)}</Typography>
             </Box>
             <Box sx={{ display: 'flex', gap: 1 }}>
-                <Typography sx={{ fontWeight: 700 }} color={theme.text.body}>{publicStoriesT('StoryCard.option-item.theme')} :</Typography>
+                <Typography
+                    sx={{ fontWeight: 700 }}
+                    color={theme.text.body}
+                >
+                    {publicStoriesT('StoryCard.option-item.theme')} :
+                </Typography>
                 <Typography color={theme.text.body}>{storyInputsT(`theme.item.${story.options.theme}`)}</Typography>
             </Box>
             <Box sx={{ display: 'flex', gap: 1 }}>
-                <Typography sx={{ fontWeight: 700 }} color={theme.text.body}>{publicStoriesT('StoryCard.option-item.duration')} :</Typography>
-                <Typography color={theme.text.body}>{storyInputsT(`duration.item.${story.options.duration}`)}</Typography>
+                <Typography
+                    sx={{ fontWeight: 700 }}
+                    color={theme.text.body}
+                >
+                    {publicStoriesT('StoryCard.option-item.duration')} :
+                </Typography>
+                <Typography color={theme.text.body}>
+                    {storyInputsT(`duration.item.${story.options.duration}`)}
+                </Typography>
             </Box>
             <Box sx={{ display: 'flex', gap: 1 }}>
-                <Typography sx={{ fontWeight: 700 }} color={theme.text.body}>{publicStoriesT('StoryCard.option-item.language')} :</Typography>
-                <Typography color={theme.text.body}>{storyInputsT(`language.item.${story.options.language}`)}</Typography>
+                <Typography
+                    sx={{ fontWeight: 700 }}
+                    color={theme.text.body}
+                >
+                    {publicStoriesT('StoryCard.option-item.language')} :
+                </Typography>
+                <Typography color={theme.text.body}>
+                    {storyInputsT(`language.item.${story.options.language}`)}
+                </Typography>
             </Box>
         </Box>
     );
@@ -171,6 +208,8 @@ type StoryButtonsProps = {
 const StoryButtons = ({ storyId, handleOpenClickOpenDetails }: StoryButtonsProps) => {
     // Hooks
     const { mediaQuery } = useAppMediaQuery();
+    const { t: publicStoriesT } = useTranslation('public-stories');
+
     return (
         <Stack
             direction={{ xxs: 'column', xs: 'row' }}
@@ -193,7 +232,7 @@ const StoryButtons = ({ storyId, handleOpenClickOpenDetails }: StoryButtonsProps
                 }}
                 onClick={handleOpenClickOpenDetails}
             >
-                Voir les détails
+                {publicStoriesT('StoryCard.button.details')}
             </Button>
             <Button
                 fullWidth
@@ -207,7 +246,7 @@ const StoryButtons = ({ storyId, handleOpenClickOpenDetails }: StoryButtonsProps
                 component={Link}
                 href={`${Path.STORY}/${storyId}`}
             >
-                Lire l'histoire
+                {publicStoriesT('StoryCard.button.read')}
             </Button>
         </Stack>
     );

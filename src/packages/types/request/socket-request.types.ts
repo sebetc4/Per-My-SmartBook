@@ -44,6 +44,9 @@ export enum SocketEvent {
     USER_STORY_IS_DELETED = 'user-story-is-deleted',
 
     // Common Story
+    NEW_COMMON_STORY = 'new-common-story',
+    UPDATE_COMMON_STORY_STATE = 'update-common-story-state',
+    COMMON_STORY_IS_DELETED = 'common-story-is-deleted',
     FIRST_COMMON_STORY_CHAPTER = 'first-common-story-chapter',
     COMMON_STORY_CHAPTER_DATA = 'common-story-chapter-data',
     COMMON_STORY_CHAPTER_IMAGE = 'common-story-chapter-image',

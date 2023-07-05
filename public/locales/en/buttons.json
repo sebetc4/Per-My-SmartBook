@@ -1,4 +1,6 @@
 {
     "start-new-story": "Start a new story",
-    "start-story": "Start"
+    "start-story": "Start",
+
+    "ChapterChoiceButton.tooltip.not-connected": "Log in to vote!"
 }

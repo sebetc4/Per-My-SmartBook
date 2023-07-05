@@ -39,6 +39,9 @@ declare module '@mui/material/styles' {
             boxShadowHover: React.CSSProperties['boxShadow'];
             boxShadowSelected: React.CSSProperties['boxShadow'];
         };
+        chat: {
+            backgroundColor: React.CSSProperties['color'];
+        };
         footer: {
             borderColor: React.CSSProperties['color'];
             backgroundColor: React.CSSProperties['color'];
@@ -81,6 +84,9 @@ declare module '@mui/material/styles' {
             boxShadow: React.CSSProperties['boxShadow'];
             boxShadowHover: React.CSSProperties['boxShadow'];
             boxShadowSelected: React.CSSProperties['boxShadow'];
+        };
+        chat: {
+            backgroundColor: React.CSSProperties['color'];
         };
         footer: {
             borderColor: React.CSSProperties['color'];
@@ -246,6 +252,9 @@ type ColorTheme = {
         backgroundColor: string;
         color: string;
     };
+    chat: {
+        backgroundColor: string;
+    };
     footer: {
         borderColor: string;
         backgroundColor: string;
@@ -285,11 +294,15 @@ export const lightTheme: ColorTheme = {
     },
     card: {
         backgroundColor: '#ece3cf',
-        boxShadow: '0 0 8px rgba(0,0,0,0.2), inset 0 0 300px rgba(222,198,122,0.7), rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;'
+        boxShadow:
+            '0 0 8px rgba(0,0,0,0.2), inset 0 0 300px rgba(222,198,122,0.7), rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;',
     },
     textarea: {
         backgroundColor: 'transparent',
-        color: 'inherit'
+        color: 'inherit',
+    },
+    chat: {
+        backgroundColor: '#eae7e3',
     },
     footer: {
         backgroundColor: '#e8ded5',
@@ -332,7 +345,10 @@ export const darkTheme: ColorTheme = {
     },
     textarea: {
         backgroundColor: '#1E1E1E',
-        color: 'white'
+        color: 'white',
+    },
+    chat: {
+        backgroundColor: '#242526',
     },
     footer: {
         backgroundColor: '#272727',

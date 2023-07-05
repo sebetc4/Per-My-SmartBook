@@ -2,10 +2,16 @@
     "success.update-data": "Vos modifications ont été enregistrées.",
     "success.update-password": "Votre mot de passe a été mis à jour.",
     "success.add-openai-key": "Votre clé OpenAI a été ajoutée.",
+    "success.update-user-color": "Votre couleur a été mise à jour.",
+    "success.toggle-color-mode": "Le mode de couleur a été modifié.",
+
     "success.modify-openai-key": "Votre clé OpenAI a été modifiée.",
     "success.user-story-saved": "Votre histoire a été sauvegardée.",
 
+    "error.invalid-session": "Votre session a expiré. Veuillez vous reconnecter.",
+
     "error.login.default": "Une erreur s'est produite lors de la tentative de connexion. Veuillez réessayer ultérieurement.",
+   
     "error.userStoryBeingGenerated.select-chapter-choice": "Une erreur s'est produite lors de la génération du chapitre. Veuillez réessayer ultérieurement.",
     "error.userStoryBeingGenerated.select-story-topic": "Une erreur s'est produite lors du choix du sujet de votre histoire. Veuillez réessayer ultérieurement.",
     "error.userStoryBeingGenerated.select-story-options": "Une erreur s'est produite lors de la création de votre histoire. Veuillez réessayer ultérieurement.",

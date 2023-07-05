@@ -1,4 +1,7 @@
 {
+    "page.title": "Mes histoires",
+    "page.description": "Retrouvez toutes vos histoires en cours et terminées. Continuez l'aventure ou faites un peu de vide dans votre bibliothèque !",
+
     "title.h2.unfinished-stories": "Vos histoires en cours",
     "title.h2.finished-stories": "Vos histoires terminées",
     "text.no-unfinished-story": "Aucune histoire en cours",

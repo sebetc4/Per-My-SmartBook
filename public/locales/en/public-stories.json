@@ -1,22 +1,26 @@
 {
-    "page.title" : "Librairie",
-    "page.description" : "Retrouvez toutes les histoires interactives de la librairie. Plongez dans des récits captivants, explorez des mondes extraordinaires. Découvrez une collection diversifiée d'histoires à choix multiples, créées par des auteurs de notre communauté.",
+    "page.title" : "Bookshop",
+    "page.description" : "Discover all the interactive stories in the bookshop. Immerse yourself in captivating tales and explore extraordinary worlds. Discover a diverse collection of multiple-choice stories, created by authors from our community.",
 
     "title.h1": "Find all our stories",
 
     "input.search.label": "Text to search",
     "input.search.placeholder": "Search a story...",
 
+    "StoryCard.option-item.rating": "Rating", 
     "StoryCard.option-item.author": "Author",
-    "StoryItem.option-item.theme": "Theme",
-    "StoryItem.option-item.duration": "Duration",
-    "StoryItem.option-item.language": "Language",
+    "StoryCard.option-item.theme": "Theme",
+    "StoryCard.option-item.duration": "Duration",
+    "StoryCard.option-item.language": "Language",
+    "StoryCard.button.details": "See details",
+    "StoryCard.button.read": "Read the story",
 
     "SearchBar.summary.options": "Options",
 
     "StoryDetails.text.commun-story": "Commun story",
     "StoryDetails.text.rating": "Rating",
     "StoryDetails.text.review.by": "By",
+    "StoryDetails.text.review.global-rating": "Global",
     "StoryDetails.text.review.text-rating": "Text",
     "StoryDetails.text.review.image-rating": "Image",
     "StoryDetails.text.numb-of-reviews": "ratings",

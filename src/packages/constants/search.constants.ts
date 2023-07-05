@@ -1,1 +1,1 @@
-export const publicStoriesPerPage = 20
+export const publicStoriesPerPage = 10

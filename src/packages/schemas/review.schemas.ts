@@ -5,7 +5,7 @@ import {
     GetStoryPreviewsQuery,
     LikeOrDislikeOneReviewBody,
     UpdateOneReviewBody,
-} from '../types/request/review.types';
+} from '../types/request/review-request.types';
 import { idSchema } from './common.schemas';
 
 export const createOneReviewSchema: yup.SchemaOf<CreateOneReviewBody> = yup.object().shape({

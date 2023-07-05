@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
-import { api } from '../../services';
+import { api, sockets } from '../../services';
 import { CustomError } from '../../packages/classes';
 import { LoginWithCredentialsBody, SessionStatus, SignUpBody } from '../../packages/types';
 import { resetUserState, setUserSessionData } from './user.slice';
@@ -146,6 +146,7 @@ export const login = createAsyncThunk<void, LoginWithCredentialsBody, { rejectVa
             const { colorMode, ...userSessionDara } = data.session.user;
             dispatch(setUserSessionData(userSessionDara));
             dispatch(setColorMode(colorMode));
+            await sockets.resetAllSockects()
         } catch (err) {
             if (err instanceof AxiosError) {
                 return rejectWithValue(err.response?.data.message);
@@ -160,6 +161,7 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>('aut
     dispatch(resetUserState());
     dispatch(resetUserStoriesState());
     dispatch(resetUserStoryBeingGeneratedState());
+    await sockets.resetAllSockects()
 });
 
 export const checkAuth = createAsyncThunk<boolean, void, { rejectValue: string }>(

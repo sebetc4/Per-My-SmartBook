@@ -1,5 +1,5 @@
 // Librairie
-import React, { ReactNode, useEffect, useRef } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 // MUI
 import { Box, useTheme } from '@mui/material';
 // App
@@ -29,7 +29,7 @@ export const Layout = ({ initializedApp, children }: LayoutProps) => {
     // Handle Invalid Session
     useEffect(() => {
         if (sessionStatus === SessionStatus.INVALID) {
-            setAlert({ type: 'error', message: "Votre session n'est plus valide. Merci de vous reconnecter." });
+            setAlert({ type: 'error', message: 'error.invalid-session' });
             dispatch(logout());
         }
     });

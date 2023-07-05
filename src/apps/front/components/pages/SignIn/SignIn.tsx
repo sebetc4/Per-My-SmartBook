@@ -31,7 +31,7 @@ export const SignIn = () => {
     // Hooks
     const dispatch = useAppDispatch();
     const router = useRouter();
-    const { t } = useTranslation('login');
+    const { t: signinT } = useTranslation('signin');
     const theme = useTheme();
     const isUpSmScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -117,7 +117,7 @@ export const SignIn = () => {
                         variant='h2'
                         color={theme.text.title}
                     >
-                        {t('title.h1')}
+                        {signinT('title.h1')}
                     </Typography>
                     <Typography
                         component='h2'
@@ -128,7 +128,7 @@ export const SignIn = () => {
                             fontSize: '1.2rem',
                         }}
                     >
-                        {t('title.h2')}
+                        {signinT('title.h2')}
                     </Typography>
                     <Box
                         component='form'
@@ -151,22 +151,22 @@ export const SignIn = () => {
                         >
                             <CustomTextField
                                 name='email'
-                                label={t('input.email.label')}
+                                label={signinT('input.email.label')}
                                 type='email'
                                 register={register('email')}
                                 errorMessage={
                                     allLoginEmailErrors.includes(errors.email?.message as LoginEmailError)
-                                        ? t(`input.email.error.${errors.email!.message as LoginEmailError}`)
+                                        ? signinT(`input.email.error.${errors.email!.message as LoginEmailError}`)
                                         : undefined
                                 }
                             />
                             <CustomPasswordInput
                                 name='password'
-                                label={t('input.password.label')}
+                                label={signinT('input.password.label')}
                                 register={register('password')}
                                 errorMessage={
                                     allLoginPasswordErrors.includes(errors.password?.message as LoginPasswordError)
-                                        ? t(`input.password.error.${errors.password!.message as LoginPasswordError}`)
+                                        ? signinT(`input.password.error.${errors.password!.message as LoginPasswordError}`)
                                         : undefined
                                 }
                             />
@@ -180,7 +180,7 @@ export const SignIn = () => {
                             fullWidth
                             size='large'
                         >
-                            {t('button.signin')}
+                            {signinT('button.signin')}
                         </LoadingButton>
                         <GoogleButton />
                         {showProviderError && (
@@ -188,12 +188,12 @@ export const SignIn = () => {
                                 color='error'
                                 sx={{ mt: 4, textAlign: 'center' }}
                             >
-                                {t('text.account-already-exists-with-this-email')}
+                                {signinT('text.account-already-exists-with-this-email')}
                             </Typography>
                         )}
                     </Box>
                     <Box sx={{ mt: 4, display: 'flex', gap: 1 }}>
-                        <Typography color={theme.text.body}>{t('text.no-account')}</Typography>
+                        <Typography color={theme.text.body}>{signinT('text.no-account')}</Typography>
                         <Link
                             href={Path.SIGNUP}
                             style={{ textDecoration: 'none' }}
@@ -206,7 +206,7 @@ export const SignIn = () => {
                                     cursor: 'pointer',
                                 }}
                             >
-                                {t('button.signup')}
+                                {signinT('button.signup')}
                             </Typography>
                         </Link>
                     </Box>

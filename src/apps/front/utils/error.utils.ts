@@ -1,11 +1,12 @@
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit';
 import { CustomError } from '../../../packages/classes';
 import { setAlert } from '../../../store';
+import { AlertMessage } from '~/packages/types';
 
 export const handleOpenAIErrorOnStore = (
     err: any,
     dispatch: ThunkDispatch<unknown, unknown, AnyAction>,
-    defaultErrorMessage: string
+    defaultErrorMessage: AlertMessage
 ) => {
     let message = defaultErrorMessage;
     if (typeof err === 'string') {

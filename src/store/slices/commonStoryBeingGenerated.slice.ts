@@ -1,7 +1,7 @@
 // Librairies
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 // App
-import { ChatMessage, CommonStoryBeingGeneratedDataWithChatMessages, NewCommonStoryChatMessageRes } from '~/packages/types';
+import { ChatMessage, CommonStoryBeingGeneratedDataWithChatMessages, CommonStoryIsFinishedOrStoppedRes, NewCommonStoryChatMessageRes } from '~/packages/types';
 import { sockets } from '../../services';
 import { AppState } from '../store';
 // Types
@@ -39,6 +39,18 @@ export const commonStoryBeingGeneratedSlice = createSlice({
     name: 'commonStoryBeingGenerated',
     initialState,
     reducers: {
+        /**
+         * Reset state
+         */
+        resetCommonStoryBeingGeneratedState(state) {
+            state.isLoading = initialState.isLoading;
+            state.data = initialState.data;
+            state.chat = initialState.chat;
+            state.error = initialState.error;
+        },
+        /**
+         * Story Data
+         */
         setCommonStoryBeingGeneratedData(state, action: PayloadAction<CommonStoryBeingGeneratedDataWithChatMessages>) {
         const { storyData, allChatMessages } = action.payload;
         state.data = storyData;
@@ -81,14 +93,16 @@ export const commonStoryBeingGeneratedSlice = createSlice({
         /**
          * Stopped Story
          */
-        setCommonStoryIsStopped(state) {
+        setCommonStoryIsStopped(state, action: PayloadAction<CommonStoryIsFinishedOrStoppedRes>) {
             state.data!.state = 'stopped';
+            state.data!.deletedAt = action.payload.storyDeletedAt;
         },
         /**
          * Finished Story
          */
-        setCommonStoryIsFinished(state) {
+        setCommonStoryIsFinished(state, action: PayloadAction<CommonStoryIsFinishedOrStoppedRes>) {
             state.data!.state = 'finished';
+            state.data!.deletedAt = action.payload.storyDeletedAt;
         },
         /**
          * New chat message
@@ -167,6 +181,7 @@ export const sendCommonStoryChatMessage = createAsyncThunk<ChatMessage, string, 
 );
 
 export const {
+    resetCommonStoryBeingGeneratedState,
     setCommonStoryBeingGeneratedData,
     setFirstCommonStoryChapter,
     setCommonStoryChapterData,

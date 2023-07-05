@@ -8,11 +8,15 @@ import {
     sendChatMessageCommonStorySchema,
 } from '~/packages/schemas';
 import {
+    CommonStoryBeingGeneratedPreview,
+    CommonStoryIsDeletedRes,
     GetAllCommonStoriesBeingGeneratedPreviewsBody,
     GetCommonStoriesBeingGeneratedDataBody,
+    Language,
     SelectCommonStoryStoryChapterChoiceBody,
     SendCommonStoryChatMessageBody,
     SocketEvent,
+    UpdateCommonStoryStateRes,
 } from '~/packages/types';
 import { FinishedStory } from '../../models';
 import {
@@ -22,6 +26,7 @@ import {
     generateStorySummaryAndTitle,
     emitToAllSocketsInRoom,
     emitToOtherSocketsInRoom,
+    emitToAllSocketsInNamespace,
 } from '../../functions';
 import { commonStoriesSocketManager } from './common-stories.manager';
 import {
@@ -36,9 +41,12 @@ import { minutesBeforeCommonStoryDelete } from '~/packages/constants';
 /**
  * Start a new story
  */
-export const startNewStory = async (io: Namespace) => {
-    const { storyId, storyOptions } = generateCommonStoryIdAndOptions();
+export const startNewStory = async (io: Namespace, language: Language) => {
+    const { storyId, storyOptions } = generateCommonStoryIdAndOptions(language);
     await handleCommonStoryTopic(storyId, storyOptions);
+
+    const newStoryPreview = await commonStoriesSocketManager.getOneStoryPreview(storyId);
+    emitToAllSocketsInNamespace<CommonStoryBeingGeneratedPreview>(SocketEvent.NEW_COMMON_STORY, io, newStoryPreview);
 
     let currentStoryStatus = await handleFirstCommonStoryChapter(storyId, io);
 
@@ -51,10 +59,15 @@ export const startNewStory = async (io: Namespace) => {
         currentStoryStatus.state === 'stopped'
             ? SocketEvent.COMMON_STORY_IS_STOPPED
             : SocketEvent.COMMON_STORY_IS_FINISHED;
-    emitToAllSocketsInRoom(socketEvent, io, storyId);
+    emitToAllSocketsInRoom(socketEvent, io, storyId, { storyDeletedAt: currentStoryStatus.storyDeletedAt });
+    emitToAllSocketsInNamespace<UpdateCommonStoryStateRes>(SocketEvent.UPDATE_COMMON_STORY_STATE, io, {
+        storyId,
+        state: currentStoryStatus.state,
+    });
 
     currentStoryStatus.state === 'finished' && saveFinishedStory(storyId);
-    await waitTime(minutesBeforeCommonStoryDelete * 60)
+    await waitTime(minutesBeforeCommonStoryDelete * 60);
+    emitToAllSocketsInNamespace<CommonStoryIsDeletedRes>(SocketEvent.COMMON_STORY_IS_DELETED, io, { storyId });
     commonStoriesSocketManager.deleteStory(storyId);
 };
 
@@ -98,7 +111,7 @@ export const getCommonStoryBeingGeneratedData = catchSocketError(async (data, so
         getCommonStoriesBeingGeneratedDataSchema,
         data
     );
-    const {storyData, allChatMessages} = await commonStoriesSocketManager.getStoryData(storyId);
+    const { storyData, allChatMessages } = await commonStoriesSocketManager.getStoryData(storyId);
     commonStoriesSocketManager.joinRoom(storyId, socket);
     cb({ storyData, allChatMessages });
 });
@@ -119,7 +132,7 @@ export const selectCommonStoryStoryChapterChoice = catchSocketError(async (data,
 /**
  * Send message
  */
-export const sendNewMessage = catchSocketError(async (data, socket, io, cb) => {
+export const sendNewMessage = catchSocketError(async (data, socket, _, cb) => {
     const { storyId, message } = await validSocketData<SendCommonStoryChatMessageBody>(
         sendChatMessageCommonStorySchema,
         data

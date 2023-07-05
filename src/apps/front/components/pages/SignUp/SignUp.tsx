@@ -13,6 +13,7 @@ import {
     allSignUpEmailErrors,
     allSignUpPasswordErrors,
     allSignUpUsernameErrors,
+    Path,
     SignUpBody,
     SignUpEmailError,
     SignUpPasswordError,
@@ -50,21 +51,15 @@ export const SignUp = () => {
 
     const onSubmit = async (data: SignUpBody) => {
         const res = await dispatch(signUp(data));
-        router.push('/login');
         if (res.meta.requestStatus === 'fulfilled') {
-            router.push('/login');
+            router.push(Path.SIGNIN);
         } else {
             switch (res.payload) {
                 case CustomError.EMAIL_ALREADY_EXISTS.message:
                     setError('email', { type: 'custom', message: 'already-associated' });
                     break;
                 default:
-                    dispatch(
-                        setAlert({
-                            type: 'error',
-                            message: "Erreur lors de la tentative de connexion. Merci d'essayer ultérieurement.",
-                        })
-                    );
+                    dispatch(setAlert({ type: 'error', message: 'error.login.default' }));
             }
         }
     };
@@ -190,7 +185,7 @@ export const SignUp = () => {
                     <Box sx={{ marginTop: 4, display: 'flex', gap: 1 }}>
                         <Typography>{t('text.already-signup')}</Typography>
                         <Link
-                            href='/login'
+                            href={Path.SIGNIN}
                             style={{ textDecoration: 'none' }}
                         >
                             <Typography
@@ -198,7 +193,7 @@ export const SignUp = () => {
                                 sx={{
                                     fontWeight: 600,
                                     textDecoration: 'none',
-                                    cursor: 'pointer'
+                                    cursor: 'pointer',
                                 }}
                             >
                                 {t('button.signin')}

@@ -33,7 +33,13 @@ export const Reviews = () => {
                 </Typography>
             </Divider>
             <Container
-                sx={{ display: 'flex', flexDirection: { xxs: 'column', lg: 'row' }, justifyContent: 'space-between', gap: 6, p: 0 }}
+                sx={{
+                    display: 'flex',
+                    flexDirection: { xxs: 'column', lg: 'row' },
+                    justifyContent: 'space-between',
+                    gap: 6,
+                    p: 0,
+                }}
             >
                 <Box>
                     <GlobalRatings />
@@ -58,15 +64,26 @@ export const Reviews = () => {
             />
             <Container>
                 {allReviews.length > 0 ? (
-                    allReviews.map((review) => (
-                        <Review
-                            key={review.id}
-                            review={review}
-                        />
+                    allReviews.map((review, index) => (
+                        <Box key={review.id}>
+                            <Review review={review} />
+                            {index + 1 < allReviews.length && (
+                                <Divider
+                                    sx={{
+                                        width: '50%',
+                                        mx: 'auto',
+                                        my: 6,
+                                    }}
+                                />
+                            )}
+                        </Box>
                     ))
                 ) : (
                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-                        <Typography sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}>
+                        <Typography
+                        color={theme.text.body} 
+                        sx={{ fontWeight: 'bold', fontSize: '1.2rem' }}
+                        >
                             {storyT('Reviews.text.no-review')}
                         </Typography>
                     </Box>

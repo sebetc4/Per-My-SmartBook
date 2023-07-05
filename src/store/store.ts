@@ -21,6 +21,7 @@ const reducer: typeof combinedReducer = (state, action) => {
             },
             app: {
                 ...state?.app,
+                colorMode: action.payload.app.colorMode || state?.app.colorMode,
             }
         };
         return nextState;

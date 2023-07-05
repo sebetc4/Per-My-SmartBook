@@ -18,3 +18,5 @@ export const getNextDayOrTodayAtHour = (hour: number): Date => {
         return new Date(tomorrow.getFullYear(), tomorrow.getMonth(), tomorrow.getDate(), hour);
     }
 };
+
+export const minutesToMilliseconds = (minutes: number): number => minutes * 60 * 1000;

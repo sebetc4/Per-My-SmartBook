@@ -1,7 +1,7 @@
 {
     "CreationDate.text": "Le",
 
-    "TimeLeftTextTimer.hours": "hours",
-    "TimeLeftTextTimer.minutes": "minutes",
-    "TimeLeftTextTimer.seconds": "secondes"
+    "time.hours": "heures",
+    "time.minutes": "minutes",
+    "time.seconds": "secondes"
 }

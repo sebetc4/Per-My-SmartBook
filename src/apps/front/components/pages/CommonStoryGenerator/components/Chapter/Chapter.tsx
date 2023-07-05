@@ -1,18 +1,17 @@
+// Librairies
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useTranslation } from 'react-i18next';
-
-import { Box, Divider, LinearProgress, Stack, Typography } from '@mui/material';
-
+// MUI
+import { Box, Divider, LinearProgress, Stack, Typography, useTheme } from '@mui/material';
+// App
 import { toRoman } from '~/packages/functions';
 import { selectCommonStoryStoryChapterChoice } from '~/store';
-
 import { commonStoryChapterDurationSeconds } from '~/packages/constants';
-
 import { CommonStoryChapterClientData } from '~/packages/types';
 import { useAppDispatch, useAppSelector } from '~/apps/front/hooks';
 import { getRandomHourglassImage, placeholderValue } from '~/apps/front/utils';
-import { ChapterChoiceButton } from '~/apps/front/components/buttons/ChapterChoiceButton/ChapterChoiceButton';
+import { ChapterChoiceButton } from '~/apps/front/components';
 
 type ChapterProps = {
     chapter: CommonStoryChapterClientData;
@@ -22,10 +21,12 @@ type ChapterProps = {
 export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
     // Hooks
     const dispatch = useAppDispatch();
+    const theme = useTheme()
     const { t: storyGeneratorT } = useTranslation('story-generator');
 
     //Store
     const { isLoading, data: storyData } = useAppSelector((state) => state.commonStoryBeingGenerated);
+    const { isAuth } = useAppSelector((state) => state.auth);
 
     // State
     const [userVoteIndex, setUserVoteIndex] = useState<number | undefined>(undefined);
@@ -38,13 +39,24 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
 
     return (
         <Box
-            sx={{ mt: 0, display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+            sx={{
+                ml: 'auto',
+                mr: 'auto',
+                border: '1px solid #c2b5a3',
+                background: theme.papel.backgroundColor,
+                boxShadow: theme.papel.boxShadow,
+                display: 'flex',
+                p: { xxs: 2, sm: 8 },
+                flexDirection: 'column',
+                alignItems: 'center',
+            }}
             component='section'
         >
             <Typography
                 textAlign='center'
                 component='h2'
                 variant='h2'
+                color={theme.text.title}
                 sx={{
                     mb: 6,
                 }}
@@ -72,10 +84,10 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                 maxWidth='md'
                 textAlign='center'
                 sx={{
-                    mt: 6,
-                    mb: 6,
+                    my: 6,
                     fontSize: '1.2rem',
                 }}
+                color={theme.text.body}
             >
                 {chapter.text}
             </Typography>
@@ -93,15 +105,14 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                         direction={{ xxs: 'column', md: 'row' }}
                         spacing={8}
                         alignItems='stretch'
-                        sx={{ pl: 4, pr: 4 }}
+                        sx={{ px: 4 }}
                     >
                         {chapter.allChoices.map((choice, i) => (
                             <ChapterChoiceButton
                                 key={`chapter-choice-${i}`}
                                 choice={choice}
-                                choiceIndex={i}
                                 isLoading={isLoading}
-                                disabled={storyData?.state !== 'generating'}
+                                disabled={storyData?.state !== 'generating' || !isAuth}
                                 isCurrentChapter={storyData?.currentStep === chapterIndex + 1}
                                 choiceIsSelected={chapter.selectedChoiceIndex !== undefined}
                                 isSelectedChoice={chapter.selectedChoiceIndex === i}
@@ -109,6 +120,11 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                                 isUserVote={userVoteIndex === i}
                                 userVoteIsSelectedChoice={userVoteIndex === chapter.selectedChoiceIndex}
                                 withCheckedIcon
+                                withNotConnectedTooltip={
+                                    !isAuth &&
+                                    storyData?.currentStep === chapterIndex + 1 &&
+                                    storyData?.state === 'generating'
+                                }
                                 onClick={() => handleClickOnChoice(i)}
                             />
                         ))}

@@ -1,40 +1,20 @@
-import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useRouter } from 'next/router';
 import Image from 'next/image';
 
 import { Box, Divider, Typography, useTheme } from '@mui/material';
 
 import { TimeLeftTextTimer } from '../../../..';
 import { getNextDayOrTodayAtHour } from '../../../../../../../packages/functions';
-import { CommonStoryBeingGeneratedPreview, SocketEvent, SocketNamespace } from '../../../../../../../packages/types';
-import { sockets } from '../../../../../../../services';
 import { CommonStoriesCarousel } from '..';
 
 import ImaginaryWorldBackground from '../../../../../../../../public/images/illustrations/imaginary-world3.png';
+import { useSocketCommonStoriesSection } from './CommonStoriesSection.hooks';
 
 export const CommonStoriesSection = () => {
     // Hooks
-    const router = useRouter();
     const { t: newStoryT } = useTranslation('new-story');
     const theme = useTheme()
-
-    // States
-    const [commonStoriesPreviews, setCommonStoriesPreviews] = useState<CommonStoryBeingGeneratedPreview[]>([]);
-
-    // Effects
-    useEffect(() => {
-        const fetchCommonStoriesTopics = async () => {
-            const body = { language: router.locale };
-            const { allStoriesTopics } = await sockets.emit(
-                SocketNamespace.COMMON_STORIES,
-                SocketEvent.GET_ALL_COMMON_STORIES_BEING_GENERATED_PREVIEWS,
-                body
-            );
-            setCommonStoriesPreviews(allStoriesTopics);
-        };
-        fetchCommonStoriesTopics();
-    }, [router.locale]);
+    const {commonStoriesPreviews} = useSocketCommonStoriesSection()
 
     return (
         <Box
@@ -125,6 +105,7 @@ export const CommonStoriesSection = () => {
                             zIndex: 0,
                             opacity: 0.6,
                         }}
+                        quality={100}
                     />
                     <Box
                         sx={{

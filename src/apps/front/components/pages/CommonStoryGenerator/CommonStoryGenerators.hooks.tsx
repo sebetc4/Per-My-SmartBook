@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import {
     CommonStoryChapterDataRes,
     CommonStoryChapterImageRes,
+    CommonStoryIsFinishedOrStoppedRes,
     CommonStoryStoryChapterChoiceAndAllNumbOfVotesRes,
     FirstCommonStoryChapterRes,
     NewCommonStoryChatMessageRes,
@@ -20,6 +21,7 @@ import {
     setCommonStoryIsFinished,
     addNewChatMessage,
     setCommonStoryBeingGeneratedData,
+    resetCommonStoryBeingGeneratedState,
 } from '~/store';
 import { useAppDispatch } from '~/apps/front/hooks';
 
@@ -74,11 +76,11 @@ export const useSocketCommonSroryGenerators = () => {
                     dispatch(setCommonStoryChapterChoiceAndAllNumbOfVotes(data));
                 }
             );
-            sockets.on(SocketNamespace.COMMON_STORIES, SocketEvent.COMMON_STORY_IS_STOPPED, () => {
-                dispatch(setCommonStoryIsStopped());
+            sockets.on<CommonStoryIsFinishedOrStoppedRes>(SocketNamespace.COMMON_STORIES, SocketEvent.COMMON_STORY_IS_STOPPED, (data) => {
+                dispatch(setCommonStoryIsStopped(data));
             });
-            sockets.on(SocketNamespace.COMMON_STORIES, SocketEvent.COMMON_STORY_IS_FINISHED, () => {
-                dispatch(setCommonStoryIsFinished());
+            sockets.on<CommonStoryIsFinishedOrStoppedRes>(SocketNamespace.COMMON_STORIES, SocketEvent.COMMON_STORY_IS_FINISHED, (data) => {
+                dispatch(setCommonStoryIsFinished(data));
             });
             sockets.on<NewCommonStoryChatMessageRes>(
                 SocketNamespace.COMMON_STORIES,
@@ -90,7 +92,16 @@ export const useSocketCommonSroryGenerators = () => {
             setIsInitialized(true);
         };
         initializeStorySocket();
-        return () => {};
+        return () => {
+            sockets.off(SocketNamespace.COMMON_STORIES, SocketEvent.FIRST_COMMON_STORY_CHAPTER);
+            sockets.off(SocketNamespace.COMMON_STORIES, SocketEvent.COMMON_STORY_CHAPTER_DATA);
+            sockets.off(SocketNamespace.COMMON_STORIES, SocketEvent.COMMON_STORY_CHAPTER_IMAGE);
+            sockets.off(SocketNamespace.COMMON_STORIES, SocketEvent.COMMON_STORY_CHAPTER_CHOICE_AND_ALL_NUMB_OF_VOTES);
+            sockets.off(SocketNamespace.COMMON_STORIES, SocketEvent.COMMON_STORY_IS_STOPPED);
+            sockets.off(SocketNamespace.COMMON_STORIES, SocketEvent.COMMON_STORY_IS_FINISHED);
+            sockets.off(SocketNamespace.COMMON_STORIES, SocketEvent.NEW_COMMON_STORY_CHAT_MESSAGE);
+            dispatch(resetCommonStoryBeingGeneratedState())
+        };
     }, [dispatch, router]);
 
     return { isInitialized };

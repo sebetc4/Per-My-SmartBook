@@ -112,14 +112,13 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                     )}
                     <Stack
                         direction={{ xxs: 'column', md: 'row' }}
-                        spacing={4}
+                        spacing={8}
                         alignItems='stretch'
-                        sx={{ pl: 2, pr: 2 }}
+                        sx={{ px: 4 }}
                     >
                         {chapter.allChoices.map((choice, i) => (
                             <ChapterChoiceButton
                                 key={`history-chapter-1-choice-${i + 1}`}
-                                choiceIndex={i}
                                 choice={choice}
                                 isLoading={isLoading}
                                 isCurrentChapter={storyData?.currentStep === chapterIndex + 1}

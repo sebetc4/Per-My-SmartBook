@@ -3,9 +3,10 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 // Mui
-import { Button, Container, Typography, useTheme } from '@mui/material';
+import { Box, Button, Container, Typography, useTheme } from '@mui/material';
 //imahes
 import NoStoryImage from '../../../../../../public/images/illustrations/no-story-found.png';
+import { Path } from '~/packages/types';
 
 export const StoryNotFound = () => {
     // Hooks
@@ -15,17 +16,25 @@ export const StoryNotFound = () => {
 
     return (
         <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, mt: 6, mb: 6 }}>
-            <Image
-                src={NoStoryImage}
-                alt={storyNotFounndT('image.alt')}
-                placeholder='blur'
-                width={500}
-                height={500}
-                style={{
-                    borderRadius: '40px',
+            <Box
+                sx={{
+                    position: 'relative',
+                    width: '100%',
+                    maxWidth: '500px',
+                    aspectRatio: '1/1',
                 }}
-                quality={100}
-            />
+            >
+                <Image
+                    src={NoStoryImage}
+                    alt={storyNotFounndT('image.alt')}
+                    placeholder='blur'
+                    fill
+                    style={{
+                        borderRadius: '40px',
+                    }}
+                    quality={100}
+                />
+            </Box>
             <Typography
                 color={theme.text.title}
                 variant='h3'
@@ -41,12 +50,20 @@ export const StoryNotFound = () => {
             >
                 {storyNotFounndT('text.main')}
             </Typography>
-            <Button
-                variant='outlined'
-                onClick={() => router.push('/')}
-            >
-                {storyNotFounndT('button.public-story')}
-            </Button>
+            <Box sx={{ display: 'flex', flexDirection: { xxs: 'column', xs: 'row' }, gap: 4 }}>
+                <Button
+                    variant='outlined'
+                    onClick={() => router.push(Path.NEW_STORY)}
+                >
+                    {storyNotFounndT('button.new-story')}
+                </Button>
+                <Button
+                    variant='outlined'
+                    onClick={() => router.push(Path.PUBLIC_STORIES)}
+                >
+                    {storyNotFounndT('button.public-story')}
+                </Button>
+            </Box>
         </Container>
     );
 };

@@ -16,7 +16,6 @@ export const EndStoryScreen = () => {
     const dispatch = useAppDispatch();
     const theme = useTheme();
     const { t: storyGenerationT } = useTranslation('story-generator');
-    const { t: alertT } = useTranslation('alert');
 
     // Store
     const { isLoading } = useAppSelector((state) => state.userStoryBeingGenerated);
@@ -26,7 +25,7 @@ export const EndStoryScreen = () => {
 
     const handleSaveStory = async ({ title }: FinishedStoryTitle) => {
         const res = await dispatch(saveUserFinishedStory({ visibility: storyVisibity!, title }));
-        dispatch(setAlert({ message: alertT('success.user-story-saved'), type: 'success' }));
+        dispatch(setAlert({ message: 'success.user-story-saved', type: 'success' }));
         router.push(`${Path.STORY}/${res.payload}`);
     };
 

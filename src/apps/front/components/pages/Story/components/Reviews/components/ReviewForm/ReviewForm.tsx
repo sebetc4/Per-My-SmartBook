@@ -31,8 +31,8 @@ export const ReviewForm = () => {
     // State
     const [titleReview, setTitleReview] = useState<string>(userReview?.title || '');
     const [textReview, setTextReview] = useState<string>(userReview?.text || '');
-    const [textRating, setTextRating] = useState<number>(userReview?.textRating || 2);
-    const [imageRating, setImageRating] = useState<number>(userReview?.imageRating || 2);
+    const [textRating, setTextRating] = useState<number>(userReview?.ratings.textRating || 2);
+    const [imageRating, setImageRating] = useState<number>(userReview?.ratings.imageRating || 2);
     const [isBeingModified, setIsBeingModified] = useState<boolean>(false);
 
     const handleSubmit = () => {
@@ -148,7 +148,6 @@ export const ReviewForm = () => {
                             {!userReview ? (
                                 <LoadingButton
                                     variant='outlined'
-                                    sx={{ fontSize: '1.2rem' }}
                                     onClick={handleSubmit}
                                     loading={isLoading}
                                 >
@@ -158,7 +157,6 @@ export const ReviewForm = () => {
                                 <Box sx={{ display: 'flex', gap: 3 }}>
                                     <Button
                                         variant='outlined'
-                                        sx={{ fontSize: '1.2rem' }}
                                         onClick={() => setIsBeingModified(true)}
                                     >
                                         {storyT('ReviewForm.button.modify')}
@@ -166,7 +164,6 @@ export const ReviewForm = () => {
                                     <LoadingButton
                                         variant='outlined'
                                         color='error'
-                                        sx={{ fontSize: '1.2rem' }}
                                         onClick={handleDelete}
                                         loading={isLoading}
                                     >
@@ -176,7 +173,6 @@ export const ReviewForm = () => {
                             ) : (
                                 <LoadingButton
                                     variant='outlined'
-                                    sx={{ fontSize: '1.2rem' }}
                                     loading={isLoading}
                                     onClick={handleUpadte}
                                 >

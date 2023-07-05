@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Path } from '../../../../../../../packages/types';
-import { useAppMediaQuery } from '../../../../../hooks';
+import { useAppMediaQuery, useAppSelector } from '../../../../../hooks';
 
 export const StartUserStoryButton = () => {
     const theme = useTheme();
@@ -106,8 +106,12 @@ export const StartUserStoryButton = () => {
 };
 
 const StartButton = () => {
+    // Hooks
     const theme = useTheme();
-    const {t: buttonT} = useTranslation('buttons') 
+    const {t: buttonT} = useTranslation('buttons')
+     
+    // Store
+    const {colorMode} = useAppSelector((state) => state.app);
 
     return (
         <Fab
@@ -118,13 +122,14 @@ const StartButton = () => {
                 p: { xxs: 2, xs: 4 },
                 position: 'relative',
                 zIndex: 8,
-                color: 'black',
+                color: theme.text.body,
                 fontSize: { xxs: '1rem', md: '1.2rem' },
                 textWeight: 'bold',
                 transition: 'all ease-in 0.8s',
+                backgroundColor: theme.card.backgroundColor,
                 '&:hover': {
                     backgroundColor: theme.palette.primary.main,
-                    color: 'white',
+                    color: colorMode === 'light' ? 'white' : 'black',
                 },
             }}
         >

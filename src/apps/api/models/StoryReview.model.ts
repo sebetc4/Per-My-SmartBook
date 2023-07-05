@@ -6,6 +6,7 @@ import {
     StoryReviewMethods,
     StoryReviewSchema,
 } from '~/packages/types';
+import { reviewRatingsSchema } from './common.models';
 
 const schema = new Schema<StoryReviewSchema, IStoryReviewModel, StoryReviewMethods>(
     {
@@ -25,18 +26,7 @@ const schema = new Schema<StoryReviewSchema, IStoryReviewModel, StoryReviewMetho
         title: {
             type: String,
         },
-        textRating: {
-            type: Number,
-            required: true,
-            min: 1,
-            max: 5,
-        },
-        imageRating: {
-            type: Number,
-            required: true,
-            min: 1,
-            max: 5,
-        },
+        ratings: reviewRatingsSchema,
         likes: [
             {
                 userId: {
@@ -72,8 +62,7 @@ schema.methods.getData = function (): StoryReviewData {
         text: this.text,
         title: this.title,
         author: this.author,
-        textRating: this.textRating,
-        imageRating: this.imageRating,
+        ratings: this.ratings,
         likes: this.likes,
         reviewRating: this.reviewRating,
         createdAt: this.createdAt!.toString(),

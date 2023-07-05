@@ -30,11 +30,11 @@ class SocketService {
                     'common-stories': io(`/${SocketNamespace.COMMON_STORIES}`),
                 };
                 this.sockets.main?.on('connect', () => {
-                    logIf(enableLogSocketService, `Connected to main socket`);
+                    logIf(enableLogSocketService, `Connected to sockets`);
                 });
             }
         } catch (error) {
-            throw new Error(`Failed to connect to socket`);
+            throw new Error(`Failed to connect to sockets`);
         }
     }
 
@@ -50,6 +50,11 @@ class SocketService {
             this.sockets[socket]?.disconnect();
             this.sockets[socket] = null;
         }
+    }
+
+    async resetAllSockects() {
+        this.mainDisconnect();
+        await this.mainConnect()
     }
 
     disconnect(namespace: SocketNamespace) {

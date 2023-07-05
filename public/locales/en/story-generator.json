@@ -4,7 +4,6 @@
     "page.user-story.title": "Personal story generator",
     "page.user-story.description": "Discover a limitless interactive storytelling experience with our choice-based story generator. Immerse yourself in captivating adventures where your decisions influence the course of story.",
     
-
     "OptionsScreen.title.h1": "Start a new story",
     "OptionsScreen.button.start": "Start",
     "OptionsScreen.text.loading": "Loading...",
@@ -56,5 +55,11 @@
 
     "CommonChat.title": "Chat",
     "CommonChat.placeholder.your-message": "Your message...",
-    "CommonChat.aria-label.send": "Send"
+    "CommonChat.aria-label.send": "Send",
+
+    "WaitingScreen.text.story-about-begin": "Your story is about to begin...",
+    "WaitingScreen.text.story-begins-in": "Your story begins in",
+
+    "EndStoryScreen.text.story-is-stopped": "The story was halted for lack of votes.",
+    "EndStoryScreen.text.redirect": "You will be automatically redirected to the creation of a new story in"
 }

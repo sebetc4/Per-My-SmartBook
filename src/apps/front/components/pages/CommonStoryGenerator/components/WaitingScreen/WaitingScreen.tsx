@@ -1,47 +1,23 @@
 // Librairies
+import { useState } from 'react';
 import Image from 'next/image';
+import { useTranslation } from 'react-i18next';
 // Mui
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Grid, Typography, useTheme } from '@mui/material';
 // App
-import { useEffect, useState } from 'react';
 import { useAppSelector } from '~/apps/front/hooks';
 import { getRandomHourglassImage, placeholderValue } from '~/apps/front/utils';
+import { TimeLeftTextTimer } from '~/apps/front/components/timer/TimeLeftTextTimer/TimeLeftTextTimer';
 
 export const WaitingScreen = () => {
+    // Hooks
+    const { t: storyGeneratorT } = useTranslation('story-generator');
+    const theme = useTheme()
+
     // Store
     const { data: storyData } = useAppSelector((state) => state.commonStoryBeingGenerated);
 
-    // State
-    const [timeLeft, setTimeLeft] = useState({
-        m: 0,
-        s: 0,
-    });
     const [hourglassImage] = useState(getRandomHourglassImage());
-
-    // Effects
-    useEffect(() => {
-        const counterInterval = setInterval(() => {
-            const now = new Date().getTime();
-            const distance = storyData!.startAt - now;
-
-            if (distance <= 0) {
-                clearInterval(counterInterval);
-                setTimeLeft({
-                    m: 0,
-                    s: 0,
-                });
-            } else {
-                setTimeLeft({
-                    m: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
-                    s: Math.floor((distance % (1000 * 60)) / 1000),
-                });
-            }
-        }, 1000);
-
-        return () => {
-            clearInterval(counterInterval);
-        };
-    }, [storyData]);
 
     return (
         <Grid
@@ -85,16 +61,20 @@ export const WaitingScreen = () => {
                     alignItems: 'center',
                     justifyContent: 'center',
                     gap: 6,
-                    px: 4
+                    px: 4,
                 }}
             >
-                <Typography textAlign='center'>{storyData?.topic}</Typography>
-                {timeLeft.m === 0 && timeLeft.s === 0 ? (
-                    <Typography>Votre histoire va commencer...</Typography>
-                ) : (
-                    <Typography>{`Votre histoire commencera dans:
-                    ${timeLeft.m} minutes ${timeLeft.s} secondes`}</Typography>
-                )}
+                <Typography textAlign='center' color={theme.text.body}>{storyData?.topic}</Typography>
+
+                <TimeLeftTextTimer
+                    boxTextSX={{ display: 'flex', gap: 1 }}
+                    text={storyGeneratorT('WaitingScreen.text.story-begins-in')}
+                    textSx={{ fontWeight: 'bold' }}
+                    endText={storyGeneratorT('WaitingScreen.text.story-about-begin')}
+                    endTextSx={{ fontWeight: 'bold' }}
+                    endAt={storyData!.startAt}
+                    timeSx={{ fontWeight: 'bold' }}
+                />
             </Grid>
         </Grid>
     );

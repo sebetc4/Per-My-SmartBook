@@ -5,9 +5,10 @@ import {
     enableLogCommonStoriesSocketManager,
     enableLogGeneratedData,
     imageGenerationIsEnable,
+    minutesBeforeCommonStoryDelete,
     stopCommonStoryIfNoVoters,
 } from '../../../../../packages/constants';
-import { logIf, waitStartTime } from '../../../../../packages/functions';
+import { logIf, minutesToMilliseconds, waitStartTime } from '../../../../../packages/functions';
 import {
     CommonStoryBeingGenerated,
     CommonStoryChapter,
@@ -51,8 +52,6 @@ export const handleFirstCommonStoryChapter = async (storyId: string, io: Namespa
     const chapter = await generateCommonStoryFirstChapterData({ theme, topic, language });
 
     const { imageOnDb, imageOnClient } = await handleCommonStoryFirstChapterImage({
-
-        
         storyId,
         style,
         description: chapter.description,
@@ -93,19 +92,21 @@ export const handleFirstCommonStoryChapter = async (storyId: string, io: Namespa
 export const handleNextCommonStoryChapter = async (storyId: string, io: Namespace): Promise<CurrentStoryStatus> => {
     let story = commonStoriesSocketManager.getStoryAndCloseVotes(storyId);
     const allChoices = story.allChapters.at(-1)!.allChoices!;
-    const chapterChoiceIndex = determineAndSendCommonStoryChapterChoice({ 
-        storyId, 
-        allChoices, 
-        io 
+    const chapterChoiceIndex = determineAndSendCommonStoryChapterChoice({
+        storyId,
+        allChoices,
+        io,
     });
 
     story = updateCommonStoryWithChapterChoice(story, chapterChoiceIndex);
 
     if (story.state === 'stopped') {
         logIf(enableLogCommonStoriesSocketManager, 'Story is stopped because no voters');
+        const storyDeletedAt = Date.now() + minutesToMilliseconds(minutesBeforeCommonStoryDelete);
         story.state = 'stopped';
+        story.deletedAt = storyDeletedAt
         commonStoriesSocketManager.updateStory(story);
-        return { nextChapterStartAt: 0, state: 'stopped' };
+        return { nextChapterStartAt: 0, state: 'stopped', storyDeletedAt };
     }
 
     const { generatedChapter: chapter, isEnd } = await generateCommonStoryNextChapterData(story);
@@ -132,7 +133,7 @@ export const handleNextCommonStoryChapter = async (storyId: string, io: Namespac
             io,
             story,
         });
-    return { nextChapterStartAt: allChapters[chapterIndex].endAt!, state: story.state };
+    return { nextChapterStartAt: allChapters[chapterIndex].endAt!, state: story.state, storyDeletedAt: story.deletedAt };
 };
 
 /**
@@ -247,7 +248,8 @@ const updateCommonStoryWithChapterData = ({
     story.allChapters = [...story.allChapters, chapter];
     story.state = isEnd ? 'finished' : 'generating';
     story.currentStep++;
-    story.votesAreOpen = true;
+    story.votesAreOpen = !isEnd;
+    story.deletedAt = isEnd ? Date.now() + minutesToMilliseconds(minutesBeforeCommonStoryDelete) : undefined
     commonStoriesSocketManager.updateStory(story);
     return story;
 };
@@ -264,7 +266,7 @@ const addInitalChapterVotesValuesAndEndTime = (chapterWithoutVotes: Omit<CommonS
         endAt: Date.now() + commonStoryChapterDurationSeconds * 1000,
     };
     return chapter;
-}
+};
 
 const updateCommonStoryWithChapterChoice = (story: CommonStoryBeingGenerated, selectedChoiceIndex: number) => {
     if (selectedChoiceIndex === -1) {

@@ -1,4 +1,4 @@
-import { Box, Button, Divider, Rating, Typography, useTheme } from '@mui/material';
+import { Box, Button, Grid, Rating, Typography, useTheme } from '@mui/material';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -29,18 +29,22 @@ export const Review = ({ review }: ReviewProps) => {
         setUserVote(review.likes.find((like) => like.userId === userData?.id)?.value ?? 0);
     }, [review.likes, userData]);
 
-    const globalRating = (review.textRating + review.imageRating) / 2;
-
     const handleLikeOrDislike = (value: number) => {
         dispatch(likeOrDislikeOneReview({ reviewId: review.id, value: value === userVote ? 0 : value }));
     };
 
     return (
-        <Box
+        <Grid
+            container
             component='article'
-            sx={{ display: 'flex', gap: 4 }}
+            spacing={6}
+            alignItems='center'
         >
-            <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <Grid
+                item
+                xxs={1}
+                sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+            >
                 <Button
                     onClick={() => handleLikeOrDislike(1)}
                     disabled={isLoading || !isAuth}
@@ -49,9 +53,9 @@ export const Review = ({ review }: ReviewProps) => {
                         sx={{
                             width: 0,
                             height: 0,
-                            borderLeft: '15px solid transparent',
-                            borderRight: '15px solid transparent',
-                            borderBottom: `30px solid ${userVote === 1 ? 'green' : theme.palette.grey[800]}`,
+                            borderLeft: '10px solid transparent',
+                            borderRight: '10px solid transparent',
+                            borderBottom: `20px solid ${userVote === 1 ? 'green' : theme.palette.grey[800]}`,
                         }}
                     />
                 </Button>
@@ -68,21 +72,21 @@ export const Review = ({ review }: ReviewProps) => {
                         sx={{
                             width: 0,
                             height: 0,
-                            borderLeft: '15px solid transparent',
-                            borderRight: '15px solid transparent',
-                            borderTop: `30px solid ${userVote === -1 ? 'red' : theme.palette.grey[800]}`,
+                            borderLeft: '10px solid transparent',
+                            borderRight: '10px solid transparent',
+                            borderTop: `20px solid ${userVote === -1 ? 'red' : theme.palette.grey[800]}`,
                         }}
                     />
                 </Button>
-            </Box>
-            <Divider
-                orientation='vertical'
-                flexItem
-            />
-            <Box>
+            </Grid>
+
+            <Grid
+                item
+                xxs={2}
+            >
                 <Typography
                     sx={{
-                        fontSize: '1.2rem',
+                        fontSize: '1.1rem',
                         fontWeight: 700,
                         fontStyle: 'italic',
                     }}
@@ -97,72 +101,114 @@ export const Review = ({ review }: ReviewProps) => {
                         color: theme.text.body,
                     }}
                 />
-            </Box>
-            <Divider
-                orientation='vertical'
-                flexItem
-            />
-            <Box
+            </Grid>
+
+            <Grid
+                item
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     gap: 2,
                 }}
+                xxs={3}
             >
-                <Box sx={{ minWidth: '250px', display: 'flex', gap: 2 }}>
-                    <Typography
-                        sx={{
-                            flex: 1,
-                            fontWeight: 700,
-                        }}
-                        color={theme.text.body}
-                    >{`${storyT('Review.text.global-rating')}`}</Typography>
-                    <Rating
-                        name={storyT('Review.text.global-rating')}
-                        value={globalRating}
-                        readOnly
-                    />
-                    <Typography color={theme.text.body}>{globalRating}</Typography>
-                </Box>
-                <Box sx={{ minWidth: '250px', display: 'flex', gap: 2 }}>
-                    <Typography
-                        sx={{
-                            flex: 1,
-                            fontWeight: 700,
-                        }}
-                        color={theme.text.body}
-                    >{`${storyT('Review.text.text-rating')}`}</Typography>
-                    <Rating
-                        name={storyT('Review.text.text-rating')}
-                        value={review.textRating}
-                        readOnly
-                    />
-                    <Typography color={theme.text.body}>{review.textRating}</Typography>
-                </Box>
-                <Box
-                    sx={{ minWidth: '250px', display: 'flex', gap: 2 }}
-                    color={theme.text.body}
+                <Grid
+                    container
+                    alignItems='center'
+                    sx={{ minWidth: '250px' }}
                 >
-                    <Typography
-                        sx={{
-                            flex: 1,
-                            fontWeight: 700,
-                        }}
-                        color={theme.text.body}
-                    >{`${storyT('Review.text.image-rating')}`}</Typography>
-                    <Rating
-                        name={storyT('Review.text.image-rating')}
-                        value={review.imageRating}
-                        readOnly
-                    />
-                    <Typography color={theme.text.body}>{review.imageRating}</Typography>
-                </Box>
-            </Box>
-            <Divider
-                orientation='vertical'
-                flexItem
-            />
-            <Box
+                    <Grid
+                        item
+                        xxs={6}
+                    >
+                        <Typography
+                            sx={{
+                                flex: 1,
+                                fontWeight: 700,
+                            }}
+                            color={theme.text.body}
+                        >{`${storyT('Review.text.global-rating')}`}</Typography>
+                    </Grid>
+                    <Grid
+                        item
+                        xxs={6}
+                        sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
+                    >
+                        <Rating
+                            name={storyT('Review.text.global-rating')}
+                            value={review.ratings.globalRating}
+                            readOnly
+                            precision={0.5}
+                        />
+                        <Typography color={theme.text.body}>{review.ratings.globalRating}</Typography>
+                    </Grid>
+                </Grid>
+                <Grid
+                    container
+                    alignItems='center'
+                    sx={{ minWidth: '250px' }}
+                >
+                    <Grid
+                        item
+                        xxs={6}
+                    >
+                        <Typography
+                            sx={{
+                                flex: 1,
+                                fontWeight: 700,
+                            }}
+                            color={theme.text.body}
+                        >{`${storyT('Review.text.text-rating')}`}</Typography>
+                    </Grid>
+                    <Grid
+                        item
+                        xxs={6}
+                        sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
+                    >
+                        <Rating
+                            name={storyT('Review.text.text-rating')}
+                            value={review.ratings.textRating}
+                            readOnly
+                            precision={0.5}
+                        />
+                        <Typography color={theme.text.body}>{review.ratings.textRating}</Typography>
+                    </Grid>
+                </Grid>
+                <Grid
+                    container
+                    alignItems='center'
+                    sx={{ minWidth: '250px' }}
+                >
+                    <Grid
+                        item
+                        xxs={6}
+                    >
+                        <Typography
+                            sx={{
+                                flex: 1,
+                                fontWeight: 700,
+                            }}
+                            color={theme.text.body}
+                        >{`${storyT('Review.text.image-rating')}`}</Typography>
+                    </Grid>
+                    <Grid
+                        item
+                        xxs={6}
+                        sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
+                    >
+                        <Rating
+                            name={storyT('Review.text.image-rating')}
+                            value={review.ratings.imageRating}
+                            readOnly
+                            precision={0.5}
+                        />
+                        <Typography color={theme.text.body}>{review.ratings.imageRating}</Typography>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Grid
+                item
+                xxs={6}
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
@@ -177,7 +223,7 @@ export const Review = ({ review }: ReviewProps) => {
                     {review.title}
                 </Typography>
                 <Typography color={theme.text.body}>{review.text}</Typography>
-            </Box>
-        </Box>
+            </Grid>
+        </Grid>
     );
 };

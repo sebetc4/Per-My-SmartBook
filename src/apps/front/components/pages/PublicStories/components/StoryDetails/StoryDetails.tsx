@@ -1,17 +1,18 @@
+// Librairies
 import { forwardRef } from 'react';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { useTranslation } from 'react-i18next';
-
-import { TransitionProps } from '@mui/material/transitions';
-import { Box, Button, Dialog, Divider, Grid, Rating, Slide, Typography } from '@mui/material';
-import { IoClose } from 'react-icons/io5';
-
-import { placeholderValue } from '../../../../../utils';
-import { CustomAvatar } from '../../../../CustomAvatar/CustomAvatar';
-import { FinishedPublicStoryPreview } from '../../../../../../../packages/types';
-import { CreationDate } from '~/apps/front/components/dates/CreationDate/CreationDate';
 import { useRouter } from 'next/router';
+// MUI
+import { TransitionProps } from '@mui/material/transitions';
+import { Box, Dialog, Divider, Grid, IconButton, Rating, Slide, Typography } from '@mui/material';
+import { IoClose } from 'react-icons/io5';
+// App
+import { placeholderValue } from '../../../../../utils';
+import { FinishedPublicStoryPreview, ImageOnClient, StoryReviewData } from '~/packages/types';
+import { CreationDate, CustomAvatar } from '~/apps/front/components';
+import { useAppMediaQuery } from '~/apps/front/hooks';
 
 const Transition = forwardRef(function Transition(
     props: TransitionProps & {
@@ -39,9 +40,7 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
     // Hooks
     const { t: storyInputsT } = useTranslation('story-inputs');
     const { t: publicStoriesT } = useTranslation('public-stories');
-    const { locale } = useRouter();
-
-    const rating = (story.ratings.imageRating + story.ratings.textRating) / 2;
+    const { mediaQuery } = useAppMediaQuery();
 
     return (
         <Dialog
@@ -51,9 +50,18 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
             TransitionComponent={Transition}
             transitionDuration={600}
             scroll='paper'
-            PaperProps={{ sx: { position: 'fixed', width: { xxs: '100%', md: '75%', lg: '50%' }, right: 0 } }}
+            PaperProps={{
+                sx: { position: 'fixed', width: { xxs: '100%', md: '75%', lg: '60%', xl: '50%' }, right: 0 },
+            }}
             sx={{ zIndex: 1700 }}
         >
+            <IconButton
+                aria-label='close'
+                sx={{ position: 'absolute', top: '10px', left: '10px' }}
+                onClick={handleClose}
+            >
+                <IoClose size={40} />
+            </IconButton>
             <Box sx={{ p: 6 }}>
                 <Grid
                     container
@@ -68,46 +76,35 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
                             alignItems: 'center',
                             gap: 4,
                         }}
-                        xxs={6}
+                        xxs={0}
+                        md={6}
                     >
-                        <Box
-                            sx={{
-                                position: 'relative',
-                                aspectRatio: '1 / 1',
-                                width: '100%',
-                                maxWidth: '512px',
-                                borderRadius: 8,
-                            }}
-                        >
-                            <Image
-                                src={story.cover?.url || bookImage!}
-                                placeholder={placeholderValue(!!story.cover)}
-                                blurDataURL={story.cover?.plaiceholder}
-                                alt={"Illustration de l'histoire"}
-                                quality={100}
-                                style={{ borderRadius: 8 }}
-                                fill
-                            />
-                        </Box>
-                        <Button
-                            sx={{ position: 'absolute', top: '-20px', left: 0 }}
-                            onClick={handleClose}
-                        >
-                            <IoClose size={40} />
-                        </Button>
+                        <CoverImage
+                            bookImage={bookImage!}
+                            cover={story.cover}
+                        />
                     </Grid>
                     <Grid
                         item
-                        xxs={6}
+                        xxs={12}
+                        md={6}
                         sx={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 2 }}
                     >
                         <Typography
                             fontWeight={700}
                             variant='h3'
                             component={'h2'}
+                            textAlign='center'
+                            sx={{ mx: 'auto' }}
                         >
                             {story.title}
                         </Typography>
+                        {!mediaQuery.upMd && (
+                            <CoverImage
+                                bookImage={bookImage!}
+                                cover={story.cover}
+                            />
+                        )}
                         {story.type === 'user' ? (
                             <Link
                                 href={'/'}
@@ -136,10 +133,11 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
                             </Typography>
                             <Rating
                                 name={"note de l'histoire"}
-                                value={rating}
+                                value={story.ratings.globalRating}
                                 readOnly
+                                precision={0.5}
                             />
-                            <Typography>{rating}</Typography>
+                            <Typography>{story.ratings.globalRating}</Typography>
                             <Typography sx={{ fontStyle: 'italic' }}>{`(${story.numbOfReviews} ${publicStoriesT(
                                 'StoryDetails.text.numb-of-reviews'
                             )})`}</Typography>
@@ -159,7 +157,7 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
                 </Grid>
                 <Divider
                     textAlign='left'
-                    sx={{ mt: 2, mb: 2 }}
+                    sx={{ mt: { xxs: 4, md: 2 }, mb: 2 }}
                 >
                     <Typography
                         component={'h3'}
@@ -182,103 +180,18 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
                 </Divider>
                 {story.reviews.length > 0 ? (
                     story.reviews.map((review, index) => (
-                        <>
-                            <Box
-                                component='article'
-                                key={`review-${index}`}
-                            >
-                                <Typography
-                                    sx={{
-                                        fontSize: '1.2rem',
-                                        fontWeight: 700,
-                                        fontStyle: 'italic',
-                                    }}
-                                >{`${publicStoriesT('StoryDetails.text.review.by')} ${
-                                    review.author.username
-                                }`}</Typography>
-                                <CreationDate
-                                    locale={locale!}
-                                    date={review.createdAt}
-                                    sx={{
-                                        mt: 1,
-                                        fontStyle: 'italic',
-                                    }}
-                                />
-                                <Box
-                                    sx={{
-                                        display: 'flex',
-                                        gap: 4,
-                                        mt: 2,
-                                    }}
-                                >
-                                    <Box
-                                        sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            gap: 2,
-                                        }}
-                                    >
-                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                            <Typography
-                                                sx={{
-                                                    fontWeight: 700,
-                                                }}
-                                            >{`${publicStoriesT('StoryDetails.text.review.text-rating')}:`}</Typography>
-                                            <Rating
-                                                name={publicStoriesT('StoryDetails.text.review.text-rating')}
-                                                value={review.textRating}
-                                                readOnly
-                                            />
-                                            <Typography>{review.textRating}</Typography>
-                                        </Box>
-                                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                                            <Typography
-                                                sx={{
-                                                    fontWeight: 700,
-                                                }}
-                                            >{`${publicStoriesT(
-                                                'StoryDetails.text.review.image-rating'
-                                            )}:`}</Typography>
-                                            <Rating
-                                                name={publicStoriesT('StoryDetails.text.review.image-rating')}
-                                                value={review.imageRating}
-                                                readOnly
-                                            />
-                                            <Typography>{review.imageRating}</Typography>
-                                        </Box>
-                                    </Box>
-                                    <Divider
-                                        orientation='vertical'
-                                        flexItem
-                                    />
-                                    <Box
-                                        sx={{
-                                            display: 'flex',
-                                            flexDirection: 'column',
-                                            gap: 1,
-                                        }}
-                                    >
-                                        <Typography
-                                            component='h4'
-                                            variant='h4'
-                                        >
-                                            {review.title}
-                                        </Typography>
-                                        <Typography>{review.text}</Typography>
-                                    </Box>
-                                </Box>
-                            </Box>
+                        <Box key={`review-${index}`}>
+                            <Review review={review} />
                             {index !== story.reviews.length - 1 && (
                                 <Divider
                                     sx={{
-                                        m: '0 auto',
-                                        mt: 4,
-                                        mb: 4,
+                                        mx: 'auto',
+                                        my: 4,
                                         maxWidth: '50%',
                                     }}
                                 />
                             )}
-                        </>
+                        </Box>
                     ))
                 ) : (
                     <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
@@ -289,5 +202,185 @@ export const StoryDetails = ({ story, open, handleClose, bookImage }: StoryDetai
                 )}
             </Box>
         </Dialog>
+    );
+};
+
+type CoverImageProps = {
+    cover?: ImageOnClient;
+    bookImage: StaticImageData;
+};
+const CoverImage = ({ cover, bookImage }: CoverImageProps) => {
+    return (
+        <Box
+            sx={{
+                position: 'relative',
+                aspectRatio: '1 / 1',
+                width: '100%',
+                maxWidth: '512px',
+                borderRadius: 8,
+                mx: 'auto',
+            }}
+        >
+            <Image
+                src={cover?.url || bookImage!}
+                placeholder={placeholderValue(!!cover)}
+                blurDataURL={cover?.plaiceholder}
+                alt={"Illustration de l'histoire"}
+                quality={100}
+                style={{ borderRadius: 8 }}
+                fill
+            />
+        </Box>
+    );
+};
+
+type ReviewProps = {
+    review: StoryReviewData;
+};
+
+const Review = ({ review }: ReviewProps) => {
+    // Hooks
+    const { t: publicStoriesT } = useTranslation('public-stories');
+    const { locale } = useRouter();
+
+    return (
+        <Box component='article'>
+            <Typography
+                sx={{
+                    fontSize: '1.2rem',
+                    fontWeight: 700,
+                    fontStyle: 'italic',
+                }}
+            >{`${publicStoriesT('StoryDetails.text.review.by')} ${review.author.username}`}</Typography>
+            <CreationDate
+                locale={locale!}
+                date={review.createdAt}
+                sx={{
+                    mt: 1,
+                    fontStyle: 'italic',
+                }}
+            />
+            <Box
+                sx={{
+                    display: 'flex',
+                    gap: 4,
+                    mt: 2,
+                }}
+            >
+                <Box
+                    sx={{
+                        width: '250px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 2,
+                    }}
+                >
+                    <Grid
+                        container
+                        alignItems='center'
+                    >
+                        <Grid
+                            item
+                            xxs={4}
+                        >
+                            <Typography
+                                sx={{
+                                    fontWeight: 700,
+                                }}
+                            >{`${publicStoriesT('StoryDetails.text.review.global-rating')}`}</Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            xxs={8}
+                            sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
+                        >
+                            <Rating
+                                name={publicStoriesT('StoryDetails.text.review.global-rating')}
+                                value={review.ratings.globalRating}
+                                readOnly
+                                precision={0.5}
+                            />
+                            <Typography>{review.ratings.globalRating}</Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        container
+                        alignItems='center'
+                    >
+                        <Grid
+                            item
+                            xxs={4}
+                        >
+                            <Typography
+                                sx={{
+                                    fontWeight: 700,
+                                }}
+                            >{`${publicStoriesT('StoryDetails.text.review.text-rating')}`}</Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            xxs={8}
+                            sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
+                        >
+                            <Rating
+                                name={publicStoriesT('StoryDetails.text.review.text-rating')}
+                                value={review.ratings.textRating}
+                                readOnly
+                                precision={0.5}
+                            />
+                            <Typography>{review.ratings.textRating}</Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid
+                        container
+                        alignItems='center'
+                    >
+                        <Grid
+                            item
+                            xxs={4}
+                        >
+                            {' '}
+                            <Typography
+                                sx={{
+                                    fontWeight: 700,
+                                }}
+                            >{`${publicStoriesT('StoryDetails.text.review.image-rating')}`}</Typography>
+                        </Grid>
+                        <Grid
+                            item
+                            xxs={8}
+                            sx={{ display: 'flex', alignItems: 'center', gap: 2 }}
+                        >
+                            <Rating
+                                name={publicStoriesT('StoryDetails.text.review.image-rating')}
+                                value={review.ratings.imageRating}
+                                readOnly
+                                precision={0.5}
+                            />
+                            <Typography>{review.ratings.imageRating}</Typography>
+                        </Grid>
+                    </Grid>
+                </Box>
+                <Divider
+                    orientation='vertical'
+                    flexItem
+                />
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: 1,
+                    }}
+                >
+                    <Typography
+                        component='h4'
+                        variant='h4'
+                    >
+                        {review.title}
+                    </Typography>
+                    <Typography>{review.text}</Typography>
+                </Box>
+            </Box>
+        </Box>
     );
 };

@@ -6,9 +6,11 @@ import { BackgroundPaper, CommonStoriesSection, UserStorySection } from './compo
 import { sockets } from '../../../../../services';
 import { ColorMode, SocketEvent, SocketNamespace } from '~/packages/types';
 import { enableCommonStoryDevMode } from '~/packages/constants';
+import { useAppMediaQuery, useAppSelector } from '~/apps/front/hooks';
+import { LoadingContainer } from '../..';
+// Images
 import HeroImage from 'public/images/illustrations/hero-stories.png';
 import HeroImageDark from 'public/images/illustrations/hero-stories-dark.png';
-import { useAppMediaQuery, useAppSelector } from '~/apps/front/hooks';
 
 export const NewStory = () => {
     // Hooks
@@ -117,5 +119,5 @@ export const NewStory = () => {
                 </Fab>
             )}
         </Container>
-    );
+    )
 };

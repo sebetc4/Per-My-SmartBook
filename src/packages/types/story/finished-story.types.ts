@@ -8,6 +8,7 @@ import {
     StoryChapterChoice,
     Visibility,
     StoryReviewData,
+    StoryRatings,
 } from '..';
 
 /**
@@ -59,15 +60,6 @@ export type FinishedStoryChapter = {
 
 export type FinishedStoryChapterWithImageOnClient = Omit<FinishedStoryChapter, 'image'> & {
     image: ImageOnClient | null;
-};
-
-/**
- * Ratings
- */
-export type StoryRatings = {
-    globalRating: number;
-    textRating: number;
-    imageRating: number;
 };
 
 /**

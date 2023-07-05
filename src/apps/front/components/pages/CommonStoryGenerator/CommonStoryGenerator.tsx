@@ -16,12 +16,13 @@ export const CommonStoryGenerator = () => {
 
     // Store
     const { data: storyData } = useAppSelector((state) => state.commonStoryBeingGenerated);
+    const { isAuth } = useAppSelector((state) => state.auth);
 
     useEffect(() => {
         lastChapterRef.current && window.scrollTo({ top: lastChapterRef.current.offsetTop, behavior: 'smooth' });
     }, [storyData?.allChapters.length]);
 
-    return isInitialized ? (
+    return isInitialized && storyData ? (
         <Box
             sx={{
                 position: 'relative',
@@ -30,8 +31,13 @@ export const CommonStoryGenerator = () => {
                 justifyContent: 'center',
             }}
         >
-            <CommonChat />
-            <Box sx={{ width: '100%', ml: {xxs: 0, md: '350px', lg: '400px'} }}>
+            {isAuth && <CommonChat />}
+            <Box
+                sx={{
+                    width: '100%',
+                    ml: isAuth ? { xxs: 0, md: '350px', lg: '400px' } : 0,
+                }}
+            >
                 <Container
                     maxWidth='xl'
                     sx={{
@@ -41,11 +47,11 @@ export const CommonStoryGenerator = () => {
                         pb: theme.main.padding,
                     }}
                 >
-                    {storyData!.state === 'waiting' ? (
+                    {storyData.state === 'waiting' ? (
                         <WaitingScreen />
                     ) : (
                         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-                            {storyData!.allChapters.map((chapter, i) => (
+                            {storyData.allChapters.map((chapter, i) => (
                                 <Box
                                     ref={storyData!.allChapters.length === i + 1 ? lastChapterRef : null}
                                     key={`story-slice${i + 1}`}
@@ -56,7 +62,7 @@ export const CommonStoryGenerator = () => {
                                     />
                                 </Box>
                             ))}
-                            {storyData!.state === 'finished' || (storyData!.state === 'stopped' && <EndStoryScreen />)}
+                            {(storyData!.state === 'finished' || storyData.state === 'stopped') && <EndStoryScreen />}
                         </Box>
                     )}
                 </Container>

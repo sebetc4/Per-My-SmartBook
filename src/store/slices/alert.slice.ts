@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { AlertState } from '../../packages/types';
+import { AlertMessage, AlertState } from '../../packages/types';
 
 const initialState: AlertState = {
     open: false,
-    message: '',
+    message: '' as AlertMessage,
     type: null,
 };
 

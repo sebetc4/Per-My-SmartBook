@@ -70,3 +70,12 @@ export type ParsedStoryChapterGenerated = {
     allChoices?: StoryChapterChoice[];
     description: string;
 };
+
+/**
+ * Ratings
+ */
+export type StoryRatings = {
+    globalRating: number;
+    textRating: number;
+    imageRating: number;
+};

@@ -1,4 +1,6 @@
 {
     "create-new-story": "Commencer une histoire",
-    "start-story": "Commencer"
+    "start-story": "Commencer",
+
+    "ChapterChoiceButton.tooltip.not-connected": "Connectez-vous pour voter !"
 }

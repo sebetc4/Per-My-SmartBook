@@ -20,6 +20,7 @@ import {
     getStoryPreviewsSchema,
     likeOrDislikeOneReviewSchema,
 } from '~/packages/schemas';
+import { roundNearestTenth } from '~/packages/functions/number/number.functions';
 
 export const getOneStoryReview = catchControllerError(async (req, res) => {
     const id = validQueryId(req);
@@ -47,13 +48,17 @@ export const createOneReview = catchControllerError(async (req, res) => {
     if (story.hasVoted(user.id)) {
         throw CustomError.FORBIDEN;
     }
+    console.log('globalRating', roundNearestTenth((textRating + imageRating) / 2));
     const review = await StoryReview.create({
         story: storyId,
         author: user.id,
         title,
         text,
-        textRating,
-        imageRating,
+        ratings: {
+            globalRating: roundNearestTenth((textRating + imageRating) / 2),
+            textRating,
+            imageRating,
+        }
     });
 
     story.reviews.push({ author: user.id, review: review.id });
@@ -75,8 +80,9 @@ export const updateOneReview = catchControllerError(async (req, res) => {
     }
     review.title = title;
     review.text = text;
-    review.textRating = textRating;
-    review.imageRating = imageRating;
+    review.ratings.globalRating = roundNearestTenth((textRating + imageRating) / 2)
+    review.ratings.textRating = textRating;
+    review.ratings.imageRating = imageRating;
     await review.save();
     const reviewData = review.getData();
     const story = await getOneFinishedStoryById(storyId);

@@ -16,9 +16,9 @@ export const handleCommonStoriesSocket = (io: Server) => {
     const commonStoriesIo = io.of(SocketNamespace.COMMON_STORIES);
 
     if (!enableCommonStoryDevMode) {
-        schedule.scheduleJob('0 17 * * *', () => startNewStory(commonStoriesIo));
-        schedule.scheduleJob('0 18 * * *', () => startNewStory(commonStoriesIo));
-        schedule.scheduleJob('0 19 * * *', () => startNewStory(commonStoriesIo));
+        schedule.scheduleJob('0 17 * * *', () => startNewStory(commonStoriesIo, 'fr'));
+        schedule.scheduleJob('0 18 * * *', () => startNewStory(commonStoriesIo, 'fr'));
+        schedule.scheduleJob('0 19 * * *', () => startNewStory(commonStoriesIo, 'fr'));
     }
       
     commonStoriesIo.on('connection', async (socket) => {
@@ -37,7 +37,7 @@ export const handleCommonStoriesSocket = (io: Server) => {
             sendNewMessage(data, socket, commonStoriesIo, cb);
         });
         socket.on(SocketEvent.START_COMMON_STORY, (data, cb) => {
-            startNewStory(commonStoriesIo);
+            startNewStory(commonStoriesIo, 'fr');
         });
     });
 };

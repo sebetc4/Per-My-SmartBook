@@ -1,14 +1,15 @@
-import { StoryImageStyleClass, StoryThemeClass } from "../../../../../packages/classes";
-import { StoryOptions } from "../../../../../packages/types";
+import { StoryImageStyleClass, StoryThemeClass } from "~/packages/classes";
+import { Language, StoryOptions } from "~/packages/types";
 import { generateRandomBytes } from "../../../functions";
+import { commonStoryDuration } from "~/packages/constants";
 
-export const generateCommonStoryIdAndOptions = () => {
+export const generateCommonStoryIdAndOptions = (language: Language) => {
     const storyId = generateRandomBytes(12);
     const storyOptions: StoryOptions = {
         theme: StoryThemeClass.getRandomValue(),
         style: StoryImageStyleClass.getRandomValue(),
-        duration: 'veryShort',
-        language: 'fr',
+        duration: commonStoryDuration,
+        language,
     };
     return { storyId, storyOptions}
 }

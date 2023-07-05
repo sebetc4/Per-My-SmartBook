@@ -1,5 +1,5 @@
 import { ChatMessage } from "~/packages/types";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography, useTheme } from "@mui/material";
 
 type MessageContainerProps = {
     allMessages: ChatMessage[];
@@ -7,6 +7,8 @@ type MessageContainerProps = {
 
 export const MessageList
  = ({ allMessages }: MessageContainerProps) => {
+    // Hooks
+    const theme = useTheme()
     return (
         <>
             {allMessages.length > 0 ? (
@@ -55,7 +57,7 @@ export const MessageList
                         justifyContent: 'center',
                     }}
                 >
-                    <Typography>Aucun message</Typography>
+                    <Typography color={theme.text.body}>Aucun message</Typography>
                 </Box>
             )}
         </>

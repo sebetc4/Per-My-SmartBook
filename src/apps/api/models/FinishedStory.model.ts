@@ -22,7 +22,7 @@ import {
     mooveAllFinishedStoryImages,
 } from '../functions';
 
-import { imageSchema } from './common.models';
+import { imageSchema, reviewRatingsSchema } from './common.models';
 import { roundNearestTenth } from '~/packages/functions/number/number.functions';
 import { getAllStoryReviewRatingsFromDb, getStoryReviewsFromDb } from '../queries';
 
@@ -118,20 +118,7 @@ const schema = new Schema<FinishedStorySchema, IFinishedStoryModel, FinishedStor
             ],
             default: [],
         },
-        ratings: {
-            globalRating: {
-                type: Number,
-                default: 0,
-            },
-            textRating: {
-                type: Number,
-                default: 0,
-            },
-            imageRating: {
-                type: Number,
-                default: 0,
-            },
-        },
+        ratings: reviewRatingsSchema,
         reviews: [
             {
                 author: {
@@ -178,17 +165,20 @@ schema.methods.hasVoted = function (this: FinishedStoryInstance, userId: string)
 
 schema.methods.updateStoryRatings = async function (this: FinishedStoryInstance): Promise<void> {
     const allReviewRatings = await getAllStoryReviewRatingsFromDb(this.id);
+    console.log({allReviewRatings})
     if (allReviewRatings.length !== 0) {
-        const { imageRating, textRating } = allReviewRatings.reduce(
-            (acc, { imageRating, textRating }) => ({
-                imageRating: acc.imageRating + imageRating,
-                textRating: acc.textRating + textRating,
+        const { imageRating, textRating, globalRating } = allReviewRatings.reduce(
+            (acc, { ratings }) => ({
+                imageRating: acc.imageRating + ratings.imageRating,
+                textRating: acc.textRating + ratings.textRating,
+                globalRating: acc.globalRating + ratings.globalRating,
             }),
-            { imageRating: 0, textRating: 0 }
+            { imageRating: 0, textRating: 0, globalRating: 0 }
         );
         this.ratings.imageRating = roundNearestTenth(imageRating / allReviewRatings.length);
         this.ratings.textRating = roundNearestTenth(textRating / allReviewRatings.length);
-        this.ratings.globalRating = roundNearestTenth((this.ratings.imageRating + this.ratings.textRating) / 2);
+        this.ratings.globalRating = roundNearestTenth(globalRating / allReviewRatings.length);
+        console.log(this.ratings)
     } else {
         this.ratings.globalRating = 0;
         this.ratings.imageRating = 0;

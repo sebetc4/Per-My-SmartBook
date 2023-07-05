@@ -59,6 +59,18 @@ class CommonStoriesSocketManager {
         return newStory.id;
     }
 
+    async getOneStoryPreview(storyId: string): Promise<CommonStoryBeingGeneratedPreview> {
+        const story = this.getStory(storyId);
+        return {
+            id: story.id,
+            state: story.state,
+            topic: story.topic,
+            cover: story.cover && (await convertToImageOnClient(story.cover)),
+            theme: story.options.theme,
+            startAt: story.startAt,
+        };
+    }
+
     async getAllPreviews(language: Language): Promise<CommonStoryBeingGeneratedPreview[]> {
         const allStories = this.allStories.filter((story) => story.options.language === language);
         const allStoriesPromises = allStories.map(async (story) => ({
@@ -91,6 +103,7 @@ class CommonStoriesSocketManager {
             currentStep: story.currentStep,
             allChapters: await Promise.all(allChaptersPromise),
             startAt: story.startAt,
+            deletedAt: story.deletedAt,
         };
         return {
             storyData,
@@ -99,7 +112,12 @@ class CommonStoriesSocketManager {
     }
 
     updateStory(updateStoryData: Partial<CommonStoryBeingGenerated> & { id: string }) {
-        this.allStories.map((story) => (story.id === updateStoryData.id ? { ...story, ...updateStoryData } : story));
+        const index = this.allStories.findIndex((story) => story.id === updateStoryData.id);
+        if (index !== -1) {
+            const updatedStory = { ...this.allStories[index], ...updateStoryData };
+            logIf(enableLogCommonStoriesSocketManager, { storyIsUpdated: updatedStory });
+            this.allStories[index] = updatedStory;
+        }
     }
 
     addOneStoryChapterChoiceVote(storyId: string, userId: string, selectedChoiceIndex: number) {

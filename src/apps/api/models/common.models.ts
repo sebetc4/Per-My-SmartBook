@@ -1,4 +1,4 @@
-import { allVisibilityValues } from "../../../packages/types";
+import { allVisibilityValues } from '../../../packages/types';
 
 export const imageSchema = {
     key: {
@@ -13,5 +13,26 @@ export const imageSchema = {
     plaiceholder: {
         type: String,
         required: true,
-    }
-}
+    },
+};
+
+export const reviewRatingsSchema = {
+    globalRating: {
+        type: Number,
+        default: 0,
+        min: 0.5,
+        max: 5,
+    },
+    textRating: {
+        type: Number,
+        default: 0,
+        min: 0.5,
+        max: 5,
+    },
+    imageRating: {
+        type: Number,
+        default: 0,
+        min: 0.5,
+        max: 5,
+    },
+};

@@ -1,4 +1,7 @@
 {
+    "page.title": "My stories",
+    "page.description": "Find all your current and completed stories. Continue the adventure or clear out your library!",
+
     "title.h2.unfinished-stories": "Your ongoing stories",
     "title.h2.finished-stories": "Your finished stories",
     "text.no-unfinished-story": "No story in progress",

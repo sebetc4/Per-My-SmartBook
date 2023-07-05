@@ -3,18 +3,18 @@ import { useTranslation } from 'react-i18next';
 import { customServerSideTranslations } from '~/apps/api/functions';
 import { Story } from '~/apps/front/components';
 import { useAppSelector } from '~/apps/front/hooks';
+import { setUserSession } from '~/apps/front/utils';
 import { isValidId } from '~/packages/functions';
 import { Path, StoryReviewData } from '~/packages/types';
 import { api } from '~/services';
 import { setStoryDataAndReviews, wrapper } from '~/store';
 
 export default function StoryPage() {
-
     // Hooks
     const { t: commonT } = useTranslation('common');
 
     // Store
-    const {storyData} = useAppSelector((state) => state.story);
+    const { storyData } = useAppSelector((state) => state.story);
 
     return (
         <>
@@ -37,6 +37,7 @@ export const getServerSideProps = wrapper.getServerSideProps((store) => async (c
             const storyRes = await api.getOneStoryAndReviews(storyId);
             const { data } = await api.getSessionServerSide(context.req.headers.cookie);
             const userId = data.session?.user?.id;
+            userId && setUserSession(store, data!.session!.user!);
             if (userId && storyRes.data.story.reviews.some((review) => review.author === userId)) {
                 const review = storyRes.data.story.reviews.find((review) => review.author === userId);
                 if (review) {

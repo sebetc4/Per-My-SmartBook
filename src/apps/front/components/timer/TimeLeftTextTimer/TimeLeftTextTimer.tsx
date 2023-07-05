@@ -42,9 +42,9 @@ export const TimeLeftTextTimer = ({
                     {text && <Typography  color={theme.text.body} sx={textSx}>{text}</Typography>}
                     {}
                     <Typography  color={theme.text.body} sx={timeSx}>
-                        {`${withHours ? `${timeLeft.h} ${dateT('TimeLeftTextTimer.hours')} ` : ''}${
+                        {`${withHours ? `${timeLeft.h} ${dateT('time.hours')} ` : ''}${
                             timeLeft.m
-                        } ${dateT('TimeLeftTextTimer.minutes')} ${timeLeft.s} ${dateT('TimeLeftTextTimer.seconds')}`}
+                        } ${dateT('time.minutes')} ${timeLeft.s} ${dateT('time.seconds')}`}
                     </Typography>
                 </Box>
             )}

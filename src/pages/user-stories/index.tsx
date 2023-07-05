@@ -6,13 +6,20 @@ import { api } from '../../services';
 import { Path, SessionStatus } from '../../packages/types';
 import { setAllUserStories } from '../../store/slices/userStories.slice';
 import { setUserSession } from '~/apps/front/utils';
+import { useTranslation } from 'react-i18next';
 
 export default function YourStoriesPage() {
-    
+    // Hooks
+    const { t: commonT } = useTranslation('common');
+    const { t: userStoriesT } = useTranslation('user-stories');
     return (
         <>
             <Head>
-                <title>Vos histoires - My StoryBook</title>
+                <title>{`${userStoriesT('page.title')} - ${commonT('app-name')}`}</title>
+                <meta
+                    name='description'
+                    content={userStoriesT('page.description')}
+                />
             </Head>
             <UserStories />
         </>

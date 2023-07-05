@@ -1,7 +1,7 @@
 //Libraries
 import { forwardRef, useCallback, useEffect, useState } from 'react';
 //MUI
-import { Box, Dialog, Divider, Fab, Slide, Typography } from '@mui/material';
+import { Box, Dialog, Divider, Fab, Slide, Typography, useTheme } from '@mui/material';
 import ChatIcon from '@mui/icons-material/Chat';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 // App
@@ -20,6 +20,7 @@ export const CommonChat = ({}: CommonChatProps) => {
 const DesktopChat = () => {
     // Hooks
     const { footerRef } = useLayout();
+    const theme = useTheme()
 
     // Store
     const { layout } = useAppSelector((state) => state.app);
@@ -52,7 +53,7 @@ const DesktopChat = () => {
                 display: 'flex',
                 flexDirection: 'column',
                 width: { md: '350px', lg: '400px' },
-                backgroundColor: '#eae7e3',
+                backgroundColor: theme.chat.backgroundColor,
                 boxShadow:
                     'rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset',
                 overflowX: 'scroll',
@@ -127,8 +128,11 @@ const MobileChat = () => {
 };
 
 const Chat = () => {
-    const { chat } = useAppSelector((state) => state.commonStoryBeingGenerated);
+    // Hooks
     const {t: storyGeneratorT} = useTranslation('story-generator');
+    const theme = useTheme()
+
+    const { chat } = useAppSelector((state) => state.commonStoryBeingGenerated);
 
     return (
         <Box sx={{ width: '100%', height: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -138,21 +142,22 @@ const Chat = () => {
                 variant='h3'
                 component='h2'
                 sx={{ mt: 2 }}
+                color={theme.text.title}
             >
                 {storyGeneratorT('CommonChat.title')}
             </Typography>
 
             {/* Message list */}
-            <Divider sx={{ mt: 2, mb: 2 }} />
+            <Divider sx={{ my: 2 }} />
             <Box sx={{ flex: 1 }}>
                 <MessageList allMessages={chat.allMessages} />
             </Box>
 
             {/* Message bar */}
             <Box>
-                <Divider sx={{ mt: 2, mb: 2 }} />
+                <Divider sx={{ my: 2 }} />
                 <SendMessageBar />
-                <Divider sx={{ mt: 2, mb: 2 }} />
+                <Divider sx={{ my: 2 }} />
             </Box>
         </Box>
     );

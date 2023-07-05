@@ -21,6 +21,7 @@ export type CommonStoryBeingGenerated = {
     votesAreOpen: boolean;
     allChapters: CommonStoryChapter[];
     startAt: number;
+    deletedAt?: number;
     allChatMessages: ChatMessage[];
 };
 
@@ -79,6 +80,7 @@ export type CommonStoryBeingGeneratedData = {
     topic: string;
     allChapters: CommonStoryChapterClientData[];
     startAt: number;
+    deletedAt?: number;
 };
 
 export type CommonStoryBeingGeneratedDataWithChatMessages = {
@@ -104,4 +106,5 @@ export type CommonStoryBeingGeneratedPreview = {
 export type CurrentStoryStatus = {
     nextChapterStartAt: number | null;
     state: CommonStoryBeingGenerated['state'];
+    storyDeletedAt?: number;
 };

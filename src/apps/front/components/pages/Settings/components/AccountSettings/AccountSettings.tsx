@@ -69,7 +69,7 @@ export const AccountSettings = () => {
                         width: '100%',
                         display: 'flex',
                         flexDirection: 'column',
-                        gap: 3,
+                        gap: 2,
                     }}
                 >
                     <CustomTextField
@@ -114,7 +114,7 @@ export const AccountSettings = () => {
                             sx={{ mb: 0.5 }}
                         />
                     }
-                    sx={{ marginTop: 4, marginBottom: 2 }}
+                    sx={{ mt: 4, mb: 2 }}
                     fullWidth
                 >
                     {t('AccountForm.button.save')}

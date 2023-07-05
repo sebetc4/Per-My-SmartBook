@@ -2,7 +2,7 @@ export type Alert = { type: Exclude<AlertState['type'], null>; message: string }
 
 export type AlertState = {
     open: boolean;
-    message: string;
+    message: AlertMessage;
     type: 'error' | 'success' | 'warning' | 'info' | null;
 };
 
@@ -16,9 +16,14 @@ export type AlertContextType = {
 export const allAlertMessages = [
     'success.update-data',
     'success.update-password',
+    'success.update-user-color',
     'success.add-openai-key',
     'success.modify-openai-key',
+    'success.toggle-color-mode',
+    
     'success.user-story-saved',
+
+    'error.invalid-session',
 
     'error.login.default',
 

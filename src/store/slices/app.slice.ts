@@ -61,7 +61,7 @@ export const toggleColorMode = createAsyncThunk<void, void, { rejectValue: strin
     'app/toggleColorMode',
     async (_, { rejectWithValue }) => {
         try {
-            await api.toggleColorMode;
+            await api.toggleColorMode();
         } catch (err) {
             if (err instanceof AxiosError) {
                 return rejectWithValue(err.response?.data.message);

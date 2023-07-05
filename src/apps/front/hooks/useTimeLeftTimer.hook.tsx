@@ -7,6 +7,7 @@ export const useTimeLeftTimer = (time: number) => {
         m: 0,
         s: 0,
         isInitialized: false,
+        isFinished: false,
     });
 
     useEffect(() => {
@@ -20,6 +21,7 @@ export const useTimeLeftTimer = (time: number) => {
                     m: 0,
                     s: 0,
                     isInitialized: true,
+                    isFinished: true,
                 });
             } else {
                 setTimeLeft({
@@ -27,6 +29,7 @@ export const useTimeLeftTimer = (time: number) => {
                     m: Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60)),
                     s: Math.floor((distance % (1000 * 60)) / 1000),
                     isInitialized: true,
+                    isFinished: false,
                 });
             }
         }, 1000);

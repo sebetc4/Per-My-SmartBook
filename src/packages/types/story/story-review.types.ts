@@ -1,5 +1,5 @@
 import { Model, ObjectId } from 'mongoose';
-import { InstanceOfWithDates } from '..';
+import { InstanceOfWithDates, StoryRatings } from '..';
 
 /**
  * Schema && Instance
@@ -9,8 +9,7 @@ export type StoryReviewSchema = {
     story: ObjectId;
     text?: string;
     title?: string;
-    textRating: number;
-    imageRating: number;
+    ratings: StoryRatings;
     likes: {
         userId: ObjectId;
         value: number;
@@ -32,8 +31,7 @@ export type StoryReviewData = {
     title?: string;
     text?: string;
     author: { username: string };
-    textRating: number;
-    imageRating: number;
+    ratings: StoryRatings;
     likes: {
         userId: string;
         value: number;

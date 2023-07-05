@@ -1,4 +1,4 @@
-import { ChatMessage, CommonStoryChapterClientData, Language } from '..';
+import { ChatMessage, CommonStoryBeingGenerated, CommonStoryChapterClientData, Language } from '..';
 
 /**
  * Get all common stories being generated previex
@@ -6,6 +6,15 @@ import { ChatMessage, CommonStoryChapterClientData, Language } from '..';
 export type GetAllCommonStoriesBeingGeneratedPreviewsBody = {
     language: Language;
 };
+
+export type UpdateCommonStoryStateRes = {
+    storyId: string;
+    state: CommonStoryBeingGenerated['state'];
+}
+
+export type CommonStoryIsDeletedRes = {
+    storyId: string;
+}
 
 /**
  * Get common story being generated data
@@ -65,3 +74,7 @@ export type CommonStoryStoryChapterChoiceAndAllNumbOfVotesRes = {
 export type NewCommonStoryChatMessageRes = {
     message: ChatMessage
 }
+
+export type CommonStoryIsFinishedOrStoppedRes = {
+    storyDeletedAt: number;
+};

@@ -1,13 +1,10 @@
-import { NextApiRequest } from 'next';
 import { ObjectId } from 'mongoose';
-import { StoryReviewInstance, GetStoryPreviewsQuery } from '~/packages/types';
+import { StoryReviewInstance } from '~/packages/types';
 import { CustomError } from '~/packages/classes';
-import { getStoryPreviewsSchema } from '~/packages/schemas';
 import { StoryReview } from '../models';
-import { validQueryData } from '../functions';
 
 export const getAllStoryReviewRatingsFromDb = async (storyId: string) => {
-    const reviews: StoryReviewInstance[] = await StoryReview.find({ story: storyId }, ['textRating', 'imageRating']);
+    const reviews: StoryReviewInstance[] = await StoryReview.find({ story: storyId }, ['ratings']);
     return reviews;
 };
 
