@@ -187,7 +187,7 @@ schema.methods.getEmailVerificationToken = function(this: UserInstance) {
     this.emailVerification.token= hashData(token);
     this.resetPassword.expireAt = Date.now() + minutesToMilliseconds(minuteResetPasswordTime)
     this.save({validateBeforeSave: false})
-    return resetToken
+    return token
 }
 
 export const User = models.User || model<UserSchema>('User', schema);
