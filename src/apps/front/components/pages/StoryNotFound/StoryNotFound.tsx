@@ -16,7 +16,9 @@ export const StoryNotFound = () => {
     const theme = useTheme();
 
     return (
-        <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, mt: 6, mb: 6 }}>
+        <Container
+            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, py: theme.main.padding }}
+        >
             <Box
                 sx={{
                     position: 'relative',

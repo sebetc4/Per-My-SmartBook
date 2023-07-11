@@ -9,6 +9,7 @@ export type UserSchema = {
     authProvider: AuthProvider;
     username: string;
     email: string;
+    emailVerification: EmailVerification,
     password?: string;
     avatar: ImageOnDb;
     uiSettings: UiSettings;
@@ -27,6 +28,12 @@ type ResetPassword = {
     token?: string;
     expireAt?: number;
 };
+
+type EmailVerification = {
+    status:boolean,
+    token: String,
+    expireAt: number,
+    }
 
 export type UserMethods = {
     getSessionData: () => Promise<UserSession>;

@@ -24,8 +24,7 @@ export const NewStory = () => {
         <Container
             maxWidth='xl'
             sx={{
-                pt: theme.main.padding,
-                pb: theme.main.padding,
+                py: theme.main.padding,
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',

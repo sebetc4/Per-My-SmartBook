@@ -16,6 +16,7 @@ import { generateRandomBytes, hashData, setTokenCookie } from '../functions';
 import { getUrlFromS3 } from '../configs';
 import { maxTokensOpenai, minTokensOpenai, minuteResetPasswordTime } from '../../../packages/constants';
 import { minutesToMilliseconds, stringToColor } from '../../../packages/functions';
+import { boolean } from 'yup';
 
 const schema = new Schema<UserSchema, IUserModel, UserMethods>(
     {
@@ -32,6 +33,18 @@ const schema = new Schema<UserSchema, IUserModel, UserMethods>(
             type: String,
             required: true,
             unique: true,
+        },
+        emailVerification: {
+            status: {
+                type: boolean,
+                default: false,
+            },
+            token: {
+                type: String,
+            },
+            expireAt: {
+                type: Date,
+            },
         },
         password: {
             type: String,
@@ -94,7 +107,7 @@ const schema = new Schema<UserSchema, IUserModel, UserMethods>(
                 type: String,
             },
             expireAt: {
-                type: Date,
+                type: Number,
             },
         },
     },
@@ -164,6 +177,14 @@ schema.methods.isEqualValues = function (this: UserInstance, values: Partial<Use
 schema.methods.getResetPasswordToken = function(this: UserInstance) {
     const resetToken = generateRandomBytes(32)
     this.resetPassword.token= hashData(resetToken);
+    this.resetPassword.expireAt = Date.now() + minutesToMilliseconds(minuteResetPasswordTime)
+    this.save({validateBeforeSave: false})
+    return resetToken
+}
+
+schema.methods.getEmailVerificationToken = function(this: UserInstance) {
+    const token = generateRandomBytes(32)
+    this.emailVerification.token= hashData(token);
     this.resetPassword.expireAt = Date.now() + minutesToMilliseconds(minuteResetPasswordTime)
     this.save({validateBeforeSave: false})
     return resetToken

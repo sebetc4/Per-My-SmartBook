@@ -20,8 +20,7 @@ export const RequiredAuth = () => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 gap: 4,
-                pt: theme.main.padding,
-                pb: theme.main.padding,
+                py: theme.main.padding,
             }}
         >
             <Image

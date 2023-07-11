@@ -26,8 +26,7 @@ export const UserStoryGenerator = () => {
             <Container
                 maxWidth='xl'
                 sx={{
-                    pt: theme.main.padding,
-                    pb: theme.main.padding,
+                    py: theme.main.padding,
                 }}
             >
                 {storyData.state === 'selectOptions' && <OptionsScreen />}

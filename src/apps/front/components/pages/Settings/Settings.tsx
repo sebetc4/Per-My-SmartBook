@@ -21,7 +21,6 @@ import { useAppSelector } from '~/apps/front/hooks/redux.hook';
 import { LoadingContainer } from '../..';
 import { Path } from '~/packages/types';
 
-
 type TabType = {
     name: 'general' | 'profile' | 'connection' | 'ai' | 'appearance';
     label: string;
@@ -138,8 +137,6 @@ export const Settings = () => {
                         display: 'flex',
                         justifyContent: 'center',
                         ml: `${leftMenuWidth || 0}px`,
-                        pt: theme.main.padding,
-                        pb: theme.main.padding,
                     }}
                 >
                     <Swiper
@@ -148,7 +145,7 @@ export const Settings = () => {
                         allowTouchMove={false}
                         initialSlide={currentTab}
                         style={{
-                            position: 'absolute',
+                            position: mediaQuery.upMd ? 'absolute' : 'relative',
                             inset: 0,
                         }}
                     >
@@ -191,7 +188,7 @@ type LeftMenuProps = {
 };
 
 const LeftMenu = forwardRef((props: LeftMenuProps, ref) => {
-    const theme = useTheme()
+    const theme = useTheme();
     const { tabs, currentTab, handleChangeCurrentTab } = props;
     const { t: settingsT } = useTranslation('settings');
 
@@ -251,6 +248,7 @@ const LeftMenu = forwardRef((props: LeftMenuProps, ref) => {
 });
 
 const TopMenu = ({ tabs, currentTab, handleChangeCurrentTab }: LeftMenuProps) => {
+    const { mediaQuery } = useAppMediaQuery();
     return (
         <Box
             sx={{
@@ -263,10 +261,9 @@ const TopMenu = ({ tabs, currentTab, handleChangeCurrentTab }: LeftMenuProps) =>
                     sx={{ width: '100%' }}
                     value={currentTab}
                     onChange={handleChangeCurrentTab}
-                    centered
-                    aria-label='basic tabs example'
-                    variant="scrollable"
-                    scrollButtons="auto"
+                    aria-label='settings menu'
+                    variant={mediaQuery.upSm ? 'fullWidth' : 'scrollable'}
+                    scrollButtons='auto'
                     allowScrollButtonsMobile
                 >
                     {tabs.map((tab, i) => (

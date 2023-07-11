@@ -52,8 +52,7 @@ export const PublicStories = ({ stories, total }: PublicStoriesProps) => {
                 maxWidth='xl'
                 sx={{
                     position: 'relative',
-                    pt: theme.main.padding,
-                    pb: theme.main.padding,
+                    py: theme.main.padding,
                 }}
             >
                 <Typography

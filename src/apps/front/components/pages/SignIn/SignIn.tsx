@@ -79,8 +79,7 @@ export const SignIn = () => {
             sx={{
                 ml: 'auto',
                 mr: 'auto',
-                pt: theme.main.padding,
-                pb: theme.main.padding,
+                py: theme.main.padding,
             }}
         >
             <Grid
@@ -201,7 +200,15 @@ export const SignIn = () => {
                             </Typography>
                         )}
                     </Box>
-                    <Box sx={{ mt: 4, display: 'flex', gap: 1 }}>
+                    <Box
+                        sx={{
+                            mt: 4,
+                            display: 'flex',
+                            flexDirection: { xxs: 'column', xs: 'rox' },
+                            alignItems: 'center',
+                            gap: 1,
+                        }}
+                    >
                         <Typography color={theme.text.body}>{signinT('text.no-account')}</Typography>
                         <Link
                             href={Path.SIGNUP}

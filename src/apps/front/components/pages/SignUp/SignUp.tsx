@@ -68,7 +68,7 @@ export const SignUp = () => {
         <Grid
             container
             maxWidth='xl'
-            sx={{ ml: 'auto', mr: 'auto', pt: theme.main.padding, pb: theme.main.padding }}
+            sx={{ ml: 'auto', mr: 'auto', py: theme.main.padding }}
         >
             <Grid
                 item
@@ -143,7 +143,9 @@ export const SignUp = () => {
                                 register={register('username')}
                                 errorMessage={
                                     allSignUpUsernameErrors.includes(errors.username?.message as SignUpUsernameError)
-                                        ? signupT(`input.username.error.${errors.username!.message as SignUpUsernameError}`)
+                                        ? signupT(
+                                              `input.username.error.${errors.username!.message as SignUpUsernameError}`
+                                          )
                                         : undefined
                                 }
                             />
@@ -164,7 +166,9 @@ export const SignUp = () => {
                                 register={register('password')}
                                 errorMessage={
                                     allSignUpPasswordErrors.includes(errors.password?.message as SignUpPasswordError)
-                                        ? signupT(`input.password.error.${errors.password!.message as SignUpPasswordError}`)
+                                        ? signupT(
+                                              `input.password.error.${errors.password!.message as SignUpPasswordError}`
+                                          )
                                         : undefined
                                 }
                             />
@@ -182,7 +186,15 @@ export const SignUp = () => {
                         </LoadingButton>
                         <GoogleButton />
                     </Box>
-                    <Box sx={{ marginTop: 4, display: 'flex', gap: 1 }}>
+                    <Box
+                        sx={{
+                            marginTop: 4,
+                            display: 'flex',
+                            gap: 1,
+                            flexDirection: { xxs: 'column', xs: 'rox' },
+                            alignItems: 'center',
+                        }}
+                    >
                         <Typography>{signupT('text.already-signup')}</Typography>
                         <Link
                             href={Path.SIGNIN}

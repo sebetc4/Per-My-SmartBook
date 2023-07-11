@@ -14,7 +14,6 @@ import { setAlert, toggleColorMode, updateUserColor } from '~/store';
 import { useTranslation } from 'react-i18next';
 
 export const UiSettings = () => {
-
     //Hooks
     const dispatch = useAppDispatch();
     const theme = useTheme();
@@ -48,12 +47,10 @@ export const UiSettings = () => {
             maxWidth='xl'
             sx={{
                 display: 'flex',
-                flexDirection: {xxs: 'column', sm: 'row'},
+                flexDirection: { xxs: 'column', md: 'row' },
                 justifyContent: 'space-between',
                 gap: 6,
-                pt: theme.main.padding,
-                pb: theme.main.padding,
-                overflowY: 'scroll'
+                py: theme.main.padding,
             }}
         >
             <Box flex={2}>
@@ -104,7 +101,16 @@ export const UiSettings = () => {
                         {settingsT('AppearanceSettings.title.h3.user-color')}{' '}
                     </Typography>
                 </Divider>
-                <Box sx={{ mt: 6, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 6 }}>
+                <Box
+                    sx={{
+                        mt: 6,
+                        display: 'flex',
+                        flexDirection: { xxs: 'column', xl: 'row' },
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: 6,
+                    }}
+                >
                     <Typography sx={{ fontSize: '2rem', fontWeight: 500, color: userColor }}>
                         {session?.username}
                     </Typography>
@@ -122,7 +128,7 @@ export const UiSettings = () => {
                             onChangeComplete={(color) => setUserColor(color.hex)}
                         />
                         <LoadingButton
-                            sx={{ mt: 2 }}
+                            sx={{ mt: 2, mb: {xxs: 6, md: 0} }}
                             variant='outlined'
                             disabled={isLoading}
                             loading={isLoading}

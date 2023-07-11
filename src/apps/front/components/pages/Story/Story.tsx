@@ -10,8 +10,7 @@ export const Story = () => {
             maxWidth='xl'
             sx={{
                 display: 'flex',
-                pt: theme.main.padding,
-                pb: theme.main.padding,
+                py: theme.main.padding,
                 flexDirection: 'column',
                 justifyContent: 'center',
             }}
