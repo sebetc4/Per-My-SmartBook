@@ -14,9 +14,8 @@ import {
 import { NextApiRequest, NextApiResponse } from 'next';
 import { generateRandomBytes, hashData, setTokenCookie } from '../functions';
 import { getUrlFromS3 } from '../configs';
-import { maxTokensOpenai, minTokensOpenai, minuteResetPasswordTime } from '../../../packages/constants';
-import { minutesToMilliseconds, stringToColor } from '../../../packages/functions';
-import { boolean } from 'yup';
+import { maxTokensOpenai, minTokensOpenai, minuteResetPasswordTime } from '~/packages/constants';
+import { minutesToMilliseconds, stringToColor } from '~/packages/functions';
 
 const schema = new Schema<UserSchema, IUserModel, UserMethods>(
     {
@@ -36,14 +35,14 @@ const schema = new Schema<UserSchema, IUserModel, UserMethods>(
         },
         emailVerification: {
             status: {
-                type: boolean,
+                type: Boolean,
                 default: false,
             },
             token: {
                 type: String,
             },
             expireAt: {
-                type: Date,
+                type: Number,
             },
         },
         password: {

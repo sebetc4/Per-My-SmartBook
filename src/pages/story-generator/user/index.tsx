@@ -26,7 +26,7 @@ export default function UserStoryGeneratorPage() {
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
     return requireAuthUser(store, context, async () => ({
         props: {
-            ...(await customServerSideTranslations(context.locale!, ['story-generator', 'story-inputs'])),
+            ...(await customServerSideTranslations(context.locale!, ['story-generator', 'story-inputs', 'buttons'])),
         },
     }));
 });
