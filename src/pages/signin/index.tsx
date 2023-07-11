@@ -1,10 +1,10 @@
 import Head from 'next/head';
 import { CustomError } from '~/packages/classes';
 import { setAuthError, wrapper } from '~/store';
-import { QueryError } from '~/packages/types';
 import { customServerSideTranslations, requireUnAuthUser } from '~/apps/api/functions';
 import { SignIn } from '~/apps/front/components';
 import { useTranslation } from 'react-i18next';
+import { PathParams } from '~/packages/types';
 
 export default function LoginPage() {
     // Hooks
@@ -27,7 +27,7 @@ export default function LoginPage() {
 
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
     switch (context.query.error) {
-        case QueryError.EMAIL_ALREADY_EXISTS:
+        case PathParams.EMAIL_ALREADY_EXISTS:
             store.dispatch(setAuthError(CustomError.EMAIL_ALREADY_EXISTS.message));
             break;
     }

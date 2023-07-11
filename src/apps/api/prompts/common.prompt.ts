@@ -10,7 +10,6 @@ export const getInitialContextSentence = (language: Language): string => {
 };
 
 export const getSumaryStorySentence = (language: Language, storySummary: string): string => {
-
     switch (language) {
         case 'fr':
             return `Voici le résumé de l'histoire: "${storySummary}".`;

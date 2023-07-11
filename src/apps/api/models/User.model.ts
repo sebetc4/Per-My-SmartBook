@@ -12,10 +12,10 @@ import {
     allVisibilityValues,
 } from '../../../packages/types';
 import { NextApiRequest, NextApiResponse } from 'next';
-import { setTokenCookie } from '../functions';
+import { generateRandomBytes, hashData, setTokenCookie } from '../functions';
 import { getUrlFromS3 } from '../configs';
-import { maxTokensOpenai, minTokensOpenai } from '../../../packages/constants';
-import { stringToColor } from '../../../packages/functions';
+import { maxTokensOpenai, minTokensOpenai, minuteResetPasswordTime } from '../../../packages/constants';
+import { minutesToMilliseconds, stringToColor } from '../../../packages/functions';
 
 const schema = new Schema<UserSchema, IUserModel, UserMethods>(
     {
@@ -89,6 +89,14 @@ const schema = new Schema<UserSchema, IUserModel, UserMethods>(
                 },
             },
         },
+        resetPassword: {
+            token: {
+                type: String,
+            },
+            expireAt: {
+                type: Date,
+            },
+        },
     },
     {
         timestamps: true,
@@ -122,7 +130,7 @@ schema.methods.getSessionData = async function (this: UserInstance): Promise<Use
         id: this.id,
         authProvider: this.authProvider,
         username: this.username,
-        avatarUrl: this.avatar.key ? (await getUrlFromS3(this.avatar)) : null,
+        avatarUrl: this.avatar.key ? await getUrlFromS3(this.avatar) : null,
         userColor: this.uiSettings.userColor,
         colorMode: this.uiSettings.colorMode,
     };
@@ -152,5 +160,13 @@ schema.methods.isEqualValues = function (this: UserInstance, values: Partial<Use
     }
     return true;
 };
+
+schema.methods.getResetPasswordToken = function(this: UserInstance) {
+    const resetToken = generateRandomBytes(32)
+    this.resetPassword.token= hashData(resetToken);
+    this.resetPassword.expireAt = Date.now() + minutesToMilliseconds(minuteResetPasswordTime)
+    this.save({validateBeforeSave: false})
+    return resetToken
+}
 
 export const User = models.User || model<UserSchema>('User', schema);

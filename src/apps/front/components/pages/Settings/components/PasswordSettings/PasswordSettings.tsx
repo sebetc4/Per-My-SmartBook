@@ -4,17 +4,17 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 // MUI
 import { LoadingButton } from '@mui/lab';
-import { Box, Grid, Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
 // App
 import {
-    allPasswordFormConfirmPasswordErrors,
     allPasswordFormCurrentPasswordErrors,
     allPasswordFormNewPasswordErrors,
-    PasswordFormConfirmPasswordError,
     PasswordFormCurrentPasswordError,
-    PasswordFormNewPasswordError,
+    NewPasswordError,
     UpdatePasswordBody,
+    PasswordFormConfirmPasswordError,
+    allPasswordFormConfirmPasswordErrors,
 } from '~/packages/types';
 import { updatePasswordSchema } from '~/packages/schemas';
 import { setAlert, updatePassword } from '~/store';
@@ -100,11 +100,11 @@ export const PasswordSettings = () => {
                         register={register('newPassword')}
                         errorMessage={
                             allPasswordFormNewPasswordErrors.includes(
-                                errors.newPassword?.message as PasswordFormNewPasswordError
+                                errors.newPassword?.message as NewPasswordError
                             )
                                 ? t(
                                       `PasswordForm.input.newPassword.error.${
-                                          errors.newPassword!.message as PasswordFormNewPasswordError
+                                          errors.newPassword!.message as NewPasswordError
                                       }`
                                   )
                                 : undefined

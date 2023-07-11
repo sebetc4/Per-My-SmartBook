@@ -8,6 +8,8 @@
     "success.modify-openai-key": "Votre clé OpenAI a été modifiée.",
     "success.user-story-saved": "Votre histoire a été sauvegardée.",
 
+    "success.reset-password": "Un email vous a été envoyé pour réinitialiser votre mot de passe.",
+
     "error.invalid-session": "Votre session a expiré. Veuillez vous reconnecter.",
 
     "error.login.default": "Une erreur s'est produite lors de la tentative de connexion. Veuillez réessayer ultérieurement.",
@@ -22,10 +24,10 @@
     
     "error.update-data.default" : "Une erreur s'est produite lors de l'enregistrement de vos modifications. Veuillez réessayer ultérieurement.",
     "error.update-password.default": "Une erreur s'est produite lors de la modification de votre mot de passe. Veuillez réessayer ultérieurement.",
+    "error.forgot-password-default": "Une erreur s'est produite lors de la réinitialisation de votre mot de passe. Veuillez réessayer ultérieurement.",
 
     "error.add-openai-key" : "Une erreur s'est produite lors de l'ajout de votre clé OpenAI. Veuillez réessayer ultérieurement.",
     "error.modify-openai-key" : "Une erreur s'est produite lors de la modification de votre clé OpenAI. Veuillez réessayer ultérieurement.",
 
     "error.openai-service-unavailable": "OpenAI n'est pas en mesure de traiter votre reqûete. Veuillez réessayer ultérieurement."
 }
-

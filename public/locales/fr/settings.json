@@ -29,7 +29,7 @@
     "PasswordForm.input.newPassword.error.too-long": "Le nouveau mot de passe doit faire au maximum 40 caractères",
     "PasswordForm.input.confirmPassword.label": "Confirmation du mot de passe",
     "PasswordForm.input.confirmPassword.error.is-required": "La confirmation du mot de passe est requise",
-    "PasswordForm.input.confirmPassword.error.not-same-as-the-old": "Les mots de passe ne sont pas identique",
+    "PasswordForm.input.confirmPassword.error.not-same-as-the-new-password": "Les mots de passe ne sont pas identique",
     "PasswordForm.button.save": "Enregistrer les modifications",
 
     "ProfileForm.button.save": "Enregistrer les modifications",

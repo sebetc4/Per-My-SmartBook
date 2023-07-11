@@ -46,7 +46,7 @@ export const createOneReview = catchControllerError(async (req, res) => {
     const user = await authUser(req);
     const story = await getOneFinishedStoryById(storyId);
     if (story.hasVoted(user.id)) {
-        throw CustomError.FORBIDEN;
+        throw CustomError.FORBIDDEN;
     }
     console.log('globalRating', roundNearestTenth((textRating + imageRating) / 2));
     const review = await StoryReview.create({
@@ -76,7 +76,7 @@ export const updateOneReview = catchControllerError(async (req, res) => {
     const user = await authUser(req);
     const review = await getOneStoryReviewById(reviewId);
     if (!review.isAuthor(user.id)) {
-        throw CustomError.FORBIDEN;
+        throw CustomError.FORBIDDEN;
     }
     review.title = title;
     review.text = text;
@@ -95,7 +95,7 @@ export const deleteOneReview = catchControllerError(async (req, res) => {
     const user = await authUser(req);
     const review = await getOneStoryReviewById(reviewId);
     if (!review.isAuthor(user.id)) {
-        throw CustomError.FORBIDEN;
+        throw CustomError.FORBIDDEN;
     }
     await review.delete();
     const story = await getOneFinishedStoryById(storyId);

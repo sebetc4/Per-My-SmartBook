@@ -48,10 +48,12 @@ export const UiSettings = () => {
             maxWidth='xl'
             sx={{
                 display: 'flex',
+                flexDirection: {xxs: 'column', sm: 'row'},
                 justifyContent: 'space-between',
                 gap: 6,
                 pt: theme.main.padding,
                 pb: theme.main.padding,
+                overflowY: 'scroll'
             }}
         >
             <Box flex={2}>

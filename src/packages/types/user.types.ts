@@ -11,15 +11,21 @@ export type UserSchema = {
     email: string;
     password?: string;
     avatar: ImageOnDb;
-    uiSettings: UserAppearanceParameters;
+    uiSettings: UiSettings;
     resetPasswordToken?: string;
     resetPasswordExpire?: Date;
     aiSettings: AISettings;
+    resetPassword: ResetPassword;
 };
 
-type UserAppearanceParameters = {
+type UiSettings = {
     userColor: string;
     colorMode: ColorMode;
+};
+
+type ResetPassword = {
+    token?: string;
+    expireAt?: number;
 };
 
 export type UserMethods = {

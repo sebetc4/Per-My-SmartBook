@@ -29,7 +29,7 @@
     "PasswordForm.input.password.error.too-long": "New password must be at most 20 characters long",
     "PasswordForm.input.confirmPassword.label": "Confirmation of the password",
     "PasswordForm.input.confirmPassword.error.is-required": "Password confirmation is required",
-    "PasswordForm.input.confirmPassword.error.not-same-as-the-old": "Passwords are not identical",
+    "PasswordForm.input.confirmPassword.error.not-same-as-the-new-password": "Passwords are not identical",
     "PasswordForm.button.save": "Save changes",
 
     "ProfileForm.button.save": "Save changes",

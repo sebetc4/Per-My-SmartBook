@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 // Mui
-import { Button, Container, Typography } from '@mui/material';
+import { Button, Container, Typography, useTheme } from '@mui/material';
 //imahes
 import LostChildrenIllustration from '../../../../../../public/images/illustrations/lost-children.png';
 
@@ -11,9 +11,18 @@ export const FourOhFour = () => {
     // Hooks
     const { t: fourOfFourT } = useTranslation('404');
     const router = useRouter();
+    const theme = useTheme();
 
     return (
-        <Container sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, mt: 6, mb: 6}}>
+        <Container
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 4,
+                py: theme.main.padding,
+            }}
+        >
             <Image
                 src={LostChildrenIllustration}
                 alt='Enfant perdu'

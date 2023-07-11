@@ -34,3 +34,8 @@ export type LoginWithCredentialsRes = {
 export type ForgotPasswordBody = {
     email: string;
 };
+
+export type ResetPasswordBody = {
+    newPassword: string;
+    confirmPassword: string;
+};

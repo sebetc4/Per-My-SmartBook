@@ -1,2 +1,3 @@
 export * from './story.queries'
-export * from './review.query'
+export * from './review.queries'
+export * from './user.queries'

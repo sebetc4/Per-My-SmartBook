@@ -4,13 +4,14 @@ import { useRouter } from 'next/router';
 import { useTranslation } from 'react-i18next';
 // Mui
 import { Box, Button, Container, Typography, useTheme } from '@mui/material';
-//imahes
-import NoStoryImage from '../../../../../../public/images/illustrations/no-story-found.png';
+// App
 import { Path } from '~/packages/types';
+// Images
+import NoStoryImage from 'public/images/illustrations/no-story-found.png';
 
 export const StoryNotFound = () => {
     // Hooks
-    const { t: storyNotFounndT } = useTranslation('story-not-found');
+    const { t: storyNotFoundT } = useTranslation('story-not-found');
     const router = useRouter();
     const theme = useTheme();
 
@@ -26,7 +27,7 @@ export const StoryNotFound = () => {
             >
                 <Image
                     src={NoStoryImage}
-                    alt={storyNotFounndT('image.alt')}
+                    alt={storyNotFoundT('image.alt')}
                     placeholder='blur'
                     fill
                     style={{
@@ -41,27 +42,27 @@ export const StoryNotFound = () => {
                 component='h1'
                 sx={{ fontWeight: 'bold' }}
             >
-                {storyNotFounndT('title.h1')}
+                {storyNotFoundT('title.h1')}
             </Typography>
             <Typography
                 color={theme.text.body}
                 textAlign='center'
                 sx={{ maxWidth: '600px', fontSize: '1.2rem' }}
             >
-                {storyNotFounndT('text.main')}
+                {storyNotFoundT('text.main')}
             </Typography>
             <Box sx={{ display: 'flex', flexDirection: { xxs: 'column', xs: 'row' }, gap: 4 }}>
                 <Button
                     variant='outlined'
                     onClick={() => router.push(Path.NEW_STORY)}
                 >
-                    {storyNotFounndT('button.new-story')}
+                    {storyNotFoundT('button.new-story')}
                 </Button>
                 <Button
                     variant='outlined'
                     onClick={() => router.push(Path.PUBLIC_STORIES)}
                 >
-                    {storyNotFounndT('button.public-story')}
+                    {storyNotFoundT('button.public-story')}
                 </Button>
             </Box>
         </Container>

@@ -7,6 +7,7 @@
     "text.account-already-exists-with-this-email": "An account is already linked to this address with another connection method",
     "text.no-account": "Don't have an account?",
     "button.signin": "Sign in",
+    "button.forgot-password": "Forgot password?",
     "button.signup": "Sign up",
 
     "input.email.label": "Email address",
@@ -16,5 +17,5 @@
 
     "input.password.label": "Password",
     "input.password.error.is-required": "Password is required",
-    "input.password.error.wrong": "Wrong password"
+    "input.password.error.wrong-password": "Wrong password"
 }

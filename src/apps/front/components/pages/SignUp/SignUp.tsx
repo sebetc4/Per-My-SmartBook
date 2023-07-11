@@ -34,7 +34,7 @@ export const SignUp = () => {
     // Hooks
     const router = useRouter();
     const dispatch = useAppDispatch();
-    const { t } = useTranslation('signup');
+    const { t: signupT } = useTranslation('signup');
     const theme = useTheme();
     const isUpSmScreen = useMediaQuery(theme.breakpoints.up('sm'));
 
@@ -104,7 +104,7 @@ export const SignUp = () => {
                         component='h1'
                         variant='h2'
                     >
-                        {t('title.h1')}
+                        {signupT('title.h1')}
                     </Typography>
                     <Typography
                         component='h2'
@@ -115,7 +115,7 @@ export const SignUp = () => {
                             fontSize: '1.2rem',
                         }}
                     >
-                        {t('title.h2')}
+                        {signupT('title.h2')}
                     </Typography>
                     <Box
                         component='form'
@@ -138,33 +138,33 @@ export const SignUp = () => {
                         >
                             <CustomTextField
                                 name='username'
-                                label={t('input.username.label')}
+                                label={signupT('input.username.label')}
                                 type='text'
                                 register={register('username')}
                                 errorMessage={
                                     allSignUpUsernameErrors.includes(errors.username?.message as SignUpUsernameError)
-                                        ? t(`input.username.error.${errors.username!.message as SignUpUsernameError}`)
+                                        ? signupT(`input.username.error.${errors.username!.message as SignUpUsernameError}`)
                                         : undefined
                                 }
                             />
                             <CustomTextField
                                 name='email'
-                                label={t('input.email.label')}
+                                label={signupT('input.email.label')}
                                 type='email'
                                 register={register('email')}
                                 errorMessage={
                                     allSignUpEmailErrors.includes(errors.email?.message as SignUpEmailError)
-                                        ? t(`input.email.error.${errors.email!.message as SignUpEmailError}`)
+                                        ? signupT(`input.email.error.${errors.email!.message as SignUpEmailError}`)
                                         : undefined
                                 }
                             />
                             <CustomPasswordInput
                                 name='password'
-                                label={t('input.password.label')}
+                                label={signupT('input.password.label')}
                                 register={register('password')}
                                 errorMessage={
                                     allSignUpPasswordErrors.includes(errors.password?.message as SignUpPasswordError)
-                                        ? t(`input.password.error.${errors.password!.message as SignUpPasswordError}`)
+                                        ? signupT(`input.password.error.${errors.password!.message as SignUpPasswordError}`)
                                         : undefined
                                 }
                             />
@@ -178,12 +178,12 @@ export const SignUp = () => {
                             size='large'
                             fullWidth
                         >
-                            {t('button.signup')}
+                            {signupT('button.signup')}
                         </LoadingButton>
                         <GoogleButton />
                     </Box>
                     <Box sx={{ marginTop: 4, display: 'flex', gap: 1 }}>
-                        <Typography>{t('text.already-signup')}</Typography>
+                        <Typography>{signupT('text.already-signup')}</Typography>
                         <Link
                             href={Path.SIGNIN}
                             style={{ textDecoration: 'none' }}
@@ -196,7 +196,7 @@ export const SignUp = () => {
                                     cursor: 'pointer',
                                 }}
                             >
-                                {t('button.signin')}
+                                {signupT('button.signin')}
                             </Typography>
                         </Link>
                     </Box>

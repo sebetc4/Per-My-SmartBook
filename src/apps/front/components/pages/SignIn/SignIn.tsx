@@ -7,15 +7,15 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslation } from 'next-i18next';
 // Mui
-import { Box, Container, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, Container, Grid, Typography, useMediaQuery, useTheme } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 // App
 import { CustomError } from '~/packages/classes';
 import {
-    allLoginEmailErrors,
-    allLoginPasswordErrors,
-    LoginEmailError,
-    LoginPasswordError,
+    allSignInEmailErrors,
+    allSignInPasswordErrors,
+    SignInEmailError,
+    SignInPasswordError,
     LoginWithCredentialsBody,
     Path,
 } from '~/packages/types';
@@ -64,7 +64,7 @@ export const SignIn = () => {
                     setError('email', { type: 'custom', message: 'no-associated-account' });
                     break;
                 case CustomError.WRONG_PASSWORD.message:
-                    setError('password', { type: 'custom', message: 'wrong' });
+                    setError('password', { type: 'custom', message: 'wrong-password' });
                     break;
                 default:
                     dispatch(setAlert({ type: 'error', message: 'error.login.default' }));
@@ -155,8 +155,8 @@ export const SignIn = () => {
                                 type='email'
                                 register={register('email')}
                                 errorMessage={
-                                    allLoginEmailErrors.includes(errors.email?.message as LoginEmailError)
-                                        ? signinT(`input.email.error.${errors.email!.message as LoginEmailError}`)
+                                    allSignInEmailErrors.includes(errors.email?.message as SignInEmailError)
+                                        ? signinT(`input.email.error.${errors.email!.message as SignInEmailError}`)
                                         : undefined
                                 }
                             />
@@ -165,8 +165,10 @@ export const SignIn = () => {
                                 label={signinT('input.password.label')}
                                 register={register('password')}
                                 errorMessage={
-                                    allLoginPasswordErrors.includes(errors.password?.message as LoginPasswordError)
-                                        ? signinT(`input.password.error.${errors.password!.message as LoginPasswordError}`)
+                                    allSignInPasswordErrors.includes(errors.password?.message as SignInPasswordError)
+                                        ? signinT(
+                                              `input.password.error.${errors.password!.message as SignInPasswordError}`
+                                          )
                                         : undefined
                                 }
                             />
@@ -176,12 +178,19 @@ export const SignIn = () => {
                             disabled={isSubmitting}
                             type='submit'
                             variant='contained'
-                            sx={{ marginTop: 2, marginBottom: 2 }}
+                            sx={{ my: 2 }}
                             fullWidth
                             size='large'
                         >
                             {signinT('button.signin')}
                         </LoadingButton>
+                        <Button
+                            sx={{ mb: 2 }}
+                            component={Link}
+                            href={Path.FORGOT_PASSWORD}
+                        >
+                            {signinT('button.forgot-password')}
+                        </Button>
                         <GoogleButton />
                         {showProviderError && (
                             <Typography

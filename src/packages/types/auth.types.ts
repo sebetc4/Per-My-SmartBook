@@ -1,4 +1,4 @@
-import { UserSessionData, UserSession } from './user.types';
+import { UserSession } from './user.types';
 
 export enum SessionStatus {
     VALID = 'valid',

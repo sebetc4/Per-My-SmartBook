@@ -22,6 +22,8 @@ import {
     LikeOrDislikeOneReviewRes,
     UpdateOneReviewBody,
     UpdateOneReviewRes,
+    ResetPasswordBody,
+    ForgotPasswordBody,
 } from '~/packages/types';
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL!;
@@ -63,6 +65,15 @@ class ApiService {
     }
     logout() {
         return this.api.get('/auth/logout');
+    }
+    forgotPassword(data: ForgotPasswordBody) {
+        return this.api.post('/auth/password/forgot', data);
+    }
+    checkResetPasswordToken(token: string) {
+        return this.api.get(`/auth/password/reset/${token}`);
+    }
+    resetPassword(data: ResetPasswordBody, token: string) {
+        return this.api.post(`/auth/password/reset/${token}`, data);
     }
 
     /**

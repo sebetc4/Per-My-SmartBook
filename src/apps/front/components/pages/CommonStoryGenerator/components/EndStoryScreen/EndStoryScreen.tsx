@@ -21,7 +21,7 @@ export const EndStoryScreen = () => {
 
     useEffect(() => {
         timeLeft.isFinished && router.push(Path.NEW_STORY);
-    }, [timeLeft.isFinished]);
+    }, [timeLeft.isFinished, router]);
 
     return (
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4 }}>

@@ -23,6 +23,8 @@ export const allAlertMessages = [
     
     'success.user-story-saved',
 
+    'success.reset-password',
+
     'error.invalid-session',
 
     'error.login.default',
@@ -35,6 +37,7 @@ export const allAlertMessages = [
     'error.userStoryBeingGenerated.resume-story',
     'error.userStoryBeingGenerated.save-finished-story',
 
+    'error.forgot-password-default',
     'error.update-data.default',
     'error.update-password.default',
 

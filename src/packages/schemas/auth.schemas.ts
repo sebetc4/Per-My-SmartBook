@@ -1,6 +1,6 @@
 import * as yup from 'yup';
 
-import { LoginWithCredentialsBody, SignUpBody, UpdatePasswordBody } from '../types';
+import { ForgotPasswordBody, LoginWithCredentialsBody, ResetPasswordBody, SignUpBody, UpdatePasswordBody } from '../types';
 import { emailValidation, usernameValidation } from '.';
 
 export const signUpSchema: yup.SchemaOf<SignUpBody> = yup.object().shape({
@@ -25,5 +25,21 @@ export const updatePasswordSchema: yup.SchemaOf<UpdatePasswordBody> = yup.object
     confirmPassword: yup
         .string()
         .required('is-required')
-        .oneOf([yup.ref('newPassword')], 'not-same-as-the-old'),
+        .oneOf([yup.ref('newPassword')], 'not-same-as-the-new-password'),
 });
+
+export const forgotPasswordSchema: yup.SchemaOf<ForgotPasswordBody> = yup.object().shape({
+    email: emailValidation,
+});
+
+export const resetPasswordSchema: yup.SchemaOf<ResetPasswordBody> = yup.object().shape({
+    newPassword: yup
+        .string()
+        .min(6, 'too-short')
+        .max(40, 'too-long')
+        .required('is-required'),
+    confirmPassword: yup
+        .string()
+        .oneOf([yup.ref('newPassword')], 'not-same-as-the-new-password')
+        .required('is-required')
+    });

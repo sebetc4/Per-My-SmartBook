@@ -265,6 +265,9 @@ const TopMenu = ({ tabs, currentTab, handleChangeCurrentTab }: LeftMenuProps) =>
                     onChange={handleChangeCurrentTab}
                     centered
                     aria-label='basic tabs example'
+                    variant="scrollable"
+                    scrollButtons="auto"
+                    allowScrollButtonsMobile
                 >
                     {tabs.map((tab, i) => (
                         <Tab

@@ -19,6 +19,7 @@ import illustrations from '../../../public/locales/fr/illustrations.json';
 import storyNotFound from '../../../public/locales/fr/story-not-found.json';
 import forgotPassword from '../../../public/locales/fr/forgot-password.json';
 import home from '../../../public/locales/fr/home.json';
+import resetPassword from '../../../public/locales/fr/reset-password.json';
 
 declare module 'i18next' {
     interface CustomTypeOptions {
@@ -43,6 +44,7 @@ declare module 'i18next' {
             'story': typeof story,
             'story-not-found': typeof storyNotFound,
             'forgot-password': typeof forgotPassword,
+            'reset-password': typeof resetPassword,
 
             // Inputs
             'story-inputs': typeof storyInputs,

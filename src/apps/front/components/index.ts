@@ -29,7 +29,6 @@ export { ConfirmModal } from './modal/ConfirmModal/ConfirmModal';
 export { FormModal } from './modal/FormModal/FormModal';
 
 // Page
-export { ForgotPassword } from './pages/ForgotPassword/ForgotPassword';
 export { SignIn } from './pages/SignIn/SignIn';
 export { SignUp } from './pages/SignUp/SignUp';
 export { UserStoryGenerator } from './pages/UserStoryGenerator/UserStoryGenerator';
@@ -43,6 +42,8 @@ export { Home } from './pages/Home/Home';
 export { NewStory } from './pages/NewStory/NewStory';
 export { Story } from './pages/Story/Story';
 export { StoryNotFound } from './pages/StoryNotFound/StoryNotFound';
+export { ForgotPassword } from './pages/ForgotPassword/ForgotPassword';
+export { ResetPassword } from './pages/ResetPassword/ResetPassword';
 
 // Timer
 export { TimeLeftTextTimer } from './timer/TimeLeftTextTimer/TimeLeftTextTimer';

@@ -2,7 +2,13 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { AxiosError } from 'axios';
 import { api, sockets } from '../../services';
 import { CustomError } from '../../packages/classes';
-import { LoginWithCredentialsBody, SessionStatus, SignUpBody } from '../../packages/types';
+import {
+    ForgotPasswordBody,
+    LoginWithCredentialsBody,
+    ResetPasswordBody,
+    SessionStatus,
+    SignUpBody,
+} from '../../packages/types';
 import { resetUserState, setUserSessionData } from './user.slice';
 import { resetUserStoryBeingGeneratedState } from './userStoryBeingGenerated.slice';
 import { resetUserStoriesState } from './userStories.slice';
@@ -121,6 +127,36 @@ export const authSlice = createSlice({
             state.isAuth = false;
             state.error = action.payload || action.error.message || null;
         });
+
+        /**
+         * Forgot password
+         */
+        builder.addCase(forgotPassword.pending, (state) => {
+            state.isLoading = true;
+            state.error = null;
+        });
+        builder.addCase(forgotPassword.fulfilled, (state) => {
+            state.isLoading = false;
+        });
+        builder.addCase(forgotPassword.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload || action.error.message || null;
+        });
+
+        /**
+         * Reset password
+         */
+        builder.addCase(resetPassword.pending, (state) => {
+            state.isLoading = true;
+            state.error = null;
+        });
+        builder.addCase(resetPassword.fulfilled, (state) => {
+            state.isLoading = false;
+        });
+        builder.addCase(resetPassword.rejected, (state, action) => {
+            state.isLoading = false;
+            state.error = action.payload || action.error.message || null;
+        });
     },
 });
 
@@ -146,7 +182,7 @@ export const login = createAsyncThunk<void, LoginWithCredentialsBody, { rejectVa
             const { colorMode, ...userSessionDara } = data.session.user;
             dispatch(setUserSessionData(userSessionDara));
             dispatch(setColorMode(colorMode));
-            await sockets.resetAllSockects()
+            await sockets.resetAllSockects();
         } catch (err) {
             if (err instanceof AxiosError) {
                 return rejectWithValue(err.response?.data.message);
@@ -161,7 +197,7 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>('aut
     dispatch(resetUserState());
     dispatch(resetUserStoriesState());
     dispatch(resetUserStoryBeingGeneratedState());
-    await sockets.resetAllSockects()
+    await sockets.resetAllSockects();
 });
 
 export const checkAuth = createAsyncThunk<boolean, void, { rejectValue: string }>(
@@ -180,6 +216,34 @@ export const checkAuth = createAsyncThunk<boolean, void, { rejectValue: string }
             dispatch(setUserSessionData(userSessionDara));
             dispatch(setColorMode(colorMode));
             return true;
+        } catch (err) {
+            if (err instanceof AxiosError) {
+                return rejectWithValue(err.response?.data.message);
+            }
+            throw err;
+        }
+    }
+);
+
+export const forgotPassword = createAsyncThunk<any, ForgotPasswordBody, { rejectValue: string }>(
+    'auth/forgotPassword',
+    async (body, { rejectWithValue }) => {
+        try {
+            await api.forgotPassword(body);
+        } catch (err) {
+            if (err instanceof AxiosError) {
+                return rejectWithValue(err.response?.data.message);
+            }
+            throw err;
+        }
+    }
+);
+
+export const resetPassword = createAsyncThunk<any, { body: ResetPasswordBody; token: string }, { rejectValue: string }>(
+    'auth/resetPassword',
+    async ({ body, token }, { rejectWithValue }) => {
+        try {
+            await api.resetPassword(body, token);
         } catch (err) {
             if (err instanceof AxiosError) {
                 return rejectWithValue(err.response?.data.message);

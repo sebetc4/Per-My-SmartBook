@@ -8,6 +8,8 @@
     "success.modify-openai-key": "Your OpenAI key has been changed.",
     "success.user-story-saved": "Your story has been saved.",
 
+    "success.reset-password": "An email has been sent to you to reset your password.",
+
     "error.login.default": "An error occurred while attempting to connect. Please try again later.",
     
     "error.invalid-session": "Your session has expired. Please log in again.",
@@ -22,6 +24,7 @@
 
     "error.update-data.default" : "An error occurred while saving your changes. Please try again later.",
     "error.update-password.default": "An error occurred while changing your password. Please try again later.",
+    "error.forgot-password-default": "An error occurred while resetting your password. Please try again later.",
 
     "error.add-openai-key" : "An error occurred while adding your OpenAI key. Please try again later.",
     "error.modify-openai-key" : "An error occurred while editing your OpenAI key. Please try again later.",

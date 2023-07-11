@@ -11,11 +11,12 @@ export default function SignUpPage() {
     return (
         <>
             <Head>
-            <title>{`${forgotPasswordT('page.title')} - ${commonT('app-name')}`}</title>
+                <title>{`${forgotPasswordT('page.title')} - ${commonT('app-name')}`}</title>
                 <meta
                     name='description'
                     content={forgotPasswordT('page.description')}
-                />            </Head>
+                />
+            </Head>
             <ForgotPassword />
         </>
     );
@@ -24,6 +25,7 @@ export default function SignUpPage() {
 export const getServerSideProps = wrapper.getServerSideProps((store) => async (context) => {
     return requireUnAuthUser(store, context, async () => ({
         props: {
-            ...( await customServerSideTranslations(context.locale!)),
+            ...(await customServerSideTranslations(context.locale!, ['forgot-password'])),
         },
-    }));});
+    }));
+});

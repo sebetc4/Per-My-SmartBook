@@ -43,8 +43,7 @@ export const CommonStoryGenerator = () => {
                     sx={{
                         height: '100%',
                         width: '100%',
-                        pt: theme.main.padding,
-                        pb: theme.main.padding,
+                        py: theme.main.padding,
                     }}
                 >
                     {storyData.state === 'waiting' ? (
