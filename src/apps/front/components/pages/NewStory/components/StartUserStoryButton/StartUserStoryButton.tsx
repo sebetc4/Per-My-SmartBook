@@ -9,7 +9,7 @@ export const StartUserStoryButton = () => {
     const theme = useTheme();
     const { mediaQuery } = useAppMediaQuery();
 
-    return mediaQuery.upMd ? (
+    return mediaQuery.upSm ? (
         <Box
             sx={{
                 position: 'relative',
@@ -108,29 +108,33 @@ export const StartUserStoryButton = () => {
 const StartButton = () => {
     // Hooks
     const theme = useTheme();
-    const {t: buttonT} = useTranslation('buttons')
-     
+    const { t: buttonT } = useTranslation('buttons');
+    const { mediaQuery } = useAppMediaQuery();
+
     // Store
-    const {colorMode} = useAppSelector((state) => state.app);
+    const { colorMode } = useAppSelector((state) => state.app);
 
     return (
         <Fab
             component={Link}
             href={Path.USER_STORY_GENERATOR}
             variant='extended'
+            color='primary'
             sx={{
                 p: { xxs: 2, xs: 4 },
                 position: 'relative',
                 zIndex: 8,
-                color: theme.text.body,
+                color: { xxs: undefined, sm: theme.text.body },
                 fontSize: { xxs: '1rem', md: '1.2rem' },
                 textWeight: 'bold',
                 transition: 'all ease-in 0.8s',
-                backgroundColor: theme.card.backgroundColor,
-                '&:hover': {
-                    backgroundColor: theme.palette.primary.main,
-                    color: colorMode === 'light' ? 'white' : 'black',
-                },
+                backgroundColor: { xxs: undefined, sm: theme.card.backgroundColor },
+                '&:hover': mediaQuery.upSm
+                    ? {
+                          backgroundColor: theme.palette.primary.main,
+                          color: colorMode === 'light' ? 'white' : 'black',
+                      }
+                    : {},
             }}
         >
             {buttonT('create-new-story')}

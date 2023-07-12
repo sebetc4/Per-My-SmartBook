@@ -16,9 +16,9 @@ export const handleCommonStoriesSocket = (io: Server) => {
     const commonStoriesIo = io.of(SocketNamespace.COMMON_STORIES);
 
     if (!enableCommonStoryDevMode) {
+        schedule.scheduleJob('0 16 * * *', () => startNewStory(commonStoriesIo, 'fr'));
         schedule.scheduleJob('0 17 * * *', () => startNewStory(commonStoriesIo, 'fr'));
         schedule.scheduleJob('0 18 * * *', () => startNewStory(commonStoriesIo, 'fr'));
-        schedule.scheduleJob('0 19 * * *', () => startNewStory(commonStoriesIo, 'fr'));
     }
       
     commonStoriesIo.on('connection', async (socket) => {

@@ -83,7 +83,7 @@ export const ChapterChoiceButton = ({
                         fontWeight: '500',
                         '&:hover': {
                             transform: 'translate3D(0,-5px,0)',
-                            backgroundColor: lightenHexColor(theme.palette.primary.main, 0.6),
+                            backgroundColor: lightenHexColor(theme.button.backgroundColor!, 0.8),
                             boxShadow: '0px 5px 10px 0px rgba(0, 0, 0, 0.5)',
                         },
                         '&:disabled': isDisabledWithSelectedStyle

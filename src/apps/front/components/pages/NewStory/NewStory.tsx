@@ -65,7 +65,7 @@ export const NewStory = () => {
                                 height: '100%',
                                 inset: 0,
                                 zIndex: 1,
-                                boxShadow: `inset 0px 0px 60px 100px ${theme.main.background}`,
+                                boxShadow: {xxs: `inset 0px 0px 10px 20px ${theme.main.background}`, sm: `inset 0px 0px 30px 50px ${theme.main.background}`, md: `inset 0px 0px 60px 100px ${theme.main.background}`},
                             }}
                         />
                     </>

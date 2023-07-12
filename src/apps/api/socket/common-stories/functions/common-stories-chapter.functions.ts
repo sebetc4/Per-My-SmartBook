@@ -1,5 +1,5 @@
 import { Namespace } from 'socket.io';
-import { StoryDurationClass } from '../../../../../packages/classes';
+import { StoryDurationClass } from '~/packages/classes';
 import {
     commonStoryChapterDurationSeconds,
     enableLogCommonStoriesSocketManager,
@@ -7,8 +7,8 @@ import {
     imageGenerationIsEnable,
     minutesBeforeCommonStoryDelete,
     stopCommonStoryIfNoVoters,
-} from '../../../../../packages/constants';
-import { logIf, minutesToMilliseconds, waitStartTime } from '../../../../../packages/functions';
+} from '~/packages/constants';
+import { logIf, minutesToMilliseconds, waitStartTime } from '~/packages/functions';
 import {
     CommonStoryBeingGenerated,
     CommonStoryChapter,
@@ -23,7 +23,7 @@ import {
     Visibility,
     FirstCommonStoryChapterRes,
     StoryChapterChoice,
-} from '../../../../../packages/types';
+} from '~/packages/types';
 import { getUrlFromS3 } from '../../../configs';
 import {
     emitToAllSocketsInRoom,

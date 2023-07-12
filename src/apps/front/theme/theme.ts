@@ -288,8 +288,8 @@ export const lightTheme: ColorTheme = {
         boxShadowSelected: `${buttonBoxShadow}, ${lightPalette.primary.light}25 0px 54px 55px, ${lightPalette.secondary.light}12 0px -12px 30px, ${lightPalette.secondary.light}12 0px 4px 6px, ${lightPalette.secondary.light}12 0px 12px 13px, ${lightPalette.secondary.light}09 0px -3px 5px;`,
     },
     papel: {
-        backgroundColor: '#fafafa',
-        boxShadow: '0 0 10px rgba(0,0,0,0.3), 0 0 300px 25px rgba(222,198,122,0.7) inset',
+        backgroundColor: '#ece3cf',
+        boxShadow: '0 0 8px rgba(0,0,0,0.2), inset 0 0 300px rgba(222,198,122,0.7), rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;',
         beforeAfterBoxShadow: '0 0 8px rgba(0,0,0,0.2), inset 0 0 300px rgba(222,198,122,0.7)',
     },
     card: {
@@ -329,7 +329,7 @@ export const darkTheme: ColorTheme = {
         body: '#ffffff',
     },
     papel: {
-        backgroundColor: '#634831',
+        backgroundColor: '#383838',
         boxShadow: '0 0 10px rgba(0,0,0,0.3), 0 0 300px 25px #211812 inset',
         beforeAfterBoxShadow: '0 0 8px rgba(0,0,0,0.2), inset 0 0 300px #211812',
     },

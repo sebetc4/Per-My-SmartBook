@@ -1,11 +1,13 @@
-import { Box, useTheme } from '@mui/material';
+// Libraries
 import Image from 'next/image';
 import React from 'react';
-
+// App
+import { useAppSelector } from '~/apps/front/hooks';
+// Mui
+import { Box, useTheme } from '@mui/material';
+// Images
 import MachineIllustration from 'public/images/illustrations/machine-illustration.png';
 import ImaginaryWorldIllustration from 'public/images/illustrations/imaginary-world2.png';
-import { useAppSelector } from '~/apps/front/hooks';
-import { ColorMode } from '~/packages/types';
 
 type BackgroundPaperProps = {
     children: JSX.Element;
@@ -25,7 +27,6 @@ export const BackgroundPaper = ({ children, withImage }: BackgroundPaperProps) =
                         box-shadow: ${theme.papel.boxShadow};
                         z-index: 0;
                         position: relative;
-                        ${colorMode === ColorMode.DARK ? `border: 1px solid ${theme.palette.secondary.main}` : ''}
                     }
 
                     .letter:before, .letter:after {
@@ -37,7 +38,6 @@ export const BackgroundPaper = ({ children, withImage }: BackgroundPaperProps) =
                         position: absolute;
                         z-index: -2;
                         transition: .5s;
-                        ${colorMode === ColorMode.DARK ? `border: 1px solid ${theme.palette.secondary.main}` : ''}
                     }
 
                     .letter:before {
@@ -65,15 +65,6 @@ export const BackgroundPaper = ({ children, withImage }: BackgroundPaperProps) =
                     right: 3px;
                     top: -3px;
                     }
-
-                    .illustration {
-                        transform: rotate(8deg);
-                        transition: .5s;
-                    }
-
-                    .letter:hover .illustration {
-                        transform: rotate(2deg) translateX(-10px);
-                    }
                 `}
             </style>
             <Box className='letter'>
@@ -85,7 +76,7 @@ export const BackgroundPaper = ({ children, withImage }: BackgroundPaperProps) =
                             alt='Machine illustration'
                             width={200}
                             height={200}
-                            style={{ position: 'absolute', top: 10, right: 0, zIndex: -1, opacity: 0.3 }}
+                            style={{ position: 'absolute', top: 10, right: 5, zIndex: 1, opacity: 0.3 }}
                             className='illustration'
                         />
                         <Image
@@ -93,7 +84,7 @@ export const BackgroundPaper = ({ children, withImage }: BackgroundPaperProps) =
                             alt='Machine illustration'
                             width={250}
                             height={250}
-                            style={{ position: 'absolute', top: 10, left: 0, zIndex: -1, opacity: 0.3 }}
+                            style={{ position: 'absolute', top: 10, left: 5, zIndex: 1, opacity: 0.3 }}
                             className='illustration'
                         />
                     </>

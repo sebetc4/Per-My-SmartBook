@@ -22,6 +22,7 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
     // Hooks
     const { t: storyGeneratorT } = useTranslation('story-generator');
     const dispatch = useAppDispatch();
+    const theme = useTheme();
 
     // Store
     const { isLoading, data: storyData } = useAppSelector((state) => state.userStoryBeingGenerated);
@@ -39,11 +40,10 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                 ml: 'auto',
                 mr: 'auto',
                 border: '1px solid #c2b5a3',
-                background: '#fafafa',
-                boxShadow:
-                    '0 0 10px rgba(0,0,0,0.3), 0 0 300px 25px rgba(222,198,122,0.7) inset, inset -7px 0 30px -7px rgba(0,0,0,.4)',
+                background: theme.papel.backgroundColor,
+                boxShadow: theme.papel.boxShadow,
                 display: 'flex',
-                p: {xxs: 2, sm: 8},
+                p: { xxs: 2, sm: 8 },
                 flexDirection: 'column',
                 alignItems: 'center',
             }}
@@ -53,10 +53,13 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                 textAlign='center'
                 component='h2'
                 variant='h2'
+                color={theme.text.title}
                 sx={{
-                    m: {xxs: 2, xs: 4},
+                    m: { xxs: 2, xs: 4 },
                 }}
-            >{`${storyGeneratorT('Chapter.title.h2.chapter')} ${toRoman(chapterIndex + 1)}: ${chapter.title}`}</Typography>
+            >{`${storyGeneratorT('Chapter.title.h2.chapter')} ${toRoman(chapterIndex + 1)}: ${
+                chapter.title
+            }`}</Typography>
             <Box
                 sx={{
                     position: 'relative',
@@ -75,10 +78,11 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                 />
             </Box>
             <Typography
+                color={theme.text.body}
                 textAlign='center'
                 sx={{
                     m: 4,
-                    mx: {xxs: 0, xs: 4},
+                    mx: { xxs: 0, xs: 4 },
                     fontSize: '1.2rem',
                 }}
             >
@@ -93,7 +97,10 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                                     flex: 1,
                                 }}
                             >
-                                <LinearProgress variant='indeterminate' color='secondary' />
+                                <LinearProgress
+                                    variant='indeterminate'
+                                    color='secondary'
+                                />
                             </Box>
                             <Box
                                 sx={{
@@ -101,7 +108,10 @@ export const Chapter = ({ chapter, chapterIndex }: ChapterProps) => {
                                     transform: 'rotate(180deg)',
                                 }}
                             >
-                                <LinearProgress variant='indeterminate' color='secondary' />
+                                <LinearProgress
+                                    variant='indeterminate'
+                                    color='secondary'
+                                />
                             </Box>
                         </Box>
                     ) : (
