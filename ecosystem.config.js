@@ -12,6 +12,7 @@ module.exports = {
     apps: [
         {
             name: 'my-smartbook',
+            "node_args": ["--max-old-space-size=2048"],
             script,
             watch: '.',
         },
