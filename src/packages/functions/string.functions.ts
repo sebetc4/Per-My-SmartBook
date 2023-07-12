@@ -25,3 +25,10 @@ export const toRoman = (num: number): string => {
 };
 
 export const capitalizeFirstLetter = (str: string): string => str.charAt(0).toUpperCase() + str.slice(1);
+
+export const isoToEmoji = (iso: string): string =>
+    iso
+        .split('')
+        .map((char) => (char.charCodeAt(0) % 32) + 0x1f1e5)
+        .map((unicode) => String.fromCodePoint(unicode))
+        .join('');
