@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const sshOptions = process.env.ECOSYSTEM_SSH_OPTIONS;
+const key = process.env.ECOSYSTEM_SSH_KEY;
 const user = process.env.ECOSYSTEM_USER;
 const host = process.env.ECOSYSTEM_HOST;
 const ref = process.env.ECOSYSTEM_REF;
@@ -19,7 +19,8 @@ module.exports = {
     ],
     deploy: {
         production: {
-            ssh_options: sshOptions,
+            key,
+            ssh_options: "StrictHostKeyChecking=no",
             user,
             host,
             ref,
