@@ -7,6 +7,6 @@ export const commonStoryChapterDurationSeconds = enableCommonStoryDevMode ? 30 :
 export const commonStoryDuration: StoryDuration = enableCommonStoryDevMode ? 'veryShort' : 'medium';
 export const veryShortStoryDuration = enableCommonStoryDevMode ? 2 : 5;
 export const stopCommonStoryIfNoVoters = true
-export const imageGenerationIsEnable = enableCommonStoryDevMode ? false : true;
+export const imageGenerationIsEnable = enableCommonStoryDevMode ? true : true;
 
 

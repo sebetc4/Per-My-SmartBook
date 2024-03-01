@@ -160,8 +160,8 @@ schema.methods.getSettings = function (this: UserInstance): UserSettings {
     };
 };
 
-schema.methods.isValidPassword = async function (this: UserInstance, password: UserSchema['password']) {
-    return await bcrypt.compare(password!, this.password!);
+schema.methods.isValidPassword = function (this: UserInstance, password: UserSchema['password']) {
+    return bcrypt.compareSync(password!, this.password!);
 };
 
 schema.methods.isEqualValues = function (this: UserInstance, values: Partial<UserSchema>) {

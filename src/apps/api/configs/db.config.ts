@@ -9,8 +9,6 @@ export const dbConnect = async () => {
     try {
         mongoose.set('strictQuery', true);
         await mongoose.connect(mongoUri, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
             autoIndex: true,
         } as ConnectOptions);
         console.log('MongoDB connected')
